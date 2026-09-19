@@ -29,6 +29,10 @@ public class Ejemplar {
         this.id = id;
     }
 
+    public boolean estaDisponibleParaVenta(){
+        return disponibilidad;
+    }
+
     //Compara los objetos para saber si son iguales por su id
     @Override
     public boolean equals(Object o) {

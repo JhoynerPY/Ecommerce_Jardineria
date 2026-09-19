@@ -13,7 +13,11 @@ public class ConsultarEjemplaresDisponibles {
         this.ejemplarRepository = ejemplarRepository;
     }
 
+    //Verifica, guarda y devuelve una lista con solo con los ejemplares disponibles para la venta
+    //Pasados por metodo estaDisponibleParaVenta
     public List<Ejemplar> ejecutar(){
-        return null;
+        return ejemplarRepository.obtenerTodos().stream().filter(Ejemplar::estaDisponibleParaVenta).toList();
     }
+
+    
 }
