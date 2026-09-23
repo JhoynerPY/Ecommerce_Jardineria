@@ -26,8 +26,19 @@ public class KitJardineria {
     }
 
     public double calcularPrecioTotal() {
-        double subtotal = planta.getPrecio() + maceta.getPrecio() + sustrato.getPrecio();
+        // Extraemos el valor del objeto Precio de cada artículo
+        double subtotal = planta.getPrecio().getValor() +
+                maceta.getPrecio().getValor() +
+                sustrato.getPrecio().getValor();
+
         return subtotal - (subtotal * DESCUENTO_PAQUETE);
+    }
+
+    public void cambiarMaceta(ArticuloKit nuevaMaceta) {
+        if (nuevaMaceta.getDiametro() < planta.getDiametro()) {
+            throw new ReglaDominioException("La maceta es muy pequeña para la planta actual.");
+        }
+        this.maceta = nuevaMaceta;
     }
 
     public String getIdKit() { return idKit; }
