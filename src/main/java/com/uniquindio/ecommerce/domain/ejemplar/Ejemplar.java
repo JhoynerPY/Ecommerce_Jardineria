@@ -6,31 +6,56 @@ import java.util.Objects;
 
 public class Ejemplar {
 
-    private Long id;
-    private Especie especie;
+    private final String id;
+    private final Especie especie;
     private EtapaCrecimiento etapaCrecimiento;
-    private double precio;
+    private Precio precio;
     private boolean disponibilidad;
 
-    public Ejemplar(Long id, Especie especie, EtapaCrecimiento etapaCrecimiento,
-                    double precio, boolean disponibilidad) {
+    private Ejemplar(String id, Especie especie, EtapaCrecimiento etapaCrecimiento,
+                    Precio precio) {
         this.id = id;
         this.especie = especie;
         this.etapaCrecimiento = etapaCrecimiento;
         this.precio = precio;
-        this.disponibilidad = disponibilidad;
+        this.disponibilidad = true;
     }
 
-    public Long getId() {
+    public static Ejemplar registrarEnInventario(String id, Especie especie, EtapaCrecimiento etapaCrecimiento,
+                                                 Precio precio){
+        return new Ejemplar(id, especie, etapaCrecimiento, precio);
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Especie getEspecie() {
+        return especie;
+    }
+
+    public EtapaCrecimiento getEtapaCrecimiento() {
+        return etapaCrecimiento;
+    }
+
+    public Precio getPrecio() {
+        return precio;
+    }
+
+    public void avanzarEtapa(EtapaCrecimiento nuevaEtapa){
+        this.etapaCrecimiento = nuevaEtapa;
+    }
+
+    public boolean isDisponibilidad() {
+        return disponibilidad;
     }
 
     public boolean estaDisponibleParaVenta(){
         return disponibilidad;
+    }
+
+    public void retirarDeVenta(){
+        this.disponibilidad = false;
     }
 
     //Compara los objetos para saber si son iguales por su id

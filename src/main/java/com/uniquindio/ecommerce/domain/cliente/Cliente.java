@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Cliente {
 
-    private Long id;
-    private String nombre;
-    private Email email;
+    private final String id;
+    private final String nombre;
+    private final Email email;
     private String telefono;
     private String direccion;
 
-    public Cliente(Long id, String nombre, Email email, String telefono, String direccion) {
+    private Cliente(String id, String nombre, Email email, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -18,7 +18,12 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public Long getId() {
+    public static Cliente registrar(String id, String nombre, Email email, String telefono,
+                                    String direccion){
+        return new Cliente(id, nombre, email, telefono, direccion);
+    }
+
+    public String getId() {
         return id;
     }
 
