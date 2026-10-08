@@ -1,4 +1,4 @@
-package com.uniquindio.ecommerce.domain.kit;
+package com.uniquindio.ecommerce.domain.common;
 
 public class ReglaDominioException extends RuntimeException {
     public ReglaDominioException(String mensaje) {

@@ -14,9 +14,9 @@ public class ConfigurarKitUseCase {
     }
 
     // Recibe una intención simple, invoca al dominio y guarda[cite: 3]
-    public KitJardineria ejecutar(ArticuloKit planta, ArticuloKit maceta, ArticuloKit sustrato) throws Exception {
+    public KitJardineria ejecutar(ArticuloKit planta, ArticuloKit maceta, ArticuloKit sustrato) {
         // 1. Invoca el comportamiento del dominio (las reglas y excepciones están por dentro de esta clase)
-        KitJardineria nuevoKit = new KitJardineria(planta, maceta, sustrato);
+        KitJardineria nuevoKit = KitJardineria.crear(planta, maceta, sustrato);
 
         // 2. Usa el repositorio para persistir[cite: 3]
         repository.almacenarKit(nuevoKit);

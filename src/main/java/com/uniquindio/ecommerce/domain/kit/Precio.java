@@ -1,5 +1,7 @@
 package com.uniquindio.ecommerce.domain.kit;
 
+import com.uniquindio.ecommerce.domain.common.ReglaDominioException;
+
 import java.util.Objects;
 
 public class Precio {

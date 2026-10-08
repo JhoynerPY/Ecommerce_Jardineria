@@ -1,12 +1,12 @@
 package com.uniquindio.ecommerce.domain.kit;
 
+import com.uniquindio.ecommerce.domain.common.ReglaDominioException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class KitJardineriaTest {
 
     // 1. Pruebas de Value Object
-
     @Test
     void dosPreciosConElMismoValorYMonedaDebenSerIguales() {
         // Arrange
@@ -14,7 +14,7 @@ class KitJardineriaTest {
         Precio precio2 = new Precio(15000, "COP");
 
         // Act & Assert
-        assertEquals(precio1, precio2); // Igualdad por valor[cite: 3]
+        assertEquals(precio1, precio2);
     }
 
     @Test
@@ -29,7 +29,6 @@ class KitJardineriaTest {
     }
 
     // 2. Pruebas de Entidad
-
     @Test
     void dosArticulosConElMismoIdSonElMismoAunqueTenganDatosDistintos() {
         // Arrange
@@ -38,7 +37,7 @@ class KitJardineriaTest {
         ArticuloKit articuloModificado = new ArticuloKit("ART-1", "Maceta Plastico", precio, 25.0);
 
         // Act & Assert
-        assertEquals(articuloOriginal, articuloModificado); // Igualdad por identidad[cite: 3]
+        assertEquals(articuloOriginal, articuloModificado);
     }
 
     @Test
@@ -51,47 +50,46 @@ class KitJardineriaTest {
         ArticuloKit articulo = new ArticuloKit(idEsperado, "Sustrato Universal", precio, 0);
 
         // Assert
-        assertEquals(idEsperado, articulo.getId()); // Comportamiento de la entidad
+        assertEquals(idEsperado, articulo.getId());
     }
 
-    //  3. Pruebas del Agregado
-
+    // 3. Pruebas del Agregado 1 (KitJardineria)
     @Test
-    void cambiarPorMacetaIncompatibleLanzaReglaDominioException() throws Exception {
+    void cambiarPorMacetaIncompatibleLanzaReglaDominioException() {
         // Arrange
         Precio precio = new Precio(10000, "COP");
         ArticuloKit planta = new ArticuloKit("P-1", "Monstera", precio, 20.0);
         ArticuloKit maceta = new ArticuloKit("M-1", "Maceta Grande", precio, 25.0);
         ArticuloKit sustrato = new ArticuloKit("S-1", "Abono", precio, 0);
 
-        KitJardineria kit = new KitJardineria(planta, maceta, sustrato);
+        KitJardineria kit = KitJardineria.crear(planta, maceta, sustrato);
         ArticuloKit macetaPequena = new ArticuloKit("M-2", "Maceta Pequeña", precio, 15.0);
 
         // Act & Assert
         assertThrows(ReglaDominioException.class, () -> {
-            kit.cambiarMaceta(macetaPequena); // Invariante: Maceta >= Planta[cite: 3]
+            kit.cambiarMaceta(macetaPequena); // Invariante
         });
     }
 
     @Test
-    void estadoDeMacetaNoCambiaTrasRechazoPorIncompatibilidad() throws Exception {
+    void estadoDeMacetaNoCambiaTrasRechazoPorIncompatibilidad() {
         // Arrange
         Precio precio = new Precio(10000, "COP");
         ArticuloKit planta = new ArticuloKit("P-1", "Monstera", precio, 20.0);
         ArticuloKit macetaOriginal = new ArticuloKit("M-1", "Maceta Grande", precio, 25.0);
         ArticuloKit sustrato = new ArticuloKit("S-1", "Abono", precio, 0);
 
-        KitJardineria kit = new KitJardineria(planta, macetaOriginal, sustrato);
+        KitJardineria kit = KitJardineria.crear(planta, macetaOriginal, sustrato);
         ArticuloKit macetaPequena = new ArticuloKit("M-2", "Maceta Pequeña", precio, 15.0);
 
         // Act
         try {
             kit.cambiarMaceta(macetaPequena);
         } catch (ReglaDominioException e) {
-            // Se ignora la excepción intencionalmente para verificar el estado posterior
+            // Assert implícito: Se captura la excepción esperada
         }
 
         // Assert
-        assertEquals(macetaOriginal, kit.getMaceta()); // El estado no cambió tras el rechazo[cite: 3]
+        assertEquals(macetaOriginal, kit.getMaceta());
     }
 }
