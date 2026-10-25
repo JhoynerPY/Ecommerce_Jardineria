@@ -19,7 +19,6 @@ public class KitJardineria {
         this.sustrato = sustrato;
     }
 
-    // Método de fábrica para instanciar
     public static KitJardineria crear(ArticuloKit planta, ArticuloKit maceta, ArticuloKit sustrato) {
         // Invariante 1: Un kit requiere estrictamente los 3 elementos bases
         if (planta == null || maceta == null || sustrato == null) {

@@ -12,7 +12,7 @@ public class Pedido {
     private EstadoPedido estado;
     private final String direccionEntrega;
 
-    // Rúbrica: Constructor privado
+
     private Pedido(String idPedido, String idCliente, List<DetallePedido> detalles, String direccionEntrega) {
         this.idPedido = idPedido;
         this.idCliente = idCliente;
@@ -21,7 +21,7 @@ public class Pedido {
         this.estado = EstadoPedido.PENDIENTE_PAGO;
     }
 
-    // Rúbrica: Método de fábrica
+
     public static Pedido crear(String idCliente, List<DetallePedido> detalles, String direccionEntrega) {
         // Invariante 1: Un pedido no tiene sentido sin detalles
         if (detalles == null || detalles.isEmpty()) {
@@ -64,7 +64,7 @@ public class Pedido {
     public EstadoPedido getEstado() { return estado; }
     public String getDireccionEntrega() { return direccionEntrega; }
 
-    // Rúbrica: equals/hashCode por identidad
+    // equals/hashCode por identidad
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
