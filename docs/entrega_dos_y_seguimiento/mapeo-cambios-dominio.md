@@ -166,8 +166,8 @@ Se transformó el dominio de un e-commerce que despacha directamente a un **mode
 
 ---
 
-### 4.2 Checklist Entrega 2 (`docs/entrega_dos/checklist_entrega_dos.md`)
-**Ubicación:** `docs/entrega_dos/checklist_entrega_dos.md`
+### 4.2 Checklist Entrega 2 (``)
+**Ubicación:** ``
 
 **Marcados como completados [x]:**
 - Actualización del lenguaje ubicuo y entidades de dominio para reflejar el modelo de intermediario (vivero cercano)

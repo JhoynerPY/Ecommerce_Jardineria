@@ -21,6 +21,8 @@ public class ArticuloKit {
 
     public double getDiametro() { return diametro; }
 
+    public String getNombre() { return nombre; }
+
     // Entidad: Igualdad por IDENTIDAD (solo importa el ID)
     @Override
     public boolean equals(Object o) {

@@ -30,4 +30,8 @@ public class Precio {
     public double getValor() {
         return valor;
     }
+
+    public String getMoneda() {
+        return moneda;
+    }
 }

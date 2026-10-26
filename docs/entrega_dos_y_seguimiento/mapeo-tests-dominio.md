@@ -186,7 +186,7 @@ BUILD SUCCESSFUL in 23s
 
 ## 5. Próximos Pasos - Fase 2 Checklist (Capa Aplicación)
 
-Según `docs/entrega_dos/checklist_entrega_dos.md`, la **Fase 2** requiere:
+Según ``, la **Fase 2** requiere:
 
 - [ ] **Definición y separación de puertos de entrada (UseCases) y salida (Repositories)**
 - [ ] **Implementación de los 6 casos de uso requeridos (mínimo 2 de comprador, 2 de vendedor/vivero)**
