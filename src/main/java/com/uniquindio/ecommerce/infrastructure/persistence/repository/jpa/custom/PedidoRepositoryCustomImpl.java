@@ -113,4 +113,48 @@ public class PedidoRepositoryCustomImpl implements PedidoRepositoryCustom {
         query.setMaxResults(limit);
         return query.getResultList();
     }
+
+    @Override
+    public List<PedidoEstadisticasViveroDTO> getEstadisticasCompletasPorVivero() {
+        String jpql = "SELECT NEW com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.custom.PedidoEstadisticasViveroDTO(" +
+                "v.id, v.nombre, " +
+                "COUNT(p), " +
+                "SUM(CASE WHEN p.estado = 'PENDIENTE_PAGO' THEN 1 ELSE 0 END), " +
+                "SUM(CASE WHEN p.estado = 'PAGADO' THEN 1 ELSE 0 END), " +
+                "SUM(CASE WHEN p.estado = 'ENVIADO' THEN 1 ELSE 0 END), " +
+                "SUM(CASE WHEN p.estado = 'ENTREGADO' THEN 1 ELSE 0 END), " +
+                "SUM(CASE WHEN p.estado = 'RECHAZADO' THEN 1 ELSE 0 END), " +
+                "SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
+                "AVG((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
+                "SUM(CASE WHEN p.estado = 'PENDIENTE_PAGO' THEN (SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d) ELSE 0 END)" +
+                ") " +
+                "FROM ViveroEntity v " +
+                "LEFT JOIN PedidoEntity p ON p.idVivero = v.id AND p.deleted = false " +
+                "WHERE v.deleted = false " +
+                "GROUP BY v.id, v.nombre " +
+                "ORDER BY v.nombre";
+
+        return entityManager.createQuery(jpql, PedidoEstadisticasViveroDTO.class).getResultList();
+    }
+
+    @Override
+    public List<PedidoEstadisticasViveroDTO> getEstadisticasPedidosEntregadosPorVivero() {
+        String jpql = "SELECT NEW com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.custom.PedidoEstadisticasViveroDTO(" +
+                "v.id, v.nombre, " +
+                "COUNT(p), " +
+                "0, 0, 0, " +
+                "COUNT(p), " +
+                "0, " +
+                "SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
+                "AVG((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
+                "0" +
+                ") " +
+                "FROM ViveroEntity v " +
+                "INNER JOIN PedidoEntity p ON p.idVivero = v.id AND p.deleted = false " +
+                "WHERE v.deleted = false AND p.estado = 'ENTREGADO' " +
+                "GROUP BY v.id, v.nombre " +
+                "ORDER BY SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)) DESC";
+
+        return entityManager.createQuery(jpql, PedidoEstadisticasViveroDTO.class).getResultList();
+    }
 }

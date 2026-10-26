@@ -24,4 +24,27 @@ public interface EspecieJpaRepository extends JpaRepository<EspecieEntity, Strin
                                          @Param("nombreCientifico") String nombreCientifico,
                                          @Param("nivelRiesgo") com.uniquindio.ecommerce.infrastructure.persistence.entity.NivelRiesgo nivelRiesgo,
                                          Pageable pageable);
+
+    // Búsqueda por requerimiento de luz
+    @Query("SELECT e FROM EspecieEntity e WHERE e.deleted = false " +
+           "AND e.fichaDeCuidado.requerimientoLuz = :requerimientoLuz " +
+           "ORDER BY e.nombreComun ASC")
+    List<EspecieEntity> findByRequerimientoLuz(@Param("requerimientoLuz") com.uniquindio.ecommerce.infrastructure.persistence.entity.RequerimientoLuz requerimientoLuz);
+
+    // Conteo por nivel de riesgo
+    @Query("SELECT e.riesgo.nivel, COUNT(e) FROM EspecieEntity e WHERE e.deleted = false " +
+           "GROUP BY e.riesgo.nivel " +
+           "ORDER BY COUNT(e) DESC")
+    List<Object[]> contarPorNivelRiesgo();
+
+    // Conteo por requerimiento de luz
+    @Query("SELECT e.fichaDeCuidado.requerimientoLuz, COUNT(e) FROM EspecieEntity e WHERE e.deleted = false " +
+           "GROUP BY e.fichaDeCuidado.requerimientoLuz " +
+           "ORDER BY COUNT(e) DESC")
+    List<Object[]> contarPorRequerimientoLuz();
+
+    // Especies tóxicas (nivel riesgo != NINGUNO)
+    @Query("SELECT e FROM EspecieEntity e WHERE e.deleted = false AND e.riesgo.nivel != 'NINGUNO' " +
+           "ORDER BY e.riesgo.nivel DESC, e.nombreComun ASC")
+    List<EspecieEntity> findEspeciesToxicas();
 }

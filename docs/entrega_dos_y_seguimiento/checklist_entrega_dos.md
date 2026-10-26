@@ -11,14 +11,14 @@
 - [x] Pruebas unitarias de los casos de uso utilizando mocks.
 
 ## 🗄️ 3. Infraestructura y Persistencia (JPA)
-- [ ] Creación de entidades JPA separadas de las entidades de dominio puro.
-- [ ] Implementación de Mappers bidireccionales (Dominio <-> JPA).
-- [ ] Configuración de repositorios Spring Data JPA con soporte de borrado lógico (soft delete).
-- [ ] Script `data.sql` con datos iniciales funcionales en `src/main/resources`.
+- [x] Creación de entidades JPA separadas de las entidades de dominio puro.
+- [x] Implementación de Mappers bidireccionales (Dominio <-> JPA).
+- [x] Configuración de repositorios Spring Data JPA con soporte de borrado lógico (soft delete).
+- [x] Script `data.sql` con datos iniciales funcionales en `src/main/resources`.
 
 ## 📊 4. Consultas Avanzadas
-- [ ] Implementación de listados paginados con filtros dinámicos mediante JPQL.
-- [ ] Consulta avanzada con `JOIN`, `GROUP BY` y funciones de agregación (ej. reportes por vivero).
+- [x] Implementación de listados paginados con filtros dinámicos mediante JPQL.
+- [x] Consulta avanzada con `JOIN`, `GROUP BY` y funciones de agregación (ej. reportes por vivero).
 
 ## 🔒 5. Seguridad (Spring Security & JWT)
 - [ ] Configuración de codificación de contraseñas con BCrypt.

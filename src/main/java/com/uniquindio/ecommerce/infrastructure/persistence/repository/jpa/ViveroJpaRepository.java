@@ -37,4 +37,22 @@ public interface ViveroJpaRepository extends JpaRepository<ViveroEntity, String>
     Page<ViveroEntity> findWithFilters(@Param("nombre") String nombre,
                                         @Param("activo") Boolean activo,
                                         Pageable pageable);
+
+    // Estadísticas de viveros con conteo de clientes asignados
+    @Query("SELECT v.id, v.nombre, v.ciudad, COUNT(c) as totalClientes " +
+           "FROM ViveroEntity v " +
+           "LEFT JOIN ClienteEntity c ON c.viveroAsignadoId = v.id AND c.deleted = false " +
+           "WHERE v.deleted = false " +
+           "GROUP BY v.id, v.nombre, v.ciudad " +
+           "ORDER BY totalClientes DESC")
+    List<Object[]> getViverosConClientesAsignados();
+
+    // Viveros con radio de cobertura mayor a un valor
+    @Query("SELECT v FROM ViveroEntity v WHERE v.deleted = false AND v.activo = true AND v.radioCoberturaKm >= :radioMin " +
+           "ORDER BY v.radioCoberturaKm DESC")
+    List<ViveroEntity> findByRadioCoberturaMin(@Param("radioMin") double radioMin);
+
+    // Promedio de radio de cobertura
+    @Query("SELECT AVG(v.radioCoberturaKm) FROM ViveroEntity v WHERE v.deleted = false AND v.activo = true")
+    Double getPromedioRadioCobertura();
 }

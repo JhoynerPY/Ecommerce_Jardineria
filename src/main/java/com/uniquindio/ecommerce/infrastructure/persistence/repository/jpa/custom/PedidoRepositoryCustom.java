@@ -19,4 +19,8 @@ public interface PedidoRepositoryCustom {
     List<ViveroReporteDTO> getReportePorVivero();
 
     List<TopProductoDTO> getTopProductosVendidos(int limit);
+
+    List<PedidoEstadisticasViveroDTO> getEstadisticasCompletasPorVivero();
+
+    List<PedidoEstadisticasViveroDTO> getEstadisticasPedidosEntregadosPorVivero();
 }
