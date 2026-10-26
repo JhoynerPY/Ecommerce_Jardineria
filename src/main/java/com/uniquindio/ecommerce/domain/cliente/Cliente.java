@@ -61,7 +61,11 @@ public class Cliente {
     }
 
     public void asignarVivero(String viveroId) {
-        this.viveroAsignadoId = viveroId;
+        if (viveroId != null && !viveroId.trim().isEmpty()) {
+            this.viveroAsignadoId = viveroId.trim();
+        } else {
+            this.viveroAsignadoId = null;
+        }
     }
 
     public boolean tieneViveroAsignado() {

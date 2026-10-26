@@ -6,9 +6,9 @@
 - [x] Pruebas unitarias del dominio actualizadas y pasando en verde.
 
 ## ⚙️ 2. Capa de Aplicación (Casos de Uso)
-- [ ] Definición y separación de puertos de entrada (UseCases) y salida (Repositories).
-- [ ] Implementación de los 6 casos de uso requeridos (mínimo 2 de comprador, 2 de vendedor/vivero).
-- [ ] Pruebas unitarias de los casos de uso utilizando mocks.
+- [x] Definición y separación de puertos de entrada (UseCases) y salida (Repositories).
+- [x] Implementación de los 6 casos de uso requeridos (mínimo 2 de comprador, 2 de vendedor/vivero).
+- [x] Pruebas unitarias de los casos de uso utilizando mocks.
 
 ## 🗄️ 3. Infraestructura y Persistencia (JPA)
 - [ ] Creación de entidades JPA separadas de las entidades de dominio puro.

@@ -2,6 +2,7 @@ package com.uniquindio.ecommerce.domain.cliente;
 
 import com.uniquindio.ecommerce.domain.common.Direccion;
 import com.uniquindio.ecommerce.domain.common.ReglaDominioException;
+import com.uniquindio.ecommerce.domain.vivero.Vivero;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,6 +58,36 @@ class ClienteTest {
         
         assertEquals("VIV-001", cliente.getViveroAsignadoId());
         assertTrue(cliente.tieneViveroAsignado());
+    }
+
+    @Test
+    void asignarViveroNuloNoPermitido() {
+        Cliente cliente = Cliente.registrar("CLI-001", "Juan", emailValido(), "3101234567", direccionValida());
+        
+        cliente.asignarVivero(null);
+        
+        assertNull(cliente.getViveroAsignadoId());
+        assertFalse(cliente.tieneViveroAsignado());
+    }
+
+    @Test
+    void asignarViveroVacioNoPermitido() {
+        Cliente cliente = Cliente.registrar("CLI-001", "Juan", emailValido(), "3101234567", direccionValida());
+        
+        cliente.asignarVivero("  ");
+        
+        assertNull(cliente.getViveroAsignadoId());
+        assertFalse(cliente.tieneViveroAsignado());
+    }
+
+    @Test
+    void reasignarViveroReemplazaElAnterior() {
+        Cliente cliente = Cliente.registrar("CLI-001", "Juan", emailValido(), "3101234567", direccionValida());
+        cliente.asignarVivero("VIV-001");
+        
+        cliente.asignarVivero("VIV-002");
+        
+        assertEquals("VIV-002", cliente.getViveroAsignadoId());
     }
 
     @Test

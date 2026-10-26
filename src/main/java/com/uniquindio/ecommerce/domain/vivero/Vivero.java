@@ -28,6 +28,17 @@ public class Vivero {
         this.activo = true;
     }
 
+    Vivero(String id, String nombre, Direccion direccion, String telefono, String email, double radioCoberturaKm, List<String> especiesDisponiblesIds, boolean activo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+        this.radioCoberturaKm = radioCoberturaKm;
+        this.especiesDisponiblesIds = new ArrayList<>(especiesDisponiblesIds);
+        this.activo = activo;
+    }
+
     public static Vivero registrar(String nombre, Direccion direccion, String telefono, String email, double radioCoberturaKm) {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new ReglaDominioException("El nombre del vivero no puede estar vacío");

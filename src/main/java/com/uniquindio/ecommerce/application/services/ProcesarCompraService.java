@@ -4,7 +4,9 @@ import com.uniquindio.ecommerce.application.ports.input.ProcesarCompraUseCase;
 import com.uniquindio.ecommerce.application.ports.output.InventarioPort;
 import com.uniquindio.ecommerce.application.ports.output.PasarelaPagoPort;
 import com.uniquindio.ecommerce.application.ports.output.PedidoRepositoryPort;
+import com.uniquindio.ecommerce.application.dto.ProcesarCompraCommand;
 import com.uniquindio.ecommerce.domain.pedido.Pedido;
+import java.util.Optional;
 
 public class ProcesarCompraService implements ProcesarCompraUseCase {
 
@@ -12,7 +14,6 @@ public class ProcesarCompraService implements ProcesarCompraUseCase {
     private final InventarioPort inventarioPort;
     private final PedidoRepositoryPort pedidoRepositoryPort;
 
-    // Inyección de dependencias mediante el constructor
     public ProcesarCompraService(PasarelaPagoPort pasarelaPagoPort,
                                  InventarioPort inventarioPort,
                                  PedidoRepositoryPort pedidoRepositoryPort) {
@@ -22,26 +23,32 @@ public class ProcesarCompraService implements ProcesarCompraUseCase {
     }
 
     @Override
-    public Pedido procesar(Pedido pedido, String metodoPago) throws Exception {
-        double total = pedido.calcularTotal();
+    public Pedido procesar(ProcesarCompraCommand command) throws Exception {
+        Optional<Pedido> pedidoOpt = pedidoRepositoryPort.buscarPorId(command.getIdPedido());
+        if (pedidoOpt.isEmpty()) {
+            throw new Exception("Pedido no encontrado: " + command.getIdPedido());
+        }
+        Pedido pedido = pedidoOpt.get();
 
-        // 1. Intentar procesar el pago
-        boolean pagoExitoso = pasarelaPagoPort.procesarPago(metodoPago, total);
+        // Usar calcularTotalConExencion() para aplicar la cobertura de responsabilidad
+        double totalConExencion = pedido.calcularTotalConExencion();
+
+        // 1. Intentar procesar el pago con el total ajustado por exencion
+        boolean pagoExitoso = pasarelaPagoPort.procesarPago(command.getMetodoPago(), totalConExencion);
 
         if (!pagoExitoso) {
             pedido.marcarComoRechazado();
-            pedidoRepositoryPort.guardar(pedido); // Guardamos el registro del intento fallido
+            pedidoRepositoryPort.guardar(pedido);
             throw new Exception("El pago fue rechazado por la pasarela.");
         }
 
         // 2. Si el pago es exitoso, actualizamos estado
         pedido.marcarComoPagado();
 
-        // 3. Descontar del inventario general (sin usar consultarEjemplares)
+        // 3. Descontar del inventario
         boolean inventarioActualizado = inventarioPort.descontarInventario(pedido.getDetalles());
 
         if (!inventarioActualizado) {
-            // Aquí iría una lógica de compensación (ej. reversar el pago) si el inventario falla
             throw new Exception("Error al descontar el inventario tras el pago.");
         }
 
