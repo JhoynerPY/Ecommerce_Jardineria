@@ -21,16 +21,16 @@
 - [x] Consulta avanzada con `JOIN`, `GROUP BY` y funciones de agregación (ej. reportes por vivero).
 
 ## 🔒 5. Seguridad (Spring Security & JWT)
-- [ ] Configuración de codificación de contraseñas con BCrypt.
-- [ ] Implementación de filtros de autenticación JWT y endpoints de login/registro.
-- [ ] Restricción de rutas basada en roles (`COMPRADOR`, `VENDEDOR_VIVERO`).
-- [ ] Configuración de seguridad integrada en Swagger / OpenAPI.
+- [x] Configuración de codificación de contraseñas con BCrypt.
+- [x] Implementación de filtros de autenticación JWT y endpoints de login/registro.
+- [x] Restricción de rutas basada en roles (`COMPRADOR`, `VENDEDOR_VIVERO`).
+- [x] Configuración de seguridad integrada en Swagger / OpenAPI.
 
 ## 🧪 6. Pruebas Avanzadas del Backend (Rúbrica)
-- [ ] Pruebas de repositorios utilizando `@DataJpaTest`.
-- [ ] Pruebas unitarias de controladores utilizando `MockMvc` con tokens JWT.
-- [ ] Verificación de casos de error en controllers usando `verify(..., never())`.
-- [ ] Verificación general de que todas las pruebas (mínimo 14) corren y pasan con éxito (`./gradlew test`).
+- [x] Pruebas de repositorios utilizando `@DataJpaTest`.
+- [x] Pruebas unitarias de controladores utilizando `MockMvc` con tokens JWT.
+- [x] Verificación de casos de error en controllers usando `verify(..., never())`.
+- [x] Verificación general de que todas las pruebas (mínimo 14) corren y pasan con éxito (`./gradlew test`).
 
 ## 📝 7. Cierre, Git y Documentación
 - [ ] Historial de commits ordenados y limpios por cada avance atómico.

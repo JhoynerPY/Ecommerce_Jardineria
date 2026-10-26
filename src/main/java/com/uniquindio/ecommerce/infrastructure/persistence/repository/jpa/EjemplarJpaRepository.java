@@ -48,7 +48,7 @@ public interface EjemplarJpaRepository extends JpaRepository<EjemplarEntity, Str
            ") " +
            "FROM EjemplarEntity e " +
            "JOIN e.especie esp " +
-           "LEFT JOIN ViveroEntity v ON v.id = (SELECT v2.id FROM ViveroEntity v2 WHERE v2.deleted = false AND v2.activo = true ORDER BY v2.id LIMIT 1) " +
+           "LEFT JOIN ViveroEntity v ON v.id = (SELECT MAX(v2.id) FROM ViveroEntity v2 WHERE v2.deleted = false AND v2.activo = true) " +
            "WHERE e.deleted = false " +
            "AND (:nombreEspecie IS NULL OR LOWER(esp.nombreComun) LIKE LOWER(CONCAT('%', :nombreEspecie, '%')) OR LOWER(esp.nombreCientifico) LIKE LOWER(CONCAT('%', :nombreEspecie, '%'))) " +
            "AND (:precioMin IS NULL OR e.precio.valor >= :precioMin) " +
