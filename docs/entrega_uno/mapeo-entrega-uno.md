@@ -4,12 +4,12 @@ Este documento detalla cómo y dónde se cumple cada uno de los mínimos exigido
 
 ## 1. Nicho y lenguaje ubicuo
 *   **Exigencia:** Nicho propio definido + mínimo 5 términos (ninguno genérico).
-*   **Ubicación:** `glosario-lenguaje-ubicuo.md`
+* **Ubicación:** `../../glosario-lenguaje-ubicuo.md`
 *   **Evidencia:** Nuestro nicho es un vivero/jardinería especializada. Los términos definidos incluyen: *Ejemplar, Sustrato, Maceta, Ficha de Cuidado, Kit de Jardinería*. No utilizamos Producto, Comprador, Vendedor, ni Compra.
 
 ## 2. Reglas de negocio
 *   **Exigencia:** Mínimo 5 reglas innegociables propias del nicho.
-*   **Ubicación:** `glosario-lenguaje-ubicuo.md` y código de dominio.
+* **Ubicación:** `../../glosario-lenguaje-ubicuo.md` y código de dominio.
 *   **Evidencia:** Las reglas están documentadas y aplicadas. Ejemplos incluyen: "La maceta debe ser compatible con el diámetro de la planta", "Una planta enferma no puede ser vendida" y "Un pedido requiere una dirección de entrega válida para proceder".
 
 ## 3. Entidades
@@ -46,7 +46,7 @@ Este documento detalla cómo y dónde se cumple cada uno de los mínimos exigido
 
 ## 8. Casos de uso
 *   **Exigencia:** Mínimo 6-8 identificados y documentados.
-*   **Ubicación:** `docs/casos-uso-dtos.md`
+* **Ubicación:** `casos-uso-dtos.md`
 *   **Evidencia:** Se documentaron 7 casos de uso cubriendo interacciones del comprador (ej. *ConfigurarKitUseCase*, *ProcesarCompraUseCase*) y del vendedor (ej. *RegistrarNuevoEjemplarUseCase*), especificando el repositorio requerido.
 
 ## 9. Repository
@@ -56,17 +56,17 @@ Este documento detalla cómo y dónde se cumple cada uno de los mínimos exigido
 
 ## 10. DTOs (Request/Response)
 *   **Exigencia:** Mínimo 3 diseñados y documentados.
-*   **Ubicación:** `docs/casos-uso-dtos.md`
+* **Ubicación:** `casos-uso-dtos.md`
 *   **Evidencia:** Están documentados 2 Request (`ConfigurarKitRequestDTO`, `ProcesarCompraRequestDTO`) y 1 Response (`ResumenPedidoResponseDTO`), justificando por qué sus campos son necesarios y a qué operación mapean para no exponer las entidades al exterior.
 
 ## 11. Diagrama del agregado
 *   **Exigencia:** Mínimo 1 diagrama mostrando raíz, límite y qué queda dentro/fuera.
-*   **Ubicación:** `docs/diagrama-agregado.md`
+* **Ubicación:** `diagrama-agregado.md`
 *   **Evidencia:** Diagrama desarrollado en Mermaid renderizado nativamente en GitHub[cite: 10], mostrando a `Pedido` como raíz, `DetallePedido` y `EstadoPedido` dentro del límite, y `Cliente` junto con `Ejemplar` fuera del límite (referenciados solo por ID).
 
 ## 12. Estructura de paquetes
 *   **Exigencia:** domain/application/infrastructure creada y subida al repositorio[cite: 10].
-*   **Ubicación:** Todo el proyecto (`src/main/java/com/uniquindio/ecommerce/`).
+* **Ubicación:** Todo el proyecto (`../../src/main/java/com/uniquindio/ecommerce`).
 *   **Evidencia:** Arquitectura de software organizada estrictamente en capas (Domain, Application, Infrastructure). Se trabajó mediante ramas integradas (`feature-jeffry-procesar-compra`, `feature-nuevo-valueobjets-entidades`, etc.) garantizando los commits distribuidos.
 
 ## 13. Tablero de trabajo (Jira o Trello)

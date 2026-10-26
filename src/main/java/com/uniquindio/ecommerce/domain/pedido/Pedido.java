@@ -8,32 +8,40 @@ import java.util.UUID;
 public class Pedido {
     private final String idPedido;
     private final String idCliente;
+    private final String idVivero;
     private final List<DetallePedido> detalles;
     private EstadoPedido estado;
     private final String direccionEntrega;
+    private ExencionResponsabilidad exencionResponsabilidad;
 
-
-    private Pedido(String idPedido, String idCliente, List<DetallePedido> detalles, String direccionEntrega) {
+    private Pedido(String idPedido, String idCliente, String idVivero, List<DetallePedido> detalles, String direccionEntrega, ExencionResponsabilidad exencionResponsabilidad) {
         this.idPedido = idPedido;
         this.idCliente = idCliente;
+        this.idVivero = idVivero;
         this.detalles = detalles;
         this.direccionEntrega = direccionEntrega;
+        this.exencionResponsabilidad = exencionResponsabilidad;
         this.estado = EstadoPedido.PENDIENTE_PAGO;
     }
 
-
-    public static Pedido crear(String idCliente, List<DetallePedido> detalles, String direccionEntrega) {
-        // Invariante 1: Un pedido no tiene sentido sin detalles
+    public static Pedido crear(String idCliente, String idVivero, List<DetallePedido> detalles, String direccionEntrega, ExencionResponsabilidad exencionResponsabilidad) {
         if (detalles == null || detalles.isEmpty()) {
             throw new ReglaDominioException("El pedido debe contener al menos un detalle (artículo o kit).");
         }
 
-        // Invariante 2: Se requiere una dirección válida para procesar la entrega
         if (direccionEntrega == null || direccionEntrega.trim().isEmpty()) {
             throw new ReglaDominioException("La dirección de entrega no puede estar vacía.");
         }
 
-        return new Pedido(UUID.randomUUID().toString(), idCliente, detalles, direccionEntrega);
+        if (idVivero == null || idVivero.trim().isEmpty()) {
+            throw new ReglaDominioException("El pedido debe estar asignado a un vivero.");
+        }
+
+        if (exencionResponsabilidad == null) {
+            throw new ReglaDominioException("La exención de responsabilidad es obligatoria.");
+        }
+
+        return new Pedido(UUID.randomUUID().toString(), idCliente, idVivero, detalles, direccionEntrega, exencionResponsabilidad);
     }
 
     public double calcularTotal() {
@@ -42,8 +50,12 @@ public class Pedido {
                 .sum();
     }
 
+    public double calcularTotalConExencion() {
+        double total = calcularTotal();
+        return exencionResponsabilidad.calcularCobertura(total);
+    }
+
     public void marcarComoPagado() {
-        // Invariante 3: Solo se puede pagar un pedido que esté esperando pago
         if (this.estado != EstadoPedido.PENDIENTE_PAGO) {
             throw new ReglaDominioException("Solo se puede pagar un pedido que esté pendiente de pago.");
         }
@@ -57,14 +69,21 @@ public class Pedido {
         this.estado = EstadoPedido.RECHAZADO;
     }
 
-    // Getters omitidos por brevedad (manten los tuyos)
+    public void marcarComoEnviado() {
+        if (this.estado != EstadoPedido.PAGADO) {
+            throw new ReglaDominioException("Solo se puede enviar un pedido que haya sido pagado.");
+        }
+        this.estado = EstadoPedido.ENVIADO;
+    }
+
     public String getIdPedido() { return idPedido; }
     public String getIdCliente() { return idCliente; }
+    public String getIdVivero() { return idVivero; }
     public List<DetallePedido> getDetalles() { return detalles; }
     public EstadoPedido getEstado() { return estado; }
     public String getDireccionEntrega() { return direccionEntrega; }
+    public ExencionResponsabilidad getExencionResponsabilidad() { return exencionResponsabilidad; }
 
-    // equals/hashCode por identidad
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

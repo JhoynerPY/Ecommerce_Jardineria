@@ -4,5 +4,6 @@ public enum EstadoPedido {
     PENDIENTE_PAGO,
     PAGADO,
     RECHAZADO,
-    ENVIADO
+    ENVIADO,
+    ENTREGADO
 }
