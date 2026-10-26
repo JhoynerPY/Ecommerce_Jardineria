@@ -1,5 +1,5 @@
 -- Script de datos iniciales para Ecommerce Jardineria
--- Viveros, Clientes, Especies, Ejemplares, Artículos de Kit, Kits, Pedidos
+-- Viveros, Clientes, Especies, Ejemplares, Artículos de Kit, Kits, Pedidos, Usuarios
 
 -- ============================================
 -- VIVEROS
@@ -22,6 +22,17 @@ INSERT INTO clientes (id, nombre, email_valor, telefono, calle, ciudad, departam
 ('cliente-005', 'Sofía Herrera', 'sofia.herrera@email.com', '3005556677', 'Carrera 25 #8-15', 'Cali', 'Valle del Cauca', '760002', 'Colombia', 3.4550, -76.5300, 'vivero-005', false),
 ('cliente-006', 'Jorge López', 'jorge.lopez@email.com', '3006667788', 'Calle 12 #5-50', 'Armenia', 'Quindío', '630003', 'Colombia', 4.5300, -75.6850, 'vivero-001', false),
 ('cliente-007', 'Paula Jiménez', 'paula.jimenez@email.com', '3007778899', 'Carrera 30 #20-10', 'Pereira', 'Risaralda', '660003', 'Colombia', 4.8100, -75.7000, 'vivero-002', false);
+
+-- ============================================
+-- USUARIOS (para autenticación JWT)
+-- Contraseña encriptada con BCrypt: "password123" = $2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S
+-- ============================================
+INSERT INTO usuarios (id, email, password, nombre, roles, activo, deleted) VALUES
+('usuario-001', 'comprador@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Comprador Test', '["COMPRADOR"]', true, false),
+('usuario-002', 'vendedor@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Vendedor Test', '["VENDEDOR_VIVERO"]', true, false),
+('usuario-003', 'admin@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Admin Test', '["ADMIN", "COMPRADOR", "VENDEDOR_VIVERO"]', true, false),
+('usuario-004', 'maria.gonzalez@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'María González', '["COMPRADOR"]', true, false),
+('usuario-005', 'contacto@eljardin.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Vivero El Jardín', '["VENDEDOR_VIVERO"]', true, false);
 
 -- ============================================
 -- ESPECIES
