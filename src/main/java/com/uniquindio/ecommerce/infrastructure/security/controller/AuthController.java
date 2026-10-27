@@ -7,6 +7,7 @@ import com.uniquindio.ecommerce.infrastructure.security.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,8 +30,8 @@ public class AuthController {
     }
 
     @GetMapping("/validate")
-    public ResponseEntity<Void> validateToken(@RequestHeader("Authorization") String authHeader) {
-        // El filtro JWT ya valida el token, si llega aquí es válido
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Void> validateToken(@RequestHeader(value = "Authorization", required = false) String authHeader) {
         return ResponseEntity.ok().build();
     }
 }

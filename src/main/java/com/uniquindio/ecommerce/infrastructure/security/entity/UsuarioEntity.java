@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class UsuarioEntity implements UserDetails {
     @CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id"))
     @Column(name = "rol")
     @Builder.Default
-    private List<String> roles = List.of("COMPRADOR");
+    private List<String> roles = new ArrayList<>();
 
     @Column(name = "activo", nullable = false)
     @Builder.Default

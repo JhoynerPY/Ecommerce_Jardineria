@@ -2,8 +2,6 @@ package com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa;
 
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.EjemplarEntity;
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.EspecieEntity;
-import com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.custom.EjemplarRepositoryCustom;
-import com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.custom.PlantaBusquedaDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface EjemplarJpaRepository extends JpaRepository<EjemplarEntity, String>, EjemplarRepositoryCustom {
+public interface EjemplarJpaRepository extends JpaRepository<EjemplarEntity, String> {
 
     Optional<EjemplarEntity> findByIdAndDeletedFalse(String id);
 
@@ -35,20 +33,9 @@ public interface EjemplarJpaRepository extends JpaRepository<EjemplarEntity, Str
     long countDisponibles();
 
     // Búsqueda avanzada de plantas por nombre de especie y rango de precio con paginación
-    @Query("SELECT NEW com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.custom.PlantaBusquedaDTO(" +
-           "e.id, " +
-           "e.especie.nombreComun, " +
-           "e.especie.nombreCientifico, " +
-           "e.etapaCrecimiento, " +
-           "e.precio.valor, " +
-           "e.precio.moneda, " +
-           "e.disponibilidad, " +
-           "v.nombre, " +
-           "v.id" +
-           ") " +
+    @Query("SELECT e.id, e.especie.nombreComun, e.especie.nombreCientifico, e.etapaCrecimiento, e.precio.valor, e.precio.moneda, e.disponibilidad " +
            "FROM EjemplarEntity e " +
            "JOIN e.especie esp " +
-           "LEFT JOIN ViveroEntity v ON v.id = (SELECT MAX(v2.id) FROM ViveroEntity v2 WHERE v2.deleted = false AND v2.activo = true) " +
            "WHERE e.deleted = false " +
            "AND (:nombreEspecie IS NULL OR LOWER(esp.nombreComun) LIKE LOWER(CONCAT('%', :nombreEspecie, '%')) OR LOWER(esp.nombreCientifico) LIKE LOWER(CONCAT('%', :nombreEspecie, '%'))) " +
            "AND (:precioMin IS NULL OR e.precio.valor >= :precioMin) " +
@@ -56,7 +43,7 @@ public interface EjemplarJpaRepository extends JpaRepository<EjemplarEntity, Str
            "AND (:disponible IS NULL OR e.disponibilidad = :disponible) " +
            "AND (:etapaCrecimiento IS NULL OR e.etapaCrecimiento = :etapaCrecimiento) " +
            "ORDER BY esp.nombreComun ASC, e.precio.valor ASC")
-    Page<PlantaBusquedaDTO> buscarPlantasPorNombreYPrecio(
+    Page<Object[]> buscarPlantasPorNombreYPrecio(
             @Param("nombreEspecie") String nombreEspecie,
             @Param("precioMin") Double precioMin,
             @Param("precioMax") Double precioMax,

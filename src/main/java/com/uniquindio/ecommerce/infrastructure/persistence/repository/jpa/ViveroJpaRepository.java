@@ -39,11 +39,11 @@ public interface ViveroJpaRepository extends JpaRepository<ViveroEntity, String>
                                         Pageable pageable);
 
     // Estadísticas de viveros con conteo de clientes asignados
-    @Query("SELECT v.id, v.nombre, v.ciudad, COUNT(c) as totalClientes " +
+    @Query("SELECT v.id, v.nombre, v.direccion.ciudad, COUNT(c) as totalClientes " +
            "FROM ViveroEntity v " +
            "LEFT JOIN ClienteEntity c ON c.viveroAsignadoId = v.id AND c.deleted = false " +
            "WHERE v.deleted = false " +
-           "GROUP BY v.id, v.nombre, v.ciudad " +
+           "GROUP BY v.id, v.nombre, v.direccion.ciudad " +
            "ORDER BY totalClientes DESC")
     List<Object[]> getViverosConClientesAsignados();
 

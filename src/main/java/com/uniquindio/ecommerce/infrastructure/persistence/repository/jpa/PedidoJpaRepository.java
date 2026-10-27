@@ -39,15 +39,15 @@ public interface PedidoJpaRepository extends JpaRepository<PedidoEntity, String>
     // Estadísticas completas por vivero con JOIN y GROUP BY
     @Query("SELECT NEW com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.custom.PedidoEstadisticasViveroDTO(" +
            "v.id, v.nombre, " +
-           "COUNT(p), " +
-           "SUM(CASE WHEN p.estado = 'PENDIENTE_PAGO' THEN 1 ELSE 0 END), " +
-           "SUM(CASE WHEN p.estado = 'PAGADO' THEN 1 ELSE 0 END), " +
-           "SUM(CASE WHEN p.estado = 'ENVIADO' THEN 1 ELSE 0 END), " +
-           "SUM(CASE WHEN p.estado = 'ENTREGADO' THEN 1 ELSE 0 END), " +
-           "SUM(CASE WHEN p.estado = 'RECHAZADO' THEN 1 ELSE 0 END), " +
-           "SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
-           "AVG((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
-           "SUM(CASE WHEN p.estado = 'PENDIENTE_PAGO' THEN (SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d) ELSE 0 END)" +
+           "CAST(COUNT(p) AS long), " +
+           "CAST(SUM(CASE WHEN p.estado = 'PENDIENTE_PAGO' THEN 1 ELSE 0 END) AS long), " +
+           "CAST(SUM(CASE WHEN p.estado = 'PAGADO' THEN 1 ELSE 0 END) AS long), " +
+           "CAST(SUM(CASE WHEN p.estado = 'ENVIADO' THEN 1 ELSE 0 END) AS long), " +
+           "CAST(SUM(CASE WHEN p.estado = 'ENTREGADO' THEN 1 ELSE 0 END) AS long), " +
+           "CAST(SUM(CASE WHEN p.estado = 'RECHAZADO' THEN 1 ELSE 0 END) AS long), " +
+           "CAST(COALESCE(SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), 0) AS double), " +
+           "CAST(COALESCE(AVG((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), 0) AS double), " +
+           "CAST(COALESCE(SUM(CASE WHEN p.estado = 'PENDIENTE_PAGO' THEN (SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d) ELSE 0 END), 0) AS double)" +
            ") " +
            "FROM ViveroEntity v " +
            "LEFT JOIN PedidoEntity p ON p.idVivero = v.id AND p.deleted = false " +
@@ -59,19 +59,21 @@ public interface PedidoJpaRepository extends JpaRepository<PedidoEntity, String>
     // Estadísticas de pedidos delegados por vivero local (solo ENTREGADOS)
     @Query("SELECT NEW com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.custom.PedidoEstadisticasViveroDTO(" +
            "v.id, v.nombre, " +
-           "COUNT(p), " +
-           "0, 0, 0, " +
-           "COUNT(p), " +
-           "0, " +
-           "SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
-           "AVG((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), " +
-           "0" +
+           "CAST(COUNT(p) AS long), " +
+           "CAST(0 AS long), " +
+           "CAST(0 AS long), " +
+           "CAST(0 AS long), " +
+           "CAST(COUNT(p) AS long), " +
+           "CAST(0 AS long), " +
+           "CAST(COALESCE(SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), 0) AS double), " +
+           "CAST(COALESCE(AVG((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), 0) AS double), " +
+           "CAST(0 AS double)" +
            ") " +
            "FROM ViveroEntity v " +
            "INNER JOIN PedidoEntity p ON p.idVivero = v.id AND p.deleted = false " +
            "WHERE v.deleted = false AND p.estado = 'ENTREGADO' " +
            "GROUP BY v.id, v.nombre " +
-           "ORDER BY SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)) DESC")
+           "ORDER BY COALESCE(SUM((SELECT SUM(d.precioUnitario * d.cantidad) FROM p.detalles d)), 0) DESC")
     List<PedidoEstadisticasViveroDTO> getEstadisticasPedidosEntregadosPorVivero();
 
     // Total de ventas por vivero (solo pedidos pagados/entregados)

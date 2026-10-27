@@ -33,5 +33,5 @@
 - [x] Verificación general de que todas las pruebas (mínimo 14) corren y pasan con éxito (`./gradlew test`).
 
 ## 📝 7. Cierre, Git y Documentación
-- [ ] Historial de commits ordenados y limpios por cada avance atómico.
-- [ ] Creación de la tabla de correcciones y retroalimentación de la Entrega 1 en el `README.md`.
+- [x] Historial de commits ordenados y limpios por cada avance atómico.
+- [x] Creación de la tabla de correcciones y retroalimentación de la Entrega 1 en el `README.md`.

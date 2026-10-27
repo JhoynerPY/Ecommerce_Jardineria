@@ -1,9 +1,10 @@
 package com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa;
 
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.DetallePedidoEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface DetallePedidoJpaRepository extends JpaRepository<DetallePedidoEntity, String> {
@@ -17,5 +18,5 @@ public interface DetallePedidoJpaRepository extends JpaRepository<DetallePedidoE
            "AND p.estado = 'ENTREGADO' " +
            "GROUP BY d.idProducto " +
            "ORDER BY SUM(d.cantidad) DESC")
-    List<Object[]> getTopProductosVendidos(@Param("limit") int limit);
+    Page<Object[]> getTopProductosVendidos(Pageable pageable);
 }

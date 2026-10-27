@@ -18,6 +18,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -45,41 +49,58 @@ class AuthControllerIntegrationTest {
     @Autowired
     private AuthService authService;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     private String compradorToken;
     private String vendedorToken;
     private String adminToken;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         // Limpiar y crear usuarios de prueba
         usuarioRepository.deleteAll();
+        entityManager.flush();
 
         UsuarioEntity comprador = new UsuarioEntity();
         comprador.setId("test-comprador-001");
         comprador.setEmail("comprador@test.com");
         comprador.setPassword(passwordEncoder.encode("password123"));
         comprador.setNombre("Comprador Test");
-        comprador.setRoles(List.of("COMPRADOR"));
+        // Usar reflexión para establecer roles directamente, evitando la lista inmutable por defecto
+        Field rolesField = UsuarioEntity.class.getDeclaredField("roles");
+        rolesField.setAccessible(true);
+        List<String> compradorRoles = new ArrayList<>();
+        compradorRoles.add("COMPRADOR");
+        rolesField.set(comprador, compradorRoles);
         comprador.setActivo(true);
-        usuarioRepository.save(comprador);
+        entityManager.persist(comprador);
 
         UsuarioEntity vendedor = new UsuarioEntity();
         vendedor.setId("test-vendedor-001");
         vendedor.setEmail("vendedor@test.com");
         vendedor.setPassword(passwordEncoder.encode("password123"));
         vendedor.setNombre("Vendedor Test");
-        vendedor.setRoles(List.of("VENDEDOR_VIVERO"));
+        List<String> vendedorRoles = new ArrayList<>();
+        vendedorRoles.add("VENDEDOR_VIVERO");
+        rolesField.set(vendedor, vendedorRoles);
         vendedor.setActivo(true);
-        usuarioRepository.save(vendedor);
+        entityManager.persist(vendedor);
 
         UsuarioEntity admin = new UsuarioEntity();
         admin.setId("test-admin-001");
         admin.setEmail("admin@test.com");
         admin.setPassword(passwordEncoder.encode("password123"));
         admin.setNombre("Admin Test");
-        admin.setRoles(List.of("ADMIN", "COMPRADOR", "VENDEDOR_VIVERO"));
+        List<String> adminRoles = new ArrayList<>();
+        adminRoles.add("ADMIN");
+        adminRoles.add("COMPRADOR");
+        adminRoles.add("VENDEDOR_VIVERO");
+        rolesField.set(admin, adminRoles);
         admin.setActivo(true);
-        usuarioRepository.save(admin);
+        entityManager.persist(admin);
+
+        entityManager.flush();
 
         // Generar tokens
         compradorToken = jwtUtil.generateToken("comprador@test.com", 

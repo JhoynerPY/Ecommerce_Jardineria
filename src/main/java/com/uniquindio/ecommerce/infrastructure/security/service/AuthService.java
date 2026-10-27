@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -32,14 +34,16 @@ public class AuthService {
             throw new ReglaDominioException("Ya existe un usuario con el email: " + request.getEmail());
         }
 
+        List<String> roles = request.getRoles() != null && !request.getRoles().isEmpty()
+                ? new ArrayList<>(request.getRoles())
+                : new ArrayList<>(List.of("COMPRADOR"));
+
         UsuarioEntity usuario = UsuarioEntity.builder()
                 .id(UUID.randomUUID().toString())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .nombre(request.getNombre())
-                .roles(request.getRoles() != null && !request.getRoles().isEmpty() 
-                    ? request.getRoles() 
-                    : java.util.List.of("COMPRADOR"))
+                .roles(roles)
                 .activo(true)
                 .build();
 

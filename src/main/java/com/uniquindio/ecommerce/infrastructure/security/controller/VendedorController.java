@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/vendedor")
-@PreAuthorize("hasRole('VENDEDOR_VIVERO')")
+@PreAuthorize("hasAuthority('VENDEDOR_VIVERO')")
 public class VendedorController {
 
     @GetMapping("/dashboard")

@@ -22,7 +22,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.context.annotation.Import;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,7 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @ActiveProfiles("test")
-@Import({EjemplarJpaRepository.class, EspecieJpaRepository.class, ViveroJpaRepository.class})
 class EjemplarJpaRepositoryTest {
 
     @Autowired
@@ -67,6 +65,20 @@ class EjemplarJpaRepositoryTest {
         ejemplar.setPrecio(new PrecioEmbeddable(BigDecimal.valueOf(precio), "COP"));
         ejemplar.setDisponibilidad(disponible);
         return entityManager.persistAndFlush(ejemplar);
+    }
+
+    private PlantaBusquedaDTO convertirADTO(Object[] row) {
+        PlantaBusquedaDTO dto = new PlantaBusquedaDTO();
+        dto.setEjemplarId((String) row[0]);
+        dto.setEspecieNombreComun((String) row[1]);
+        dto.setEspecieNombreCientifico((String) row[2]);
+        dto.setEtapaCrecimiento(row[3] != null ? row[3].toString() : null);
+        dto.setPrecio(row[4] != null ? ((BigDecimal) row[4]).doubleValue() : null);
+        dto.setMoneda((String) row[5]);
+        dto.setDisponible((Boolean) row[6]);
+        dto.setViveroNombre(null);
+        dto.setViveroId(null);
+        return dto;
     }
 
     @Test
@@ -126,9 +138,10 @@ class EjemplarJpaRepositoryTest {
 
         // When
         Pageable pageable = PageRequest.of(0, 10);
-        Page<PlantaBusquedaDTO> resultado = ejemplarRepository.buscarPlantasPorNombreYPrecio(
+        Page<Object[]> resultadoRaw = ejemplarRepository.buscarPlantasPorNombreYPrecio(
                 "Rosa", null, null, null, null, pageable
         );
+        Page<PlantaBusquedaDTO> resultado = resultadoRaw.map(this::convertirADTO);
 
         // Then
         assertThat(resultado.getContent()).hasSize(1);
@@ -145,13 +158,14 @@ class EjemplarJpaRepositoryTest {
 
         // When
         Pageable pageable = PageRequest.of(0, 10);
-        Page<PlantaBusquedaDTO> resultado = ejemplarRepository.buscarPlantasPorNombreYPrecio(
+        Page<Object[]> resultadoRaw = ejemplarRepository.buscarPlantasPorNombreYPrecio(
                 null, 20000.0, 30000.0, null, null, pageable
         );
+        Page<PlantaBusquedaDTO> resultado = resultadoRaw.map(this::convertirADTO);
 
         // Then
         assertThat(resultado.getContent()).hasSize(1);
-        assertThat(resultado.getContent().get(0).getPrecio()).isEqualTo(BigDecimal.valueOf(25000));
+        assertThat(resultado.getContent().get(0).getPrecio()).isEqualTo(25000.0);
     }
 
     @Test
@@ -163,9 +177,10 @@ class EjemplarJpaRepositoryTest {
 
         // When
         Pageable pageable = PageRequest.of(0, 10);
-        Page<PlantaBusquedaDTO> resultado = ejemplarRepository.buscarPlantasPorNombreYPrecio(
+        Page<Object[]> resultadoRaw = ejemplarRepository.buscarPlantasPorNombreYPrecio(
                 null, null, null, true, null, pageable
         );
+        Page<PlantaBusquedaDTO> resultado = resultadoRaw.map(this::convertirADTO);
 
         // Then
         assertThat(resultado.getContent()).hasSize(1);
@@ -182,9 +197,10 @@ class EjemplarJpaRepositoryTest {
 
         // When
         Pageable pageable = PageRequest.of(0, 10);
-        Page<PlantaBusquedaDTO> resultado = ejemplarRepository.buscarPlantasPorNombreYPrecio(
+        Page<Object[]> resultadoRaw = ejemplarRepository.buscarPlantasPorNombreYPrecio(
                 null, null, null, null, EtapaCrecimiento.FLORACION, pageable
         );
+        Page<PlantaBusquedaDTO> resultado = resultadoRaw.map(this::convertirADTO);
 
         // Then
         assertThat(resultado.getContent()).hasSize(1);
