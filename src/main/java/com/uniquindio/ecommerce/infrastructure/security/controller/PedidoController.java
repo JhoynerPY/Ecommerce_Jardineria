@@ -39,7 +39,7 @@ public class PedidoController {
     public ResponseEntity<CancelarPedidoResponse> cancelarPedido(@Valid @RequestBody CancelarPedidoRequest request){
 
         //Mapea DTO de la web al Command de la app
-        CancelarPedidoCommand command = new CancelarPedidoCommand(request.getIdpedido(),
+        CancelarPedidoCommand command = new CancelarPedidoCommand(request.getIdPedido(),
                 request.getMotivoCancelacion());
 
         //Delega caso de uso
@@ -63,7 +63,7 @@ public class PedidoController {
         CrearPedidoCommand command = new CrearPedidoCommand(
                 request.getIdCliente(),
                 detallesDomain,
-                new Direccion(request.getDireccion(), "N/A", "N/A", "000000", "N/A", 0, 0),
+                new Direccion(request.getDireccion(), "Armenia", "Quindio", "630001", "Colombia", 4.5350, -75.6800),
                 ExencionResponsabilidad.TipoExencion.SIN_EXENCION,
                 "Terminos por defecto", "1.0", true
         );

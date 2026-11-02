@@ -5,18 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 public class CancelarPedidoRequest {
 
     @NotBlank(message = "El ID del pedido es obligatorio")
-    private String idpedido;
+    private String idPedido;
 
     @NotBlank(message = "El motivo de cancelacion es obligatorio")
     private String motivoCancelacion;
 
-    public String getIdpedido() {
-        return idpedido;
-    }
+    public String getIdPedido() { return idPedido; }
 
-    public void setIdpedido(String idpedido) {
-        this.idpedido = idpedido;
-    }
+    public void setIdPedido(String idPedido) { this.idPedido = idPedido; }
 
     public String getMotivoCancelacion() {
         return motivoCancelacion;
