@@ -139,6 +139,8 @@ public class JpaMapper {
         entity.setEtapaCrecimiento(toEtapaCrecimientoEntity(domain.getEtapaCrecimiento()));
         entity.setPrecio(toPrecioEmbeddable(domain.getPrecio()));
         entity.setDisponibilidad(domain.isDisponibilidad());
+        entity.setEstadoSalud(com.uniquindio.ecommerce.infrastructure.persistence.entity.EstadoDeSalud.
+                valueOf(domain.getEstadoDeSalud().name()));
         return entity;
     }
 
@@ -152,6 +154,10 @@ public class JpaMapper {
         );
         if (!entity.isDisponibilidad()) {
             ejemplar.retirarDeVenta();
+        }
+        if (entity.getEstadoSalud() != null){
+            ejemplar.actualizarEstadoSalud(com.uniquindio.ecommerce.domain.ejemplar.EstadoDeSalud.
+                    valueOf(entity.getEstadoSalud().name()));
         }
         return ejemplar;
     }

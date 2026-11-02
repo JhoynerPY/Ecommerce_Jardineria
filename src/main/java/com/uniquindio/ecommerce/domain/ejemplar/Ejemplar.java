@@ -11,6 +11,7 @@ public class Ejemplar {
     private EtapaCrecimiento etapaCrecimiento;
     private Precio precio;
     private boolean disponibilidad;
+    private EstadoDeSalud estadoDeSalud;
 
     private Ejemplar(String id, Especie especie, EtapaCrecimiento etapaCrecimiento,
                     Precio precio) {
@@ -19,6 +20,7 @@ public class Ejemplar {
         this.etapaCrecimiento = etapaCrecimiento;
         this.precio = precio;
         this.disponibilidad = true;
+        this.estadoDeSalud = EstadoDeSalud.SANO;
     }
 
     public static Ejemplar registrarEnInventario(String id, Especie especie, EtapaCrecimiento etapaCrecimiento,
@@ -56,6 +58,21 @@ public class Ejemplar {
 
     public void retirarDeVenta(){
         this.disponibilidad = false;
+    }
+
+    public EstadoDeSalud getEstadoDeSalud() {
+        return estadoDeSalud;
+    }
+
+    public void actualizarEstadoSalud(EstadoDeSalud nuevoEstado){
+        if (nuevoEstado == null){
+            throw new IllegalArgumentException("El estado de salud no puede ser nulo");
+        }
+        this.estadoDeSalud = nuevoEstado;
+        //Si esta marchito o con plaga se tira de la venta (REGLA DE NEGOCIO)
+        if (nuevoEstado == EstadoDeSalud.MARCHITO || nuevoEstado == EstadoDeSalud.CON_PLAGA){
+            this.retirarDeVenta();
+        }
     }
 
     //Compara los objetos para saber si son iguales por su id

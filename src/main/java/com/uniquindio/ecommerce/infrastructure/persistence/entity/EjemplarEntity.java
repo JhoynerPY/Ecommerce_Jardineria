@@ -1,5 +1,6 @@
 package com.uniquindio.ecommerce.infrastructure.persistence.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -41,6 +42,10 @@ public class EjemplarEntity {
 
     @Column(name = "disponibilidad", nullable = false)
     private boolean disponibilidad = true;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_salud", nullable = false)
+    private EstadoDeSalud estadoSalud = EstadoDeSalud.SANO;
 
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;

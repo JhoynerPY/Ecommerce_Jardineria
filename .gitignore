@@ -1,5 +1,6 @@
+out/
 build/
 .gradle/
 .idea/
-*.class
-.env —
+.DS_Store
+Thumbs.db
