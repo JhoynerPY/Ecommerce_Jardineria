@@ -1,5 +1,9 @@
+# Ignorar carpetas de compilación de IntelliJ y Gradle
+out/
 build/
 .gradle/
 .idea/
-*.class
-.env —
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db

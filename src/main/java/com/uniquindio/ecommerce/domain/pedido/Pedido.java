@@ -76,6 +76,16 @@ public class Pedido {
         this.estado = EstadoPedido.ENVIADO;
     }
 
+    public void cancelar(){
+        if (this.estado == EstadoPedido.ENVIADO || this.estado == EstadoPedido.ENTREGADO){
+            throw new ReglaDominioException("No se puede cancelar un pedido que ya fue enviado o entregado.");
+        }
+        if (this.estado == EstadoPedido.CANCELADO || this.estado == EstadoPedido.RECHAZADO){
+            throw new ReglaDominioException("El pedido ya se encuentra cancelado o rechazado.");
+        }
+        this.estado = EstadoPedido.CANCELADO;
+    }
+
     public String getIdPedido() { return idPedido; }
     public String getIdCliente() { return idCliente; }
     public String getIdVivero() { return idVivero; }

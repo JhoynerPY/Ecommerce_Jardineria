@@ -20,6 +20,8 @@ public interface EjemplarJpaRepository extends JpaRepository<EjemplarEntity, Str
 
     List<EjemplarEntity> findByEspecieIdAndDisponibilidadTrueAndDeletedFalse(String especieId);
 
+    List<EjemplarEntity> findByEspecieIdAndDisponibilidadFalseAndDeletedFalse(String especieId);
+
     @Query("SELECT e FROM EjemplarEntity e WHERE e.deleted = false " +
            "AND (:especieId IS NULL OR e.especie.id = :especieId) " +
            "AND (:etapaCrecimiento IS NULL OR e.etapaCrecimiento = :etapaCrecimiento) " +

@@ -13,6 +13,11 @@ public class InMemoryInventarioPort implements InventarioPort {
         return !debeFallar;
     }
 
+    @Override
+    public boolean reponerInventario(List<DetallePedido> detalles){
+        return !debeFallar;
+    }
+
     public void setDebeFallar(boolean debeFallar) {
         this.debeFallar = debeFallar;
     }

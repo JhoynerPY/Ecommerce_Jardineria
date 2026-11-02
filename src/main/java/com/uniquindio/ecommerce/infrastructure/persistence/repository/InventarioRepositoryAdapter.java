@@ -33,4 +33,27 @@ public class InventarioRepositoryAdapter implements InventarioPort {
         }
         return true;
     }
+
+    @Override
+    public boolean reponerInventario(List<DetallePedido> detalles) {
+        try {
+            for (DetallePedido detalle : detalles){
+
+                //Busca ejemplares no disponibles de esa especie para volverlos a poner en venta
+                List<EjemplarEntity> ejemplaresOcultos = jpaRepository.
+                        findByEspecieIdAndDisponibilidadFalseAndDeletedFalse(detalle.getIdProducto());
+
+                int cantidadAReponer = Math.min(detalle.getCantidad(), ejemplaresOcultos.size());
+
+                for (int i = 0; i < cantidadAReponer; i++){
+                    EjemplarEntity ejemplar = ejemplaresOcultos.get(i);
+                    ejemplar.setDisponibilidad(true);
+                    jpaRepository.save(ejemplar);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
