@@ -149,7 +149,7 @@ class AuthControllerIntegrationTest {
                                     "nombre": "Otro Usuario"
                                 }
                                 """))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.message").value(containsString("Ya existe un usuario")));
     }
 
