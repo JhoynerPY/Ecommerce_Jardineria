@@ -137,7 +137,7 @@ class AuthControllerIntegrationTest {
     }
 
     @Test
-    void register_conEmailDuplicado_debeRetornar400() throws Exception {
+    void register_conEmailDuplicado_debeRetornar422() throws Exception {
         // Given - usuario ya existe
         // When & Then
         mockMvc.perform(post("/api/auth/register")
@@ -149,7 +149,7 @@ class AuthControllerIntegrationTest {
                                     "nombre": "Otro Usuario"
                                 }
                                 """))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.message").value(containsString("Ya existe un usuario")));
     }
 

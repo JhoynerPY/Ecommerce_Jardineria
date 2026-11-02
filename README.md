@@ -99,6 +99,36 @@ src/
 - ✅ Verificación `verify(..., never())` en casos de error
 - ✅ 32+ pruebas unitarias pasando sin BD externa
 
+#### Probar un endpoint con seguridad (401, 403 y 200)
+
+- **Códigos esperados:** se valida que un endpoint responda **401** cuando no hay autenticación, **403** cuando hay identidad pero falta el rol, y **200** cuando el rol autorizado accede; en `RoleBasedAccessControllerTest`, `sinToken_noDebeAccederAEndpointsDeComprador` y `tokenMalformado_debeRetornar401` cubren el 401, `vendedor_sinRolComprador_noDebeAccederAEndpointsDeComprador` cubre el 403 y `comprador_conTokenValido_debeAccederAEndpointsDeComprador` cubre el 200.
+- **Simulación sin login real:** `spring-security-test` permite usar `@WithMockUser(roles = "COMPRADOR")` para inyectar un usuario ficticio en el `SecurityContext`, o `jwt()` para construir un `JwtAuthenticationToken` con los claims y authorities deseados, evitando ejecutar el flujo completo de autenticación.
+- **Aplicación en este proyecto:** además de la simulación, `RoleBasedAccessControllerTest` genera tokens firmados con `JwtUtil` y los envía en `Authorization: Bearer ...`, de modo que la prueba también ejercita el `JwtAuthenticationFilter` real y no solo el `SecurityContext`.
+- **Cobertura del 401:** `AuthControllerIntegrationTest.validate_sinToken_debeRetornar401` y `validate_conTokenInvalido_debeRetornar401`, junto con `authorizationHeaderSinBearer_debeRetornar401`, `authorizationHeaderVacio_debeRetornar401`, `usuarioInactivo_debeRetornar401` y `usuarioEliminadoSoftDelete_debeRetornar401`.
+- **Cobertura del 403:** `comprador_sinRolVendedor_noDebeAccederAEndpointsDeVendedor`, `vendedor_sinRolComprador_noDebeAccederAEndpointsDeComprador`, `comprador_sinRolAdmin_noDebeAccederAEndpointsDeAdmin` y `vendedor_sinRolAdmin_noDebeAccederAEndpointsDeAdmin` demuestran que estar autenticado no implica tener permiso.
+- **Cobertura del 200:** `admin_conRolComprador_debeAccederAEndpointsDeComprador`, `admin_conRolVendedor_debeAccederAEndpointsDeVendedor`, `admin_conTokenValido_debeAccederAEndpointsDeAdmin` y `vendedor_debeAccederAEndpointEstadisticas` confirman que la matriz de roles deja pasar solo lo permitido.
+- **Por qué validar los tres:** si solo se probara el 200, un endpoint abierto por error pasaría desapercibido; los 401 y 403 convierten la seguridad en una especificación ejecutable de acceso por rol.
+
+#### `@DataJpaTest` contra `@SpringBootTest`
+
+- **Alcance reducido:** `@DataJpaTest` configura únicamente JPA, repositorios, entidades y un DataSource embebido H2; no carga controladores, servicios ni seguridad, por lo que arranca rápido y aísla la capa de persistencia.
+- **Transaccionalidad:** cada prueba de `@DataJpaTest` corre dentro de una transacción que se revierte al finalizar; la propia anotación ya incluye `@Transactional`, así que no hace falta añadirla manualmente.
+- **Alcance completo:** `@SpringBootTest` levanta todo el contexto de la aplicación con sus beans y capas, útil para integración pero más lento y sensible a configuraciones globales como seguridad, filtros y perfiles.
+- **En este proyecto:** `EjemplarJpaRepositoryTest` usa `@DataJpaTest` con `TestEntityManager` y valida consultas concretas como `findWithFilters_debeFiltrarPorRangoPrecio`, `estadisticasPrecioPorEspecie_debeRetornarPromedioMinMax` y `softDelete_debeMarcarComoEliminadoSinBorrarFisicamente`; en cambio, `AuthControllerIntegrationTest` y `RoleBasedAccessControllerTest` usan `@SpringBootTest` porque necesitan el flujo completo.
+- **Cambio en Spring Boot 4:** la anotación pasó de `org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest` a `org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest` y requiere la dependencia `spring-boot-starter-data-jpa-test`; el proyecto actual en Boot 3.3.5 sigue usando el paquete clásico.
+- **Uso de `@Import`:** `@DataJpaTest` no escanea adaptadores propios como `EjemplarRepositoryAdapter`, mappers o implementaciones custom; cuando una prueba necesita esos componentes se declaran con `@Import(EjemplarRepositoryAdapter.class)` para incorporarlos al contexto reducido sin cargar toda la aplicación.
+- **Regla práctica:** `@DataJpaTest` para probar repositorios y mapeo JPA de forma aislada; `@SpringBootTest` cuando se quiere verificar la integración real entre controlador, caso de uso, persistencia y seguridad.
+
+#### Prueba de integración
+
+- **Recorrido completo:** una prueba de integración entra por el controlador, atraviesa el caso de uso, llega al adaptador de persistencia y termina en la base H2, verificando el comportamiento real y no piezas aisladas.
+- **Sin mocks de Mockito:** no se reemplazan dependencias; se usa el cableado real de Spring, de modo que un puerto mal implementado, un bean faltante o un mapeo incorrecto hacen fallar la prueba.
+- **Flujo de autenticación:** `AuthControllerIntegrationTest` cubre `register_debeRegistrarNuevoUsuarioYRetornarToken`, `register_conEmailDuplicado_debeRetornar422`, `login_conCredencialesValidas_debeRetornarToken`, `login_conPasswordIncorrecto_debeRetornar401` y `validate_conTokenValido_debeRetornar200` sobre `/api/auth`.
+- **Seguridad integrada:** `RoleBasedAccessControllerTest` completa el recorrido al combinar `MockMvc`, tokens JWT reales y el filtro de seguridad, comprobando que el rol se propaga correctamente desde el token hasta la autorización del endpoint.
+- **Aislamiento con `@Transactional`:** cada test se ejecuta en una transacción que Spring revierte al terminar, por lo que los usuarios y datos creados en `setUp` no contaminan otros tests ni la base compartida.
+- **Sin dependencia del orden:** como cada prueba deja la base como la encontró, se pueden ejecutar en cualquier orden y repetir sin limpiezas manuales de tablas.
+- **Valor en arquitectura hexagonal:** la integración demuestra que el hexágono está correctamente conectado: el adaptador de entrada traduce la petición, el caso de uso aplica las reglas y el adaptador de salida persiste, todo con la seguridad y el manejo de errores reales.
+
 ## 📦 Endpoints Principales
 
 ### Autenticación (Públicos)

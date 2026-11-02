@@ -2,7 +2,6 @@ package com.uniquindio.ecommerce.infrastructure.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -74,7 +73,7 @@ public class JwtUtil {
                 .subject(subject)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .signWith(getSigningKey())
                 .compact();
     }
 
@@ -95,8 +94,10 @@ public class JwtUtil {
     public java.util.List<String> extractRoles(String token) {
         Claims claims = extractAllClaims(token);
         Object roles = claims.get("roles");
-        if (roles instanceof java.util.List) {
-            return (java.util.List<String>) roles;
+        if (roles instanceof java.util.List<?> roleList) {
+            return roleList.stream()
+                    .map(String.class::cast)
+                    .toList();
         }
         return java.util.List.of();
     }
