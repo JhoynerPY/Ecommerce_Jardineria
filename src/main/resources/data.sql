@@ -27,7 +27,7 @@ INSERT INTO clientes (id, nombre, email, telefono, direccion_calle, direccion_ci
 -- USUARIOS (para autenticación JWT)
 -- ============================================
 INSERT INTO usuarios (id, email, password, nombre, activo, deleted) VALUES
-('usuario-001', 'comprador@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Comprador Test', true, false),
+('usuario-001', 'comprador@test.com', '$2a$12$eA4.5toy4k51pgMYDJ.q3ObYN1OJZpcUOyiNusJg6kVzpgEPNdTL6', 'Comprador Test', true, false),
 ('usuario-002', 'vendedor@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Vendedor Test', true, false),
 ('usuario-003', 'admin@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Admin Test', true, false),
 ('usuario-004', 'maria.gonzalez@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'María González', true, false),
