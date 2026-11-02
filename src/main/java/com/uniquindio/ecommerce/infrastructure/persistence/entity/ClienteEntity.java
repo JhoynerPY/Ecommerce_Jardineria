@@ -1,10 +1,6 @@
 package com.uniquindio.ecommerce.infrastructure.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,12 +24,22 @@ public class ClienteEntity {
     private String nombre;
 
     @Embedded
+    @AttributeOverride(name = "valor", column = @Column(name = "email"))
     private EmailEmbeddable email;
 
     @Column(name = "telefono")
     private String telefono;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "calle", column = @Column(name = "direccion_calle")),
+            @AttributeOverride(name = "ciudad", column = @Column(name = "direccion_ciudad")),
+            @AttributeOverride(name = "departamento", column = @Column(name = "direccion_departamento")),
+            @AttributeOverride(name = "codigoPostal", column = @Column(name = "direccion_codigo_postal")),
+            @AttributeOverride(name = "pais", column = @Column(name = "direccion_pais")),
+            @AttributeOverride(name = "latitud", column = @Column(name = "direccion_latitud")),
+            @AttributeOverride(name = "longitud", column = @Column(name = "direccion_longitud"))
+    })
     private DireccionEmbeddable direccion;
 
     @Column(name = "vivero_asignado_id", length = 36)

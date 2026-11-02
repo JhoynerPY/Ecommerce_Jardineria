@@ -1,12 +1,6 @@
 package com.uniquindio.ecommerce.infrastructure.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,9 +27,19 @@ public class EspecieEntity {
     private String nombreCientifico;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "requerimientoLuz", column = @Column(name = "ficha_de_cuidado_requerimiento_luz")),
+            @AttributeOverride(name = "frecuenciaRiego", column = @Column(name = "ficha_de_cuidado_frecuencia_riego")),
+            @AttributeOverride(name = "sustrato", column = @Column(name = "ficha_de_cuidado_sustrato")),
+            @AttributeOverride(name = "temporadaFloracion", column = @Column(name = "ficha_de_cuidado_temporada_floracion"))
+    })
     private FichaDeCuidadoEmbeddable fichaDeCuidado;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "nivel", column = @Column(name = "riesgo_nivel")),
+            @AttributeOverride(name = "descripcion", column = @Column(name = "riesgo_descripcion"))
+    })
     private RiesgoEmbeddable riesgo;
 
     @Column(name = "deleted", nullable = false)

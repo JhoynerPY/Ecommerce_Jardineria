@@ -1,15 +1,7 @@
 package com.uniquindio.ecommerce.infrastructure.persistence.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +30,10 @@ public class EjemplarEntity {
     private EtapaCrecimiento etapaCrecimiento;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "valor", column = @Column(name = "precio_valor")),
+            @AttributeOverride(name = "moneda", column = @Column(name = "precio_moneda"))
+    })
     private PrecioEmbeddable precio;
 
     @Column(name = "disponibilidad", nullable = false)

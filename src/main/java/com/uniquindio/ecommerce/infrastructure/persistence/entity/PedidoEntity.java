@@ -1,14 +1,7 @@
 package com.uniquindio.ecommerce.infrastructure.persistence.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -47,6 +40,12 @@ public class PedidoEntity {
     private String direccionEntrega;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "tipo", column = @Column(name = "exencion_responsabilidad_tipo")),
+            @AttributeOverride(name = "terminos", column = @Column(name = "exencion_responsabilidad_terminos")),
+            @AttributeOverride(name = "aceptadaPorCliente", column = @Column(name = "exencion_responsabilidad_aceptada_por_cliente")),
+            @AttributeOverride(name = "version", column = @Column(name = "exencion_responsabilidad_version"))
+    })
     private ExencionResponsabilidadEmbeddable exencionResponsabilidad;
 
     @Column(name = "deleted", nullable = false)

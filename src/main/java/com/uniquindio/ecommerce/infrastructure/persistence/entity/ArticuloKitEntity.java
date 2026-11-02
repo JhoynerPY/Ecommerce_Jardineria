@@ -1,10 +1,6 @@
 package com.uniquindio.ecommerce.infrastructure.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +24,10 @@ public class ArticuloKitEntity {
     private String nombre;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "valor", column = @Column(name = "precio_valor")),
+            @AttributeOverride(name = "moneda", column = @Column(name = "precio_moneda"))
+    })
     private PrecioEmbeddable precio;
 
     @Column(name = "diametro", nullable = false)
