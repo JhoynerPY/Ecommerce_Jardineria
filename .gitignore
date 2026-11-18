@@ -4,3 +4,9 @@ build/
 .idea/
 .DS_Store
 Thumbs.db
+# Carpetas de compilación de Java
+target/
+build/
+bin/
+out/
+*.class
