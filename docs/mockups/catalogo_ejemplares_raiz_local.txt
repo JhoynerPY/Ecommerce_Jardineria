@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Raíz Local - Mercado Botánico</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e4e3db", "on-primary": "#ffffff", "on-tertiary-container": "#e4a2a7", "surface-container-high": "#eae8e0", "inverse-on-surface": "#f3f1e9", "on-error": "#ffffff", "error-container": "#ffdad6", "surface": "#fbf9f1", "surface-dim": "#dcdad2", "on-primary-fixed-variant": "#244f37", "on-secondary-fixed-variant": "#7b2f02", "primary-fixed-dim": "#a2d1b2", "primary-fixed": "#beeecd", "secondary-fixed": "#ffdbcc", "on-tertiary": "#ffffff", "primary-container": "#234e36", "surface-tint": "#3c674d", "on-error-container": "#93000a", "inverse-surface": "#30312c", "secondary-fixed-dim": "#ffb695", "surface-variant": "#e4e3db", "surface-container-lowest": "#ffffff", "on-tertiary-fixed-variant": "#6a383d", "background": "#fbf9f1", "surface-bright": "#fbf9f1", "on-tertiary-fixed": "#350e14", "on-secondary": "#ffffff", "tertiary-container": "#68373c", "surface-container-low": "#f6f4ec", "secondary": "#994619", "secondary-container": "#ff9563", "on-secondary-container": "#762c00", "on-primary-fixed": "#002111", "on-primary-container": "#90bea0", "tertiary": "#4d2127", "primary": "#083721", "inverse-primary": "#a2d1b2", "outline-variant": "#c1c9c0", "on-surface-variant": "#414943", "on-surface": "#1b1c17", "tertiary-fixed-dim": "#fab5ba", "surface-container": "#f0eee6", "on-background": "#1b1c17", "on-secondary-fixed": "#351000", "outline": "#717972", "error": "#ba1a1a", "tertiary-fixed": "#ffdadb" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter-sm": "1rem", "space-xl": "2rem", "gutter": "1.5rem", "space-xs": "0.25rem", "margin-sm": "1rem", "space-md": "1rem", "margin-lg": "3rem", "gutter-lg": "2rem", "space-2xl": "3rem" }, "fontFamily": { "label-sm": ["Manrope"], "headline-lg": ["Epilogue"], "display-lg": ["Epilogue"], "label-md": ["Manrope"], "body-md": ["Manrope"], "body-sm": ["Manrope"], "body-lg": ["Manrope"], "label-lg": ["Manrope"], "headline-md": ["Epilogue"], "headline-sm": ["Epilogue"], "display-lg-mobile": ["Epilogue"] }, "fontSize": { "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface-container-low font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-primary-container shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1280px] mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Raíz Local Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrAL9XP5y3ntN0XUr2rdQZgr4qL2Pkn4tyYnB8vs8kiN3KF_Pb4h1EJl5gZMctmh7tgxn7rro67NCajIbV8rxoOdaD0od3c5BiOyZ5Gia_Et4RjRNzUtDsec8RLrVnM9_MERQA1FeAmRCfrJ_7USTLGZEQE0PogA2oQZt7mCrYocj9dgvHZ4xtNp7q-HU4rFxLfNwZ5ZiUzk2iutLMeWItiZPwHKLvFZLhGpNmqtEnyb"/><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span></div><nav class="hidden md:flex items-center gap-space-xl" data-active-classes="text-on-primary font-bold border-b-2 border-secondary-container"><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="inicio" href="#">Inicio</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="catalogo-de-ejemplares" href="#">Catálogo de Ejemplares</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="armar-kit" href="#">Armar Kit</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg px-space-lg py-space-sm rounded-lg transition-colors shadow-[0_1px_3px_rgba(35,78,54,0.05)]" data-path="iniciar-sesion" href="#">Iniciar Sesión</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button aria-label="Abrir menú" class="md:hidden flex items-center justify-center p-space-sm rounded-lg text-on-primary hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button></div></div></header><main class="w-full pt-20 bg-surface-container-low flex-1"><div class="flex flex-col w-full">
+<!-- Dynamic Overrides for App Shell Nav State to show authenticated user & active page -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Highlight "Catálogo de Ejemplares" link in the shell header
+      const navLinks = document.querySelectorAll('header nav a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === 'catalogo-de-ejemplares') {
+          link.classList.remove('text-on-primary-container');
+          link.classList.add('text-on-primary', 'font-bold', 'border-b-2', 'border-secondary-container');
+        } else {
+          link.classList.remove('text-on-primary', 'font-bold', 'border-b-2', 'border-secondary-container');
+          link.classList.add('text-on-primary-container');
+        }
+      });
+
+      // Update right-side header section to show logged-in state "Hola, Camilo V." + "Cerrar Sesión"
+      const headerRight = document.querySelector('header .flex.items-center.gap-space-md');
+      if (headerRight) {
+        headerRight.innerHTML = `
+          <div class="flex items-center gap-space-sm pl-2">
+            <div class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-md text-label-md shadow-sm font-bold tracking-tight">
+              CV
+            </div>
+            <div class="hidden lg:flex flex-col text-left leading-none">
+              <span class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Conectado</span>
+              <span class="font-label-md text-label-md text-on-primary font-semibold">Hola, Camilo V.</span>
+            </div>
+          </div>
+          <button type="button" class="inline-flex items-center justify-center bg-transparent hover:bg-secondary/15 text-secondary-container hover:text-on-primary font-label-md text-label-md px-3 py-1.5 rounded-lg border border-secondary-container transition-all">
+            <span class="material-symbols-outlined text-[16px] mr-1">logout</span>
+            <span class="hidden sm:inline">Cerrar Sesión</span>
+          </button>
+        `;
+      }
+    });
+  </script>
+<!-- Main Content Container with Baseline 1280px Grid -->
+<div class="max-w-[1280px] w-full mx-auto px-gutter py-space-xl">
+<!-- Page Title & Region Header -->
+<section class="mb-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm mb-space-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[15px] text-secondary">eco</span>
+            Ecorregión Cafetera • Trazabilidad 100% Viva
+          </div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight text-balance">
+            Catálogo de Ejemplares Botánicos
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-xs max-w-2xl text-pretty">
+            Plantas vivas seleccionadas directamente desde viveros locales del Eje Cafetero. Elige ejemplares aclimatados a tu entorno.
+          </p>
+</div>
+<div class="hidden md:flex items-center gap-space-sm px-space-md py-space-sm bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-[20px]">local_shipping</span>
+<div class="text-left">
+<p class="font-label-xs text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">Entregas en Quindío</p>
+<p class="font-label-md text-label-md text-primary font-semibold">Despacho en vehículo climatizado</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Search & Filters Container (Bootstrap / Flexible responsive row) -->
+<section class="bg-surface-container-lowest rounded-2xl shadow-sm p-6 mb-space-2xl border border-outline-variant/30">
+<form class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-end" id="filter-form" onsubmit="event.preventDefault();">
+<!-- 1. Text Search -->
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant font-semibold flex items-center gap-1" for="species-search">
+<span class="material-symbols-outlined text-[16px]">search</span>
+            Buscar especie o variedad
+          </label>
+<div class="relative w-full">
+<input class="w-full h-12 pl-10 pr-4 rounded-lg bg-surface text-on-surface placeholder:text-outline font-body-sm text-body-sm border border-outline-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" id="species-search" placeholder="Buscar por nombre de especie o variedad..." type="text"/>
+<span class="material-symbols-outlined text-outline absolute left-3 top-3 text-[20px] pointer-events-none">
+              potted_plant
+            </span>
+</div>
+</div>
+<!-- 2. Growth Stage Dropdown -->
+<div class="md:col-span-3 flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant font-semibold flex items-center gap-1" for="growth-stage">
+<span class="material-symbols-outlined text-[16px]">psychiatry</span>
+            Etapa de Crecimiento
+          </label>
+<div class="relative w-full">
+<select class="w-full h-12 px-4 pr-10 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm border border-outline-variant/60 appearance-none focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer" id="growth-stage">
+<option value="all">Todas las etapas</option>
+<option value="plantula">Plántula en Desarrollo</option>
+<option value="joven">Joven</option>
+<option value="adulta">Adulta Climatizada</option>
+<option value="floracion">Floración Activa</option>
+</select>
+<span class="material-symbols-outlined text-outline absolute right-3 top-3.5 text-[20px] pointer-events-none">
+              expand_more
+            </span>
+</div>
+</div>
+<!-- 3. Price Range COP Inputs -->
+<div class="md:col-span-3 flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant font-semibold flex items-center justify-between">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+              Rango de Precio (COP)
+            </span>
+<span class="text-[11px] text-secondary font-bold">25k - 180k</span>
+</label>
+<div class="grid grid-cols-2 gap-2">
+<div class="relative">
+<span class="absolute left-2.5 top-3 text-outline text-[13px] font-semibold">$</span>
+<input class="w-full h-12 pl-6 pr-2 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm border border-outline-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" min="0" placeholder="Mín" step="5000" type="number" value="25000"/>
+</div>
+<div class="relative">
+<span class="absolute left-2.5 top-3 text-outline text-[13px] font-semibold">$</span>
+<input class="w-full h-12 pl-6 pr-2 rounded-lg bg-surface text-on-surface font-body-sm text-body-sm border border-outline-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" min="0" placeholder="Máx" step="5000" type="number" value="180000"/>
+</div>
+</div>
+</div>
+<!-- 4. Action Buttons -->
+<div class="md:col-span-2 flex items-center gap-2">
+<button class="flex-1 h-12 px-2 inline-flex items-center justify-center font-label-md text-label-md text-secondary hover:text-on-secondary-container hover:bg-surface-container rounded-lg border border-secondary/30 transition-colors" onclick="document.getElementById('species-search').value=''; document.getElementById('growth-stage').value='all';" title="Restablecer filtros" type="button">
+            Limpiar
+          </button>
+<button class="flex-1 h-12 px-3 inline-flex items-center justify-center bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:shadow transition-all font-semibold" type="button">
+            Filtrar
+          </button>
+</div>
+</form>
+<!-- Active Count & Micro Badges Bar -->
+<div class="flex flex-wrap items-center justify-between gap-3 mt-5 pt-4 border-t border-surface-container-high">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Mostrando <span class="font-bold text-primary">6 ejemplares disponibles</span> cerca de tu ubicación en Quindío.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Aclimatados para:</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">Interiores Luminosos</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm">18°C - 26°C</span>
+</div>
+</div>
+</section>
+<!-- Grid of 6 Botanical Specimen Cards (3 Columns Desktop, 2 Tablet, 1 Mobile) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg mb-space-2xl">
+<!-- TARJETA 1: Monstera Deliciosa -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between border border-primary/10 group">
+<div>
+<!-- Specimen Image with Badges -->
+<div class="relative w-full aspect-square overflow-hidden bg-surface-container">
+<img alt="Monstera Deliciosa en maceta artesanal de terracota" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFpk4taaFKj_s0S4xeN1wEpulwbfKgoJ6A5UWzlcGwo20Ws3GGCZ4UIvCMutbf88NLRv3Lb-lNRRLgUFCrapcilYjbvEQiXoYS8GxQf-ezjH1eKs7NQrKMj_OZe1PTqCL3Avq5op_Q8idnosfIr58ufg3Zk7ogBo9_svXGW8XNzyN8ByNq65wTjnbrhslBxsPLb-rOFyYxOQwbiK2uPOfj_uyjjH7BhUR3BZtd8DU"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+<span class="bg-secondary text-on-secondary px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">park</span>
+                Adulta (60-80 cm)
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+                Genotipo San Bernardo
+              </span>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-5 flex flex-col">
+<div class="mb-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                Monstera Deliciosa
+              </h3>
+<p class="font-body-sm text-body-sm text-outline italic">
+                Monstera deliciosa Liebm.
+              </p>
+</div>
+<!-- Toxicity Indicator -->
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 text-[12px] font-label-md border border-amber-200/80">
+<span class="material-symbols-outlined text-[16px] text-amber-600">warning</span>
+<span>Riesgo moderado para gatos/perros</span>
+</div>
+</div>
+<!-- Care Summary Icons -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-surface-container-low text-on-surface mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">light_mode</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Luz</span>
+<span class="text-[12px] font-semibold">Indirecta media-alta</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">water_drop</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Riego</span>
+<span class="text-[12px] font-semibold">1 vez / sem. sustrato seco</span>
+</div>
+</div>
+</div>
+<!-- Origin Nursery -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm py-1 border-t border-surface-container">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span>
+<span class="truncate font-medium">Vivero El Bosque Nativo (a 3.2 km)</span>
+</div>
+</div>
+</div>
+<!-- Footer Action & Price -->
+<div class="px-5 pb-5 pt-2 flex items-center justify-between gap-3 border-t border-surface-container mt-auto">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-outline block">Precio vivo</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">
+              $85.000 <span class="text-xs font-normal text-outline">COP</span>
+</span>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2.5 rounded-xl font-label-md text-label-md font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5" type="button">
+<span>Seleccionar Ejemplar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- TARJETA 2: Calatea Orbifolia -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between border border-primary/10 group">
+<div>
+<!-- Specimen Image -->
+<div class="relative w-full aspect-square overflow-hidden bg-surface-container">
+<img alt="Calatea Orbifolia de hojas rayadas amplias" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRRFgP4oBL-iT4dht1Cwv3-l8X8kQzyMXIGRVpWEKy-S_CD8_0GO8eRbVdaqP-d4cm9mgcoTLed2Ds53w3j49-nRZxRbwrFqOHlT1RC6x81G7RZ5I6RbfHJZC6W8qo05RYBwYXC0tfFezS49-ScoaKAe65Ei9yF7zIXDYPSOX1GwIn07xVnAIXWmPVT7qxFDbOPOFvhRUsufdnz1XImTbS1u5moTSxTwIPOa-KCKs"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+<span class="bg-secondary text-on-secondary px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">park</span>
+                Joven (35-45 cm)
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">eco</span>
+                Follaje Premium
+              </span>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-5 flex flex-col">
+<div class="mb-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                Calatea Orbifolia
+              </h3>
+<p class="font-body-sm text-body-sm text-outline italic">
+                Calathea orbifolia
+              </p>
+</div>
+<!-- Toxicity Indicator (Pet friendly) -->
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[12px] font-label-md border border-emerald-200">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">pets</span>
+<span>🐾 100% Seguro para mascotas</span>
+</div>
+</div>
+<!-- Care Summary Icons -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-surface-container-low text-on-surface mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">wb_twilight</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Luz</span>
+<span class="text-[12px] font-semibold">Sombra / luz tamizada</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">humidity_high</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Riego</span>
+<span class="text-[12px] font-semibold">2 veces / sem. constante</span>
+</div>
+</div>
+</div>
+<!-- Origin Nursery -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm py-1 border-t border-surface-container">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span>
+<span class="truncate font-medium">Vivero La Esperanza - Filandia (a 5.8 km)</span>
+</div>
+</div>
+</div>
+<!-- Footer Action & Price -->
+<div class="px-5 pb-5 pt-2 flex items-center justify-between gap-3 border-t border-surface-container mt-auto">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-outline block">Precio vivo</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">
+              $62.000 <span class="text-xs font-normal text-outline">COP</span>
+</span>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2.5 rounded-xl font-label-md text-label-md font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5" type="button">
+<span>Seleccionar Ejemplar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- TARJETA 3: Lengua de Suegra / Sansevieria -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between border border-primary/10 group">
+<div>
+<!-- Specimen Image -->
+<div class="relative w-full aspect-square overflow-hidden bg-surface-container">
+<img alt="Sansevieria Trifasciata en maceta de terracota cilíndrica" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8nms6h7AYKHNg7KCcIRClM5ndHzRk5s_P5NaSjUE4rTnB6ZtXvO6j8cv9QxwRvQs-FYkLi0OUJ5ZoRXj6TQe5IKw9Z3GMGdVMt_1pdczTUcHAK0995v1iBi-A-_MGL83DOf8AwXYQI0ZRUfltx997-0ZV7QJ2jZmpUUkBgAqza19Q90Pl17WwV65c_VK8KCInn2Iyp_wdAzRRts6eI9p7CY4a775_XqfQQ7_BMZI"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+<span class="bg-secondary text-on-secondary px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">park</span>
+                Adulta (50-70 cm)
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">air</span>
+                Purificadora
+              </span>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-5 flex flex-col">
+<div class="mb-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                Lengua de Suegra / Sansevieria
+              </h3>
+<p class="font-body-sm text-body-sm text-outline italic">
+                Sansevieria trifasciata
+              </p>
+</div>
+<!-- Toxicity Indicator -->
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-50 text-orange-900 text-[12px] font-label-md border border-orange-200">
+<span class="material-symbols-outlined text-[16px] text-orange-600">warning</span>
+<span>⚠️ Precaución con mascotas (savia irritante)</span>
+</div>
+</div>
+<!-- Care Summary Icons -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-surface-container-low text-on-surface mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">filter_vintage</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Luz</span>
+<span class="text-[12px] font-semibold">Adaptable / tolera sombra</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">opacity</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Riego</span>
+<span class="text-[12px] font-semibold">Cada 15-20 días / bajo</span>
+</div>
+</div>
+</div>
+<!-- Origin Nursery -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm py-1 border-t border-surface-container">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span>
+<span class="truncate font-medium">EcoVivero Quindío Verde (a 2.1 km)</span>
+</div>
+</div>
+</div>
+<!-- Footer Action & Price -->
+<div class="px-5 pb-5 pt-2 flex items-center justify-between gap-3 border-t border-surface-container mt-auto">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-outline block">Precio vivo</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">
+              $48.000 <span class="text-xs font-normal text-outline">COP</span>
+</span>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2.5 rounded-xl font-label-md text-label-md font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5" type="button">
+<span>Seleccionar Ejemplar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- TARJETA 4: Ficus Lira / Hoja de Violín -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between border border-primary/10 group">
+<div>
+<!-- Specimen Image -->
+<div class="relative w-full aspect-square overflow-hidden bg-surface-container">
+<img alt="Ficus Lira en macetero de arcilla natural" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9RCf56ye6mAqmqgUDkpn-SC3uNKYUL3fWcVEG4gfLXc2OepMPqSq9dQR-sOxvJl5NXCmAx-cDcSeUSXhNNoILADXk8J57IVQaR5YRNIbrNkYxwXOjrlunkwwMmNwOnz2PDVBkz1aiROjoFs03oEqYfR-CajxI-R7blKplX6MdNeg3Eqkp0VI6qwcu7gbeL2ulp0jxYTdtpS766fkq6W_RhXy-vizB0nqo3AluW2Q"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+<span class="bg-secondary text-on-secondary px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">park</span>
+                Plántula en Desarrollo (25-30 cm)
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">trending_up</span>
+                Rápido crecimiento
+              </span>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-5 flex flex-col">
+<div class="mb-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                Ficus Lira / Hoja de Violín
+              </h3>
+<p class="font-body-sm text-body-sm text-outline italic">
+                Ficus lyrata
+              </p>
+</div>
+<!-- Toxicity Indicator -->
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 text-[12px] font-label-md border border-amber-200/80">
+<span class="material-symbols-outlined text-[16px] text-amber-600">warning</span>
+<span>⚠️ Riesgo para gatos/perros</span>
+</div>
+</div>
+<!-- Care Summary Icons -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-surface-container-low text-on-surface mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">sunny</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Luz</span>
+<span class="text-[12px] font-semibold">Abundante luz indirecta</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">water_drop</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Riego</span>
+<span class="text-[12px] font-semibold">Semanal moderado</span>
+</div>
+</div>
+</div>
+<!-- Origin Nursery -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm py-1 border-t border-surface-container">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span>
+<span class="truncate font-medium">Vivero Jardín del Café (a 6.4 km)</span>
+</div>
+</div>
+</div>
+<!-- Footer Action & Price -->
+<div class="px-5 pb-5 pt-2 flex items-center justify-between gap-3 border-t border-surface-container mt-auto">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-outline block">Precio vivo</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">
+              $39.000 <span class="text-xs font-normal text-outline">COP</span>
+</span>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2.5 rounded-xl font-label-md text-label-md font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5" type="button">
+<span>Seleccionar Ejemplar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- TARJETA 5: Monstera Adansonii -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between border border-primary/10 group">
+<div>
+<!-- Specimen Image -->
+<div class="relative w-full aspect-square overflow-hidden bg-surface-container">
+<img alt="Monstera Adansonii trepadora o colgante" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFpk4taaFKj_s0S4xeN1wEpulwbfKgoJ6A5UWzlcGwo20Ws3GGCZ4UIvCMutbf88NLRv3Lb-lNRRLgUFCrapcilYjbvEQiXoYS8GxQf-ezjH1eKs7NQrKMj_OZe1PTqCL3Avq5op_Q8idnosfIr58ufg3Zk7ogBo9_svXGW8XNzyN8ByNq65wTjnbrhslBxsPLb-rOFyYxOQwbiK2uPOfj_uyjjH7BhUR3BZtd8DU"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+<span class="bg-secondary text-on-secondary px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">park</span>
+                Joven Colgante (30-40 cm)
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">density_small</span>
+                Fenestrada
+              </span>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-5 flex flex-col">
+<div class="mb-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                Monstera Adansonii
+              </h3>
+<p class="font-body-sm text-body-sm text-outline italic">
+                Monstera adansonii
+              </p>
+</div>
+<!-- Toxicity Indicator -->
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 text-[12px] font-label-md border border-amber-200/80">
+<span class="material-symbols-outlined text-[16px] text-amber-600">warning</span>
+<span>⚠️ No apto para consumo de mascotas</span>
+</div>
+</div>
+<!-- Care Summary Icons -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-surface-container-low text-on-surface mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">wb_sunny</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Luz</span>
+<span class="text-[12px] font-semibold">Filtrada brillante</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">water_drop</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Riego</span>
+<span class="text-[12px] font-semibold">1-2 veces por semana</span>
+</div>
+</div>
+</div>
+<!-- Origin Nursery -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm py-1 border-t border-surface-container">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span>
+<span class="truncate font-medium">Vivero Palmas de Salento (a 7.5 km)</span>
+</div>
+</div>
+</div>
+<!-- Footer Action & Price -->
+<div class="px-5 pb-5 pt-2 flex items-center justify-between gap-3 border-t border-surface-container mt-auto">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-outline block">Precio vivo</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">
+              $54.000 <span class="text-xs font-normal text-outline">COP</span>
+</span>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2.5 rounded-xl font-label-md text-label-md font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5" type="button">
+<span>Seleccionar Ejemplar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- TARJETA 6: Maranta Fascinator -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between border border-primary/10 group">
+<div>
+<!-- Specimen Image -->
+<div class="relative w-full aspect-square overflow-hidden bg-surface-container">
+<img alt="Maranta Fascinator con patrones botánicos marcados" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRRFgP4oBL-iT4dht1Cwv3-l8X8kQzyMXIGRVpWEKy-S_CD8_0GO8eRbVdaqP-d4cm9mgcoTLed2Ds53w3j49-nRZxRbwrFqOHlT1RC6x81G7RZ5I6RbfHJZC6W8qo05RYBwYXC0tfFezS49-ScoaKAe65Ei9yF7zIXDYPSOX1GwIn07xVnAIXWmPVT7qxFDbOPOFvhRUsufdnz1XImTbS1u5moTSxTwIPOa-KCKs"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5">
+<span class="bg-secondary text-on-secondary px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">local_florist</span>
+                En Floración Activa
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">spa</span>
+                Oración Viva
+              </span>
+</div>
+</div>
+<!-- Card Content -->
+<div class="p-5 flex flex-col">
+<div class="mb-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+                Maranta Fascinator (Planta de la Oración)
+              </h3>
+<p class="font-body-sm text-body-sm text-outline italic">
+                Maranta leuconeura
+              </p>
+</div>
+<!-- Toxicity Indicator (Pet friendly) -->
+<div class="mb-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[12px] font-label-md border border-emerald-200">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">pets</span>
+<span>🐾 100% Seguro para mascotas</span>
+</div>
+</div>
+<!-- Care Summary Icons -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-surface-container-low text-on-surface mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">bedtime</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Luz</span>
+<span class="text-[12px] font-semibold">Luz media indirecta</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">shower</span>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-wider">Riego</span>
+<span class="text-[12px] font-semibold">Sustrato siempre húmedo</span>
+</div>
+</div>
+</div>
+<!-- Origin Nursery -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm py-1 border-t border-surface-container">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span>
+<span class="truncate font-medium">Semillero Botánico del Quindío (a 4.0 km)</span>
+</div>
+</div>
+</div>
+<!-- Footer Action & Price -->
+<div class="px-5 pb-5 pt-2 flex items-center justify-between gap-3 border-t border-surface-container mt-auto">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-outline block">Precio vivo</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">
+              $58.000 <span class="text-xs font-normal text-outline">COP</span>
+</span>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2.5 rounded-xl font-label-md text-label-md font-semibold transition-all shadow-sm hover:shadow flex items-center gap-1.5" type="button">
+<span>Seleccionar Ejemplar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Centered Pagination Control -->
+<section class="flex flex-col items-center justify-center gap-space-sm mb-space-2xl">
+<nav aria-label="Navegación de páginas del catálogo" class="inline-flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-2xl shadow-sm border border-outline-variant/30">
+<!-- Prev Button (Disabled) -->
+<button aria-disabled="true" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-outline bg-surface-container-high/50 font-label-md text-label-md cursor-not-allowed opacity-60" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<!-- Page Indicator & Quick Jump -->
+<div class="flex items-center gap-1 px-3 font-label-md text-label-md text-on-surface-variant">
+<span class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold">1</span>
+<span class="text-outline mx-1">de</span>
+<span class="font-semibold text-on-surface">4</span>
+</div>
+<!-- Next Button (Active) -->
+<button class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all" type="button">
+<span>Siguiente</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</nav>
+<span class="font-body-sm text-body-sm text-outline">
+        Mostrando ejemplares 1 - 6 de 24 en Armenia, Circasia, Calarcá y Salento
+      </span>
+</section>
+<!-- Artisanal Botanical Assurance Banner -->
+<section class="rounded-2xl bg-surface-container p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-space-lg mb-space-xl">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[32px]">format_image_left</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Garantía Botánica de 30 Días</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Cada ejemplar incluye maceta de vivero biodegradada, sustrato formulado en finca y acompañamiento digital gratuito por agrónomos del Quindío.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<a class="inline-flex items-center justify-center bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg px-space-lg py-3 rounded-xl transition-all shadow-sm font-semibold" data-path="armar-kit" href="#">
+          Armar mi Kit con este Ejemplar
+        </a>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-primary-container text-on-primary-container py-space-2xl"><div class="max-w-[1280px] mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-lg text-center md:text-left"><div class="flex flex-col gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span><p class="font-body-sm text-body-sm text-on-primary-container">Artesanía botánica, viveros locales y biodiversidad consciente.</p></div><div class="flex flex-col items-center md:items-end gap-space-xs"><p class="font-label-md text-label-md text-on-primary font-bold">Universidad del Quindío - Programación Avanzada</p><p class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Raíces vivas • Cultivo ético • Hecho con orgullo regional</p></div></div></footer></body></html>

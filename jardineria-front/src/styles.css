@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-base-lino: #F6F4EC;
+  --color-primario-bosque: #234E36;
+  --color-acento-terracota: #C96A3B;
+  --color-texto-carbon: #1F2922;
+
+  /* Sobrescritura limpia de Bootstrap 5 */
+  --bs-primary: #234E36;
+  --bs-primary-rgb: 35, 78, 54;
+  --bs-body-bg: #F6F4EC;
+  --bs-body-color: #1F2922;
+}

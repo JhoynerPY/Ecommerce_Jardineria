@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Raíz Local - Mercado Botánico</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e4e3db", "on-primary": "#ffffff", "on-tertiary-container": "#e4a2a7", "surface-container-high": "#eae8e0", "inverse-on-surface": "#f3f1e9", "on-error": "#ffffff", "error-container": "#ffdad6", "surface": "#fbf9f1", "surface-dim": "#dcdad2", "on-primary-fixed-variant": "#244f37", "on-secondary-fixed-variant": "#7b2f02", "primary-fixed-dim": "#a2d1b2", "primary-fixed": "#beeecd", "secondary-fixed": "#ffdbcc", "on-tertiary": "#ffffff", "primary-container": "#234e36", "surface-tint": "#3c674d", "on-error-container": "#93000a", "inverse-surface": "#30312c", "secondary-fixed-dim": "#ffb695", "surface-variant": "#e4e3db", "surface-container-lowest": "#ffffff", "on-tertiary-fixed-variant": "#6a383d", "background": "#fbf9f1", "surface-bright": "#fbf9f1", "on-tertiary-fixed": "#350e14", "on-secondary": "#ffffff", "tertiary-container": "#68373c", "surface-container-low": "#f6f4ec", "secondary": "#994619", "secondary-container": "#ff9563", "on-secondary-container": "#762c00", "on-primary-fixed": "#002111", "on-primary-container": "#90bea0", "tertiary": "#4d2127", "primary": "#083721", "inverse-primary": "#a2d1b2", "outline-variant": "#c1c9c0", "on-surface-variant": "#414943", "on-surface": "#1b1c17", "tertiary-fixed-dim": "#fab5ba", "surface-container": "#f0eee6", "on-background": "#1b1c17", "on-secondary-fixed": "#351000", "outline": "#717972", "error": "#ba1a1a", "tertiary-fixed": "#ffdadb" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter-sm": "1rem", "space-xl": "2rem", "gutter": "1.5rem", "space-xs": "0.25rem", "margin-sm": "1rem", "space-md": "1rem", "margin-lg": "3rem", "gutter-lg": "2rem", "space-2xl": "3rem" }, "fontFamily": { "label-sm": ["Manrope"], "headline-lg": ["Epilogue"], "display-lg": ["Epilogue"], "label-md": ["Manrope"], "body-md": ["Manrope"], "body-sm": ["Manrope"], "body-lg": ["Manrope"], "label-lg": ["Manrope"], "headline-md": ["Epilogue"], "headline-sm": ["Epilogue"], "display-lg-mobile": ["Epilogue"] }, "fontSize": { "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface-container-low font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-primary-container shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1280px] mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Raíz Local Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrAL9XP5y3ntN0XUr2rdQZgr4qL2Pkn4tyYnB8vs8kiN3KF_Pb4h1EJl5gZMctmh7tgxn7rro67NCajIbV8rxoOdaD0od3c5BiOyZ5Gia_Et4RjRNzUtDsec8RLrVnM9_MERQA1FeAmRCfrJ_7USTLGZEQE0PogA2oQZt7mCrYocj9dgvHZ4xtNp7q-HU4rFxLfNwZ5ZiUzk2iutLMeWItiZPwHKLvFZLhGpNmqtEnyb"/><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span></div><nav class="hidden md:flex items-center gap-space-xl" data-active-classes="text-on-primary font-bold border-b-2 border-secondary-container"><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="inicio" href="#">Inicio</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="catalogo-de-ejemplares" href="#">Catálogo de Ejemplares</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="armar-kit" href="#">Armar Kit</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg px-space-lg py-space-sm rounded-lg transition-colors shadow-[0_1px_3px_rgba(35,78,54,0.05)]" data-path="iniciar-sesion" href="#">Iniciar Sesión</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button aria-label="Abrir menú" class="md:hidden flex items-center justify-center p-space-sm rounded-lg text-on-primary hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button></div></div></header><main class="w-full pt-20 bg-surface-container-low flex-1"><div class="flex flex-col w-full relative">
+<!-- Top Right Floating Success Toast Notification -->
+<div class="fixed top-24 right-4 sm:right-8 z-50 max-w-md w-full bg-primary text-on-primary rounded-xl shadow-2xl p-space-md transition-all duration-300 transform translate-y-0 opacity-100 flex items-start gap-space-md" id="orderSuccessToast">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="flex-1 min-w-0 pr-space-xs">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-secondary text-on-secondary uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          Despacho Activo
+        </span>
+<span class="text-on-primary-container text-label-sm font-label-sm ml-auto">Hace un momento</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-primary text-[15px] leading-tight mb-1">¡Pedido #RL-8942 Registrado con Éxito!</h4>
+<p class="font-body-sm text-body-sm text-surface-container-low text-xs leading-relaxed">
+<strong class="text-on-primary font-semibold">Vivero El Bosque Nativo</strong> ha sido notificado para la selección, aclimatación y empaque ventilado de tu ejemplar.
+      </p>
+</div>
+<button aria-label="Cerrar notificación" class="text-on-primary-container hover:text-on-primary transition-colors p-1 rounded-md shrink-0" onclick="document.getElementById('orderSuccessToast').style.display='none'">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="max-w-[1280px] w-full mx-auto px-gutter py-space-xl">
+<!-- Breadcrumb and Page Header -->
+<div class="flex flex-col gap-space-xs mb-space-xl">
+<a class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary transition-colors w-fit group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+        Volver al Catálogo de Ejemplares
+      </a>
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-sm mt-space-xs">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-headline-lg text-primary tracking-tight">Finalizar Pedido y Acuerdo de Envío</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1">
+            Despacho directo de proximidad y trazabilidad viva desde viveros locales aliados del Quindío.
+          </p>
+</div>
+<div class="inline-flex items-center gap-2 px-space-md py-space-xs rounded-full bg-surface-container text-primary font-label-md text-label-md self-start sm:self-auto shrink-0">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+          Custodia Biológica 100% Protegida
+        </div>
+</div>
+</div>
+<!-- 12-Column Responsive Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: Delivery details, specimen selection & legal shipping agreement -->
+<div class="lg:col-span-8 flex flex-col gap-space-xl">
+<!-- SECTION 1: Delivery Address & Nursery Assignment -->
+<section class="bg-surface-container-lowest rounded-2xl shadow-sm p-space-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-headline-sm text-sm">1</div>
+<h2 class="font-headline-md text-headline-sm text-primary">Dirección de Entrega Botánica</h2>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Paso 1 de 3</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xs md:col-span-2">
+<label class="font-label-lg text-label-lg text-on-surface" for="address">Dirección / Calle completa *</label>
+<div class="relative">
+<input class="w-full h-12 px-space-md pl-11 rounded-lg bg-surface-container-lowest text-on-surface text-body-md shadow-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="address" placeholder="Ej. Calle 10 Norte # 14-20" type="text" value="Carrera 14 # 23-45 Apto 402"/>
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline text-[20px]">location_on</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface" for="neighborhood">Barrio / Sector *</label>
+<input class="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface text-body-md shadow-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="neighborhood" type="text" value="La Castellana"/>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface" for="city">Ciudad / Municipio *</label>
+<div class="relative">
+<select class="w-full h-12 px-space-md pr-10 rounded-lg bg-surface-container-lowest text-on-surface text-body-md shadow-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer" id="city">
+<option selected="" value="armenia">Armenia, Quindío</option>
+<option value="circasia">Circasia, Quindío</option>
+<option value="calarca">Calarca, Quindío</option>
+<option value="salento">Salento, Quindío</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs md:col-span-2">
+<label class="font-label-lg text-label-lg text-on-surface" for="notes">Instrucciones de acceso para transportista botánico</label>
+<input class="w-full h-12 px-space-md rounded-lg bg-surface-container-lowest text-on-surface text-body-md shadow-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline" id="notes" type="text" value="Conjunto Portal del Parque, torre 2, timbre 402. Dejar en recepción si no responde."/>
+</div>
+</div>
+<!-- Highlight Box: Auto-assigned Proximity Nursery -->
+<div class="rounded-xl p-space-md bg-surface-container flex flex-col sm:flex-row items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">potted_plant</span>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-headline-sm text-[16px] text-primary font-bold">Vivero Asignado: El Bosque Nativo</span>
+<span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-primary text-on-primary">A 3.2 km</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Tu dirección fue vinculada al cultivador más cercano en el corredor Armenia-Circasia para garantizar un trayecto de menos de <strong class="text-primary font-semibold">25 minutos</strong>, reduciendo el estrés hídrico y la huella de carbono del traslado.
+              </p>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Specimen Selection & Add-ons -->
+<section class="bg-surface-container-lowest rounded-2xl shadow-sm p-space-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-headline-sm text-sm">2</div>
+<h2 class="font-headline-md text-headline-sm text-primary">Ejemplar Seleccionado y Accesorios</h2>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Paso 2 de 3</span>
+</div>
+<!-- Plant Item Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row gap-space-md items-center">
+<img class="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-xl shadow-sm shrink-0" data-alt="Exuberante Monstera Deliciosa de hojas grandes y verdes con fenestraciones en maceta de terracota sobre mesa de madera artesanal con fondo cálido difuminado y luz suave matutina" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_ZFMfzmupeb0cjEe75SW280nk26ANwXcFBefmv856JgNrjpY9qfBEurNdFfOTK1rmtccvH2PjqtYlNbUd9sYRr5_iHDylCp914aK94ySLcESbE307DvsMFtLI7J8DLAy704s2RRK9e9CIksDFAnsniR9h6qbgffpd-dsalqOPaFKUMQEOWxA45Y_EhVUf19mCrvRzQ7NgpuIGLIpseekowAkTlp8x3L4dlXRrj4A"/>
+<div class="flex-1 min-w-0 w-full flex flex-col justify-between h-full gap-2">
+<div class="flex flex-col">
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Monstera Deliciosa</h3>
+<p class="font-body-sm text-body-sm italic text-on-surface-variant">Monstera deliciosa Liebm.</p>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary whitespace-nowrap">$85.000 COP</span>
+</div>
+<div class="flex flex-wrap items-center gap-2 mt-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant">Etapa: Adulta (60-80 cm)</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant">Luz indirecta brillante</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary/10 text-primary font-semibold">Tallo Enraizado</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-highest/60">
+<span class="font-label-md text-label-md text-on-surface">Cantidad de especímenes:</span>
+<div class="inline-flex items-center bg-surface-container-lowest rounded-lg shadow-sm p-1">
+<button aria-label="Disminuir cantidad" class="w-7 h-7 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-30" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<span class="w-8 text-center font-label-lg text-label-lg text-primary">1</span>
+<button aria-label="Aumentar cantidad" class="w-7 h-7 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Add-ons Selection Options -->
+<div class="flex flex-col gap-space-sm">
+<h4 class="font-label-lg text-label-lg text-on-surface tracking-wide uppercase">Complementos Botánicos Recomendados</h4>
+<!-- Addon 1: Terracotta Pot (Pre-selected) -->
+<label class="flex items-start gap-space-md p-space-md rounded-xl bg-surface-container cursor-pointer transition-colors">
+<input checked="" class="mt-1 w-5 h-5 rounded text-primary focus:ring-primary accent-primary cursor-pointer shrink-0" type="checkbox"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary font-bold">Maceta Artesanal de Terracota del Quindío</span>
+<span class="font-label-lg text-label-lg text-secondary font-bold">+ $24.000 COP</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Moldeada a mano en arcilla roja porosa de Filandia, incluye plato base y drenaje optimizado para oxigenación radical.
+                </p>
+</div>
+</label>
+<!-- Addon 2: Substrate & Fertilizer -->
+<label class="flex items-start gap-space-md p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input class="mt-1 w-5 h-5 rounded text-primary focus:ring-primary accent-primary cursor-pointer shrink-0" type="checkbox"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Sustrato Formulado para Aráceas (4 Litros)</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">+ $16.000 COP</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Corteza de pino, fibra de coco, humus de lombriz y perlita volcánica calibrada.
+                </p>
+</div>
+</label>
+</div>
+</section>
+<!-- SECTION 3: Legal Botanical Delivery Agreement & Liability Waiver -->
+<section class="bg-surface-container-lowest rounded-2xl shadow-sm p-space-xl flex flex-col gap-space-lg">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-headline-sm text-sm">3</div>
+<h2 class="font-headline-md text-headline-sm text-primary">Acuerdo de Despacho e Intermediación Botánica</h2>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Requisito Legal</span>
+</div>
+<!-- Legal Preamble Notice -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-md">
+<span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-0.5">gavel</span>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-primary font-semibold">Marco de Operación:</strong> Raíz Local actúa exclusivamente como plataforma de articulación tecnológica y logística entre el comprador y viveros botánicos certificados del Quindío. Cada ejemplar viaja acondicionado con empaque biodegradable ventilado y sustrato humedecido para salvaguardar su integridad vegetal.
+            </div>
+</div>
+<!-- Policy Options -->
+<div class="flex flex-col gap-space-md">
+<span class="font-label-lg text-label-lg text-on-surface">Selecciona el tipo de acuerdo para este despacho:</span>
+<!-- Policy Radio A -->
+<label class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-start gap-space-md cursor-pointer">
+<input class="mt-1 w-5 h-5 text-primary accent-primary focus:ring-primary cursor-pointer shrink-0" name="agreement_type" type="radio"/>
+<div class="flex-1 flex flex-col">
+<span class="font-label-lg text-label-lg text-primary font-semibold">Opción A: Exención Estándar de Transporte</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  El cliente acepta las variaciones biológicas normales asociadas al traslado y asume las contingencias de aclimatación posterior una vez firmado el comprobante de entrega en buen estado visible.
+                </p>
+</div>
+</label>
+<!-- Policy Radio B (Selected with dynamic slider) -->
+<label class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm cursor-pointer">
+<div class="flex items-start gap-space-md">
+<input checked="" class="mt-1 w-5 h-5 text-primary accent-primary focus:ring-primary cursor-pointer shrink-0" name="agreement_type" type="radio"/>
+<div class="flex-1 flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-primary font-bold">Opción B: Acuerdo de Cobertura Botánica Compartida</span>
+<span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-container text-on-primary">Recomendado</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                    Garantía solidaria entre Raíz Local y <strong class="text-primary">Vivero El Bosque Nativo</strong> ante contingencias mecánicas de tránsito, quiebre apical o pérdida foliar superior al umbral acordado.
+                  </p>
+</div>
+</div>
+<!-- Inline selector for coverage tier -->
+<div class="mt-space-xs pl-8 pr-2 flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+<span class="font-label-md text-label-md text-on-surface">Umbral de reposición por vivero aliado:</span>
+</div>
+<div class="inline-flex rounded-lg p-0.5 bg-surface-container gap-1">
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md text-on-surface-variant hover:text-primary transition-colors" type="button">15% daño</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md bg-primary text-on-primary shadow-sm font-bold" type="button">25% estándar</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md text-on-surface-variant hover:text-primary transition-colors" type="button">50% total</button>
+</div>
+</div>
+</label>
+</div>
+<!-- Mandatory Acceptance Checkbox -->
+<div class="pt-space-sm">
+<label class="flex items-start gap-space-md cursor-pointer select-none">
+<input checked="" class="mt-1 w-5 h-5 rounded text-primary accent-primary focus:ring-primary cursor-pointer shrink-0" required="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface leading-snug">
+                Acepto voluntariamente los términos del acuerdo de intermediación biológica, la política de transporte de plantas vivas por carretera departamental y declaro conocer los requerimientos agronómicos y de seguridad del ejemplar seleccionado.
+              </span>
+</label>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Order Summary, Pet Toxicity Warning & Payment (Sticky Card) -->
+<div class="lg:col-span-4 sticky top-24 flex flex-col gap-space-md">
+<aside class="bg-surface-container-lowest rounded-2xl shadow-md p-space-xl flex flex-col gap-space-lg">
+<!-- Summary Header -->
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container-highest">
+<h3 class="font-headline-md text-headline-sm text-primary">Resumen del Pedido</h3>
+<span class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-primary text-on-primary font-bold">1 Ejemplar Vivo</span>
+</div>
+<!-- Line Items List -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-xs text-body-sm">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-primary font-semibold">1x Monstera Deliciosa</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">Ejemplar Climatizado • 70 cm</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold">$85.000</span>
+</div>
+<div class="flex items-start justify-between gap-space-xs text-body-sm">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-primary font-semibold">1x Maceta Terracota Artesanal</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">Quindío • Plato base incluido</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold">$24.000</span>
+</div>
+<div class="flex items-start justify-between gap-space-xs text-body-sm">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-primary font-semibold">Despacho de Proximidad</span>
+<span class="text-on-surface-variant text-label-sm font-label-sm">Vehículo Climatizado (3.2 km)</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold">$8.000</span>
+</div>
+</div>
+<!-- Visual Alert: Pet Toxicity Warning (Amber Callout) -->
+<div class="rounded-xl p-space-md bg-secondary-fixed/30 flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0 mt-0.5">warning</span>
+<div class="flex flex-col gap-1">
+<h5 class="font-label-lg text-label-lg text-on-secondary-fixed font-bold leading-tight">Advertencia de Toxicidad</h5>
+<p class="font-body-sm text-[12px] leading-relaxed text-on-secondary-fixed-variant">
+                Esta especie contiene cristales insolubles de oxalato de calcio. Clasificada como <strong class="text-secondary font-bold">Riesgo Moderado</strong> para perros y gatos. Ubícala fuera del alcance de mascotas curiosas.
+              </p>
+</div>
+</div>
+<!-- Financial Breakdown -->
+<div class="flex flex-col gap-space-xs pt-space-xs border-t border-surface-container-highest">
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Subtotal productos</span>
+<span>$109.000 COP</span>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span>Envío ecológico local</span>
+<span>$8.000 COP</span>
+</div>
+<div class="flex items-baseline justify-between pt-space-sm mt-space-xs border-t border-surface-container-highest">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">Total a Pagar</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Impuestos e intermediación incl.</span>
+</div>
+<span class="font-display-lg text-[28px] text-primary font-bold">$117.000 COP</span>
+</div>
+</div>
+<!-- Accepted Quick Payment Badges -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Métodos de Pago Aceptados</span>
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-2 py-1 rounded bg-surface-container text-primary font-label-sm font-semibold">Tarjetas Crédito/Débito</span>
+<span class="px-2 py-1 rounded bg-surface-container text-primary font-label-sm font-semibold">PSE</span>
+<span class="px-2 py-1 rounded bg-surface-container text-secondary font-label-sm font-bold">Nequi</span>
+<span class="px-2 py-1 rounded bg-surface-container text-primary font-label-sm font-semibold">Daviplata</span>
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm font-semibold">Contra Entrega</span>
+</div>
+</div>
+<!-- Main CTA Conversion Button -->
+<button class="w-full h-14 bg-secondary hover:bg-on-secondary-container text-on-secondary rounded-xl font-headline-sm text-[16px] tracking-wide shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-sm group cursor-pointer" type="button">
+<span>Confirmar Pedido y Aceptar Acuerdo</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<!-- Trust Micro-Copy -->
+<div class="flex items-center justify-center gap-2 text-center text-on-surface-variant text-label-sm font-label-sm pt-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">lock</span>
+<span>Transacción 100% segura • Garantía botánica Raíz Local de 30 días</span>
+</div>
+</aside>
+<!-- Nursery Proximity Mini-Card -->
+<div class="bg-surface-container rounded-xl p-space-md flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Despacho en Vehículo Climatizado</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant text-xs">Protección térmica contra vientos y deshidratación foliar.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-primary-container text-on-primary-container py-space-2xl"><div class="max-w-[1280px] mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-lg text-center md:text-left"><div class="flex flex-col gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span><p class="font-body-sm text-body-sm text-on-primary-container">Artesanía botánica, viveros locales y biodiversidad consciente.</p></div><div class="flex flex-col items-center md:items-end gap-space-xs"><p class="font-label-md text-label-md text-on-primary font-bold">Universidad del Quindío - Programación Avanzada</p><p class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Raíces vivas • Cultivo ético • Hecho con orgullo regional</p></div></div></footer></body></html>

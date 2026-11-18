@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Raíz Local - Mercado Botánico</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e4e3db", "on-primary": "#ffffff", "on-tertiary-container": "#e4a2a7", "surface-container-high": "#eae8e0", "inverse-on-surface": "#f3f1e9", "on-error": "#ffffff", "error-container": "#ffdad6", "surface": "#fbf9f1", "surface-dim": "#dcdad2", "on-primary-fixed-variant": "#244f37", "on-secondary-fixed-variant": "#7b2f02", "primary-fixed-dim": "#a2d1b2", "primary-fixed": "#beeecd", "secondary-fixed": "#ffdbcc", "on-tertiary": "#ffffff", "primary-container": "#234e36", "surface-tint": "#3c674d", "on-error-container": "#93000a", "inverse-surface": "#30312c", "secondary-fixed-dim": "#ffb695", "surface-variant": "#e4e3db", "surface-container-lowest": "#ffffff", "on-tertiary-fixed-variant": "#6a383d", "background": "#fbf9f1", "surface-bright": "#fbf9f1", "on-tertiary-fixed": "#350e14", "on-secondary": "#ffffff", "tertiary-container": "#68373c", "surface-container-low": "#f6f4ec", "secondary": "#994619", "secondary-container": "#ff9563", "on-secondary-container": "#762c00", "on-primary-fixed": "#002111", "on-primary-container": "#90bea0", "tertiary": "#4d2127", "primary": "#083721", "inverse-primary": "#a2d1b2", "outline-variant": "#c1c9c0", "on-surface-variant": "#414943", "on-surface": "#1b1c17", "tertiary-fixed-dim": "#fab5ba", "surface-container": "#f0eee6", "on-background": "#1b1c17", "on-secondary-fixed": "#351000", "outline": "#717972", "error": "#ba1a1a", "tertiary-fixed": "#ffdadb" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter-sm": "1rem", "space-xl": "2rem", "gutter": "1.5rem", "space-xs": "0.25rem", "margin-sm": "1rem", "space-md": "1rem", "margin-lg": "3rem", "gutter-lg": "2rem", "space-2xl": "3rem" }, "fontFamily": { "label-sm": ["Manrope"], "headline-lg": ["Epilogue"], "display-lg": ["Epilogue"], "label-md": ["Manrope"], "body-md": ["Manrope"], "body-sm": ["Manrope"], "body-lg": ["Manrope"], "label-lg": ["Manrope"], "headline-md": ["Epilogue"], "headline-sm": ["Epilogue"], "display-lg-mobile": ["Epilogue"] }, "fontSize": { "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface-container-low font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-primary-container shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1280px] mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Raíz Local Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrAL9XP5y3ntN0XUr2rdQZgr4qL2Pkn4tyYnB8vs8kiN3KF_Pb4h1EJl5gZMctmh7tgxn7rro67NCajIbV8rxoOdaD0od3c5BiOyZ5Gia_Et4RjRNzUtDsec8RLrVnM9_MERQA1FeAmRCfrJ_7USTLGZEQE0PogA2oQZt7mCrYocj9dgvHZ4xtNp7q-HU4rFxLfNwZ5ZiUzk2iutLMeWItiZPwHKLvFZLhGpNmqtEnyb"/><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span></div><nav class="hidden md:flex items-center gap-space-xl" data-active-classes="text-on-primary font-bold border-b-2 border-secondary-container"><a aria-current="page" class="transition-colors py-space-xs text-on-primary font-bold border-b-2 border-secondary-container" data-path="inicio" href="#">Inicio</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="catalogo-de-ejemplares" href="#">Catálogo de Ejemplares</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="armar-kit" href="#">Armar Kit</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg px-space-lg py-space-sm rounded-lg transition-colors shadow-[0_1px_3px_rgba(35,78,54,0.05)]" data-path="iniciar-sesion" href="#">Iniciar Sesión</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button aria-label="Abrir menú" class="md:hidden flex items-center justify-center p-space-sm rounded-lg text-on-primary hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button></div></div></header><main class="w-full pt-20 bg-surface-container-low flex-1"><div class="flex flex-col w-full">
+<!-- Top Hero Section with 12-column responsive layout -->
+<section class="w-full relative overflow-hidden py-space-xl lg:py-space-2xl">
+<div class="max-w-[1280px] mx-auto px-gutter">
+<!-- 12-Column Grid -->
+<div class="grid grid-cols-12 gap-y-space-xl lg:gap-x-gutter-lg items-center">
+<!-- Left Column: col-12 col-lg-6 equivalent -->
+<div class="col-span-12 lg:col-span-6 flex flex-col justify-center items-start z-10">
+<!-- Origin Badge -->
+<div class="inline-flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-full mb-space-lg shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-primary-container tracking-wider uppercase">Marketplace de Proximidad</span>
+</div>
+<!-- Hero Editorial Headline -->
+<h1 class="font-headline-lg text-headline-lg lg:text-display-lg font-bold text-primary tracking-tight leading-tight mb-space-md">
+            Plantas vivas desde el vivero más cercano a tu hogar
+          </h1>
+<!-- Editorial Subtitle -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-space-xl leading-relaxed">
+            Actuamos como intermediarios conectando tu dirección con viveros locales para evitar maltrato en envíos largos, asegurando que tus plantas lleguen frescas, aclimatadas y llenas de vida.
+          </p>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md w-full sm:w-auto mb-space-2xl">
+<a class="inline-flex items-center justify-center gap-space-sm bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg px-space-xl py-3.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5" data-path="catalogo-de-ejemplares" href="#">
+<span>Explorar Catálogo</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center gap-space-sm bg-surface-container-lowest text-secondary hover:bg-secondary-fixed/30 font-label-lg text-label-lg px-space-xl py-3.5 rounded-lg transition-all duration-200 shadow-sm" data-path="armar-kit" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary">potted_plant</span>
+<span>Configurar Kit de Jardinería</span>
+</a>
+</div>
+<!-- Proof Metrics Bar -->
+<div class="w-full pt-space-lg bg-surface-container/60 rounded-xl px-space-lg py-space-md shadow-sm">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md divide-y sm:divide-y-0 sm:divide-x divide-outline-variant/30">
+<div class="flex items-center gap-space-sm pb-space-xs sm:pb-0">
+<span class="material-symbols-outlined text-primary-container text-[20px]">yard</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">+45 viveros aliados</span>
+</div>
+<div class="flex items-center gap-space-sm pt-space-xs sm:pt-0 sm:pl-space-md">
+<span class="material-symbols-outlined text-primary-container text-[20px]">local_shipping</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Entregas en menos de 24h</span>
+</div>
+<div class="flex items-center gap-space-sm pt-space-xs sm:pt-0 sm:pl-space-md">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">4.9/5 satisfacción</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: col-12 col-lg-6 equivalent with visual frame -->
+<div class="col-span-12 lg:col-span-6 relative flex justify-center lg:justify-end mt-space-lg lg:mt-0">
+<!-- Outer Terracotta & Moss Aura Accent -->
+<div class="relative w-full max-w-[560px]">
+<!-- Decorative Subtle Accent Shape -->
+<div class="absolute -top-6 -right-6 w-64 h-64 bg-secondary-fixed/40 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-8 -left-8 w-72 h-72 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Main Image Wrapper -->
+<div class="relative w-full h-[460px] sm:h-[540px] rounded-3xl overflow-hidden shadow-md bg-surface-container-high group">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Sunlit artisanal botanical interior full of thriving indoor potted plants including monstera deliciosa, rubber tree, and ferns in earthy terracotta planters by an open paned window in soft golden natural daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuFoz3y4PwfHxcrJdYMajjtQGWtxp0CWSC5qQbQTm7bMHCP9msvO2upiH2OTc3JA0G5VAGqHtVD86uHtIirNb-JoOjqrSqfdmxMt78W4ZtT2LmXHA7rzWLH-XupL0qf8fAXXr6VsmjAi7wd4A7WKwCtbnSdGYNvEo-nUuzCbEK4T3NLADB2_PY6xLJ3g1Ijnxx9o-HI5_SWgxLZfxmOVwkWlYgVtofCyxb8eFOdMk"/>
+<!-- Ambient Scrim at base -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent opacity-60"></div>
+</div>
+<!-- Overlapping Float Pill Card -->
+<div class="absolute -bottom-5 left-4 right-4 sm:left-8 sm:right-auto sm:max-w-md bg-surface-container-lowest rounded-2xl p-space-md shadow-md flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex-shrink-0 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[26px]">eco</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Garantía Botánica Raíz</span>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold leading-snug">
+                  Ejemplares aclimatados a tu microclima local - 100% garantizados
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Proposition Section (3-Column Grid) -->
+<section class="w-full py-space-2xl my-space-lg">
+<div class="max-w-[1280px] mx-auto px-gutter">
+<!-- Section Header -->
+<div class="text-center max-w-2xl mx-auto mb-space-2xl">
+<span class="inline-block font-label-md text-label-md uppercase tracking-widest text-secondary font-bold mb-space-xs">
+          ¿Por qué Raíz Local?
+        </span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">
+          Cuidamos el trayecto y la vida de cada planta
+        </h2>
+<div class="w-12 h-1 bg-secondary mx-auto mt-space-sm rounded-full"></div>
+</div>
+<!-- 3-Column Responsive Value Cards Grid (12-column system, col-12 col-md-4) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
+<!-- Card 1: Vivero Cercano Asignado -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-surface-container-low flex items-center justify-center mb-space-lg group-hover:bg-primary-fixed/40 transition-colors">
+<span class="material-symbols-outlined text-primary-container text-[28px]">distance</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-space-sm group-hover:text-primary-container transition-colors">
+              Vivero Cercano Asignado
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Tu pedido se despacha directamente desde el productor o vivero más próximo a tu ubicación geográfica, reduciendo tiempos de traslado y la huella de carbono.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-lg flex items-center gap-space-xs text-primary-container font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span>Rango de proximidad 15km</span>
+</div>
+</div>
+<!-- Card 2: Ficha de Cuidado Garantizada -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-surface-container-low flex items-center justify-center mb-space-lg group-hover:bg-primary-fixed/40 transition-colors">
+<span class="material-symbols-outlined text-primary-container text-[28px]">receipt_long</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-space-sm group-hover:text-primary-container transition-colors">
+              Ficha de Cuidado Garantizada
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Cada especie incluye una guía botánica detallada y personalizada elaborada por especialistas: frecuencia de riego, exposición solar y requerimientos de sustrato.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-lg flex items-center gap-space-xs text-primary-container font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span>Diagnóstico digital incluido</span>
+</div>
+</div>
+<!-- Card 3: Alerta de Riesgo para Mascotas y Niños -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-surface-container-low flex items-center justify-center mb-space-lg group-hover:bg-secondary-fixed/40 transition-colors">
+<span class="material-symbols-outlined text-secondary text-[28px]">pets</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-space-sm group-hover:text-secondary transition-colors">
+              Alerta de Riesgo para Mascotas y Niños
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Información clara sobre niveles de toxicidad en hojas o savia para perros, gatos y niños, permitiéndote elegir con total tranquilidad para tu hogar.
+            </p>
+</div>
+<div class="pt-space-lg mt-space-lg flex items-center gap-space-xs text-secondary font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Filtro Pet-Friendly activo</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Regional Nursery Spotlight Strip -->
+<section class="w-full pb-space-2xl">
+<div class="max-w-[1280px] mx-auto px-gutter">
+<div class="bg-primary-container text-on-primary rounded-3xl p-space-xl sm:p-space-2xl shadow-md flex flex-col lg:flex-row items-center justify-between gap-space-xl">
+<div class="flex flex-col max-w-xl text-center lg:text-left">
+<span class="font-label-sm text-label-sm text-secondary-container uppercase tracking-widest font-bold mb-space-xs">
+            Red Hortícola del Eje Cafetero &amp; Región
+          </span>
+<h3 class="font-headline-md text-headline-md text-on-primary font-bold mb-space-xs">
+            ¿Tienes un vivero o cultivas especies endémicas?
+          </h3>
+<p class="font-body-md text-body-md text-on-primary-container">
+            Súmate a la red de productores que entregan frescura inmediata y sin intermediación industrial innecesaria.
+          </p>
+</div>
+<div class="flex items-center gap-space-md flex-shrink-0">
+<a class="inline-flex items-center justify-center bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg px-space-xl py-3.5 rounded-lg transition-colors shadow-sm" data-path="iniciar-sesion" href="#">
+            Registrar mi Vivero
+          </a>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-primary-container text-on-primary-container py-space-2xl"><div class="max-w-[1280px] mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-lg text-center md:text-left"><div class="flex flex-col gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span><p class="font-body-sm text-body-sm text-on-primary-container">Artesanía botánica, viveros locales y biodiversidad consciente.</p></div><div class="flex flex-col items-center md:items-end gap-space-xs"><p class="font-label-md text-label-md text-on-primary font-bold">Universidad del Quindío - Programación Avanzada</p><p class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Raíces vivas • Cultivo ético • Hecho con orgullo regional</p></div></div></footer></body></html>
