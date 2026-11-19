@@ -77,7 +77,40 @@
 - [x] Registrar `Avisos` en los `imports` de `src/app/app.ts`.
 - [x] Verificar compilación con `npm run build`.
 
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 2.2 — Autenticación JWT en `jardineria-front/`
+**Rama sugerida:** `feature/auth-jwt`
+**Criterios cubiertos:** Frontend Conectado al Backend + Seguridad
+
+- [x] Crear `src/app/modelos/auth.model.ts` con interfaces TypeScript idénticas a los DTOs del backend (`LoginRequest`, `RegisterRequest`, `AuthResponse`) más `UsuarioAutenticado`.
+- [x] Crear `src/app/servicios/auth.service.ts` usando `inject(HttpClient)` y `environment.apiUrl` con:
+  - `login(credenciales)` -> POST `${environment.apiUrl}/auth/login`, guarda token en `localStorage`, actualiza señales (`estaAutenticado`, `rolActual`, `correoUsuario`).
+  - `registrar(datos)` -> POST `${environment.apiUrl}/auth/register`.
+  - `cerrarSesion()` -> elimina token de `localStorage`, limpia señales al instante y redirige a `/login`.
+  - `obtenerToken()` y método seguro para decodificar payload Base64 del JWT y extraer rol (`COMPRADOR`, `VENDEDOR_VIVERO`, `ADMIN`) y correo (claim `"roles"`, subject = email).
+- [x] Actualizar `src/app/app.html` navbar para reaccionar en vivo a `authService.estaAutenticado()` y `authService.rolActual()`: sin sesión muestra 'Iniciar Sesión' y 'Registrarse'; con sesión muestra correo/rol y 'Cerrar Sesión'.
+- [x] Inyectar `AuthService` en `src/app/app.ts`.
+- [x] Verificar compilación con `npm run build`.
+
 **Prompt para el Agente:**
-> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: crea `src/app/servicios/aviso.service.ts` usando signal para una lista de avisos con tipo (success | danger | warning | info) y mensaje, e incluye métodos mostrarExito(msg), mostrarError(msg), mostrarInfo(msg) y cerrar(id) que desaparezcan automáticamente tras 4 segundos. Crea el componente standalone `src/app/componentes/avisos/` (avisos.ts, avisos.html, avisos.css, sin sufijo .component) que renderice alertas flotantes de Bootstrap (alert, shadow, position-fixed top-0 end-0 m-3) usando @if y @for con botón de cierre manual. Inserta `<app-avisos />` en `src/app/app.html` para que esté disponible globalmente en la SPA y regístralo en los imports de `src/app/app.ts`. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 2.1 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
+> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: inspecciona los DTOs del backend (`LoginRequest`, `RegisterRequest`, `AuthResponse`) y `AuthController` + `JwtUtil` para conocer rutas exactas (`/api/auth/login`, `/api/auth/register`), campos y el claim de rol (`roles`). Crea `src/app/modelos/auth.model.ts` con interfaces TypeScript idénticas a los DTOs. Crea `src/app/servicios/auth.service.ts` usando `inject(HttpClient)` y `environment.apiUrl` con `login`, `registrar`, `cerrarSesion`, `obtenerToken` y decodificación segura del payload Base64 del JWT para extraer rol y correo. Actualiza `src/app/app.html` navbar para reaccionar en vivo a `estaAutenticado()` y `rolActual()`. Inyecta `AuthService` en `src/app/app.ts`. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 2.2 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
+
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 1.3 — Home (Inicio) basado en mockup `inicio_raiz_local.txt`
+**Rama sugerida:** `feature/home-mockup`
+**Criterios cubiertos:** Frontend Conectado al Backend + Identidad Visual
+
+- [x] Reorganizar `src/app/componentes/inicio/` (`inicio.ts`, `inicio.html`, `inicio.css`) para reflejar el mockup `docs/mockups/inicio_raiz_local.txt`.
+- [x] Crear `src/app/modelos/home.model.ts` con interfaces del dominio (`ViveroAliado`, `MetricaHome`, `BloqueValor`, `EjemplarDestacado`) usando lenguaje ubicuo.
+- [x] Hero section con badge "Marketplace de Proximidad", headline "Plantas vivas desde el vivero más cercano a tu hogar", botones Explorar Catálogo (`/catalogo`) y Configurar Kit (`/kits`), y barra de métricas (+45 viveros aliados, 24h, 4.9/5).
+- [x] 3 bloques de valor: Vivero Cercano Asignado, Ficha de Cuidado Garantizada, Alerta de Riesgo para Mascotas y Niños.
+- [x] Banda viveros regionales con botón "Registrar mi Vivero" (`/registro`).
+- [x] Uso de `signal()` y `computed()` para datos reactivos; cero URLs ni datos quemados en componentes; cero palabras prohibidas (`Producto`, `Item`, `Stock`, `Advertencia`).
+- [x] Verificar compilación con `npm run build`.
+
+**Prompt para el Agente:**
+> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: lee el mockup `docs/mockups/inicio_raiz_local.txt` y reorganiza `src/app/componentes/inicio/` (`inicio.ts`, `inicio.html`, `inicio.css`) para reflejar ese diseño real usando Bootstrap 5 (no Tailwind), paleta 60-30-10, lenguaje ubicuo (`Ejemplar`, `Vivero`, `FichaDeCuidado`, `Riesgo`, etc.), `signal()` y `computed()`, y cero URLs ni datos quemados en componentes. Crea `src/app/modelos/home.model.ts` con las interfaces del dominio. Incluye hero con métricas, 3 bloques de valor y banda de viveros regionales. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 1.3 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.

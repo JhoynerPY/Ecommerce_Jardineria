@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { Avisos } from './componentes/avisos/avisos';
+import { AuthService } from './servicios/auth.service';
 
 @Component({
   imports: [RouterOutlet, RouterLink, RouterLinkActive, Avisos],
@@ -9,6 +10,7 @@ import { Avisos } from './componentes/avisos/avisos';
   templateUrl: './app.html',
 })
 export class App {
+  protected readonly authService = inject(AuthService);
   protected readonly titulo = signal('EcoJardín');
   protected readonly piePagina = signal('Universidad del Quindío - Programación Avanzada');
 }

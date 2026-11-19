@@ -1,39 +1,102 @@
 <app-avisos />
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #234E36;">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">{{ titulo() }}</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navPrincipal" aria-controls="navPrincipal" aria-expanded="false" aria-label="Menú">
+<nav class="navbar navbar-expand-lg navbar-dark app-navbar">
+  <div class="container-xxl px-4">
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
+      <i class="bi bi-flower1"></i>
+      <span class="fw-bold">Raíz Local</span>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navPrincipal"
+      aria-controls="navPrincipal"
+      aria-expanded="false"
+      aria-label="Menú"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navPrincipal">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Inicio</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">Catálogo de Ejemplares</a>
+          <a class="nav-link" routerLink="/catalogo" routerLinkActive="active"
+            >Catálogo de Ejemplares</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/kits" routerLinkActive="active">Armar Kit</a>
+          <a class="nav-link" routerLink="/kits" routerLinkActive="active"
+            >Armar Kit</a
+          >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar Sesión</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/registro" routerLinkActive="active">Registrarse</a>
-        </li>
+        @if (!authService.estaAutenticado()) {
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <a
+              class="btn btn-terracota btn-sm px-3 d-inline-flex align-items-center gap-2"
+              routerLink="/login"
+              routerLinkActive="active"
+            >
+              <i class="bi bi-person"></i>
+              <span>Iniciar Sesión</span>
+            </a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link small" routerLink="/registro" routerLinkActive="active"
+              >Registrarse</a
+            >
+          </li>
+        } @else {
+          <li class="nav-item ms-lg-3">
+            <span class="nav-link small d-inline-flex align-items-center gap-2">
+              <i class="bi bi-person-circle"></i>
+              {{ authService.correoUsuario() }} ({{ authService.rolActual() }})
+            </span>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <button
+              class="btn btn-outline-light btn-sm d-inline-flex align-items-center gap-2"
+              (click)="authService.cerrarSesion()"
+            >
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Cerrar Sesión</span>
+            </button>
+          </li>
+        }
       </ul>
     </div>
   </div>
 </nav>
 
-<main class="container py-4">
+<main class="app-main">
   <router-outlet />
 </main>
 
-<footer class="bg-light text-center text-dark py-3 mt-5">
-  <div class="container">
-    <span>{{ piePagina() }}</span>
+<footer class="app-footer">
+  <div class="container-xxl px-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <span class="fw-bold text-white d-block">Raíz Local</span>
+        <p class="mb-0 small text-white-50">
+          Artesanía botánica, viveros locales y biodiversidad consciente.
+        </p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <p class="mb-0 fw-bold text-white small">
+          Universidad del Quindío - Programación Avanzada
+        </p>
+        <p class="mb-0 small text-white-50 text-uppercase app-footer-tagline">
+          Raíces vivas • Cultivo ético • Hecho con orgullo regional
+        </p>
+      </div>
+    </div>
   </div>
 </footer>
