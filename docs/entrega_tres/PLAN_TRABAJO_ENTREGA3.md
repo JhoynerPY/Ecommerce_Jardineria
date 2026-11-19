@@ -114,3 +114,20 @@
 > "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: lee el mockup `docs/mockups/inicio_raiz_local.txt` y reorganiza `src/app/componentes/inicio/` (`inicio.ts`, `inicio.html`, `inicio.css`) para reflejar ese diseño real usando Bootstrap 5 (no Tailwind), paleta 60-30-10, lenguaje ubicuo (`Ejemplar`, `Vivero`, `FichaDeCuidado`, `Riesgo`, etc.), `signal()` y `computed()`, y cero URLs ni datos quemados en componentes. Crea `src/app/modelos/home.model.ts` con las interfaces del dominio. Incluye hero con métricas, 3 bloques de valor y banda de viveros regionales. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 1.3 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 2.3 — Componentes de autenticación Login y Registro en `jardineria-front/`
+**Rama sugerida:** `feature/login-registro`
+**Criterios cubiertos:** Frontend Conectado al Backend + Interfaz de usuario + Seguridad
+
+- [x] Implementar `src/app/componentes/login/` (`login.ts`, `login.html`, `login.css`) con `ReactiveFormsModule` (`FormBuilder`), validaciones (correo requerido y con formato, contraseña requerida), `signal` de carga y alternancia de visibilidad de la contraseña.
+- [x] Integrar `login.ts` con `AuthService.login()` y `AuthService.guardarSesion()`; mostrar `AvisoService.mostrarExito(...)` y navegar a `/catalogo` tras autenticarse.
+- [x] Traducir errores HTTP a mensajes del dominio visible en pantalla y en aviso: 401 credenciales incorrectas, 400 datos inválidos, 0 sin conexión con el servidor.
+- [x] Implementar `src/app/componentes/registro/` (`registro.ts`, `registro.html`, `registro.css`) con `ReactiveFormsModule` y campos alineados a `RegisterRequest`: `nombre` (mín. 3), `email`, `password` (mín. 6) y `roles` (`COMPRADOR` / `VENDEDOR_VIVERO`).
+- [x] Integrar `registro.ts` con `AuthService.registrar()` + `guardarSesion()`, aviso de éxito y redirección a `/catalogo`; traducir errores HTTP (409 correo ya registrado, 400 validación, 0 sin conexión).
+- [x] Maquetar ambos formularios como tarjeta de dos paneles (panel editorial verde + formulario) según `docs/images/login.png`, con Bootstrap 5, paleta 60-30-10, `@if` para validaciones y lenguaje ubicuo.
+- [x] Verificar compilación con `npm run build`.
+
+**Prompt para el Agente:**
+> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: implementa `src/app/componentes/login/` (`login.ts`, `login.html`, `login.css`) y `src/app/componentes/registro/` (`registro.ts`, `registro.html`, `registro.css`) con `ReactiveFormsModule`, validaciones, `signal` de carga y traducción de errores HTTP. Conecta login con `AuthService.login()` + `guardarSesion()` y registro con `AuthService.registrar()` + `guardarSesion()`, mostrando avisos con `AvisoService` y redirigiendo a `/catalogo` en caso de éxito. El registro debe reflejar los campos de `RegisterRequest` (nombre, email, password mínimo 6, roles COMPRADOR/VENDEDOR_VIVERO). Maqueta ambos formularios como la tarjeta de dos paneles de `docs/images/login.png` con Bootstrap 5, paleta 60-30-10 y lenguaje ubicuo. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 2.3 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
+
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
