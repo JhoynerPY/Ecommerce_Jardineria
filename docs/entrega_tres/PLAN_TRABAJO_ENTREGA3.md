@@ -52,3 +52,17 @@
 > "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: instala `bootstrap` y `bootstrap-icons` con npm; registra los CSS y JS de Bootstrap en `angular.json` (sin copiar archivos a mano); en `src/styles.css` sobrescribe variables de Bootstrap 5 con la paleta base #F6F4EC, primario #234E36, acento #C96A3B, texto #1F2922 y crea clases utilitarias `.btn-terracota`, `.bg-terracota`, `.text-terracota`, `.badge-terracota`. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 1.1 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 1.2 — Layout profesional y página de inicio en `jardineria-front/`
+**Rama sugerida:** `feature/layout-inicio`
+**Criterios cubiertos:** Frontend Conectado al Backend
+
+- [x] Reemplazar `src/app/app.html` por layout con `<nav class="navbar navbar-expand-lg navbar-dark">` en Verde Bosque (#234E36), botón hamburguesa funcional, enlaces con `routerLink`/`routerLinkActive` (Inicio `/`, Catálogo de Ejemplares `/catalogo`, Armar Kit `/kits`, Iniciar Sesión `/login`, Registrarse `/registro`), `<main class="container py-4">` con `<router-outlet />` y `<footer>` con 'Universidad del Quindío - Programación Avanzada'.
+- [x] Actualizar `src/app/app.ts` importando `RouterOutlet`, `RouterLink`, `RouterLinkActive` y usando `signal` para título y footer.
+- [x] Maquetar `src/app/componentes/inicio/inicio.html` e `inicio.css` con Bootstrap 5 (`row`, `col-md-*`, `card`, `shadow-sm`, `rounded-3`, `btn`) reflejando intermediación con Viveros locales cercanos, Ficha de Cuidado garantizada y alertas de Riesgo de toxicidad para mascotas/niños. Cero palabras prohibidas (`Producto`, `Item`, `Stock`).
+- [x] Verificar compilación con `npm run build`.
+
+**Prompt para el Agente:**
+> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: reemplaza `src/app/app.html` por un layout profesional con navbar en Verde Bosque (#234E36), botón hamburguesa, enlaces routerLink a /, /catalogo, /kits, /login, /registro; main con router-outlet y footer con 'Universidad del Quindío - Programación Avanzada'. Actualiza `src/app/app.ts` importando RouterOutlet, RouterLink, RouterLinkActive y usando signal para título y footer. Maqueta `src/app/componentes/inicio/inicio.html` e `inicio.css` con Bootstrap 5 (row, col-md-*, card, shadow-sm, rounded-3, btn) sobre intermediación con Viveros locales cercanos, Ficha de Cuidado garantizada y alertas de Riesgo de toxicidad para mascotas/niños. Cero palabras prohibidas. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 1.2 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
+
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
