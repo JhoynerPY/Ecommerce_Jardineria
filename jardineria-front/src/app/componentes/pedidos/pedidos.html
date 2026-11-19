@@ -1,0 +1,60 @@
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+          
+          <h2 class="fw-bold text-success mb-3">Finalizar Pedido</h2>
+          <p class="text-muted mb-4">Ingresa los datos de entrega y define la responsabilidad por daños en el transporte.</p>
+
+          <form [formGroup]="form" (ngSubmit)="enviar()">
+            
+            <!-- Dirección -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Dirección de Entrega</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                formControlName="direccion"
+                placeholder="Ej: Calle 20 #10-05, Armenia"
+                [class.is-invalid]="direccion.invalid && direccion.touched"
+              >
+              <div class="invalid-feedback">
+                La dirección es obligatoria (mínimo 10 caracteres).
+              </div>
+            </div>
+
+            <!-- Exención -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Exención de Responsabilidad</label>
+              <select class="form-select" formControlName="tipoExencion" (change)="actualizarExencion($event)">
+                <option value="SIN_EXENCION">Sin exención (Cobertura total)</option>
+                <option value="ACUERDO_PARCIAL_PERDIDA">Acuerdo Parcial (Cubrimos el 50%)</option>
+                <option value="EXENCION_TOTAL">Exención Total (El cliente asume el riesgo)</option>
+              </select>
+            </div>
+
+            <!-- Términos y Condiciones -->
+            @if (exencionSeleccionada() !== 'SIN_EXENCION') {
+              <div class="mb-4 form-check bg-light p-3 rounded">
+                <input type="checkbox" class="form-check-input" id="acepta" formControlName="aceptaExencion">
+                <label class="form-check-label text-secondary small" for="acepta">
+                  Acepto los términos y condiciones de la exención de responsabilidad seleccionada.
+                </label>
+              </div>
+            }
+
+            <!-- Botón Submit -->
+            <button type="submit" class="btn btn-success w-100 py-2 fw-bold" [disabled]="cargando() || (form.invalid) || (exencionSeleccionada() !== 'SIN_EXENCION' && !form.value.aceptaExencion)">
+              @if (cargando()) {
+                <span class="spinner-border spinner-border-sm me-2"></span> Procesando...
+              } @else {
+                Confirmar Pedido <i class="bi bi-arrow-right ms-1"></i>
+              }
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
