@@ -1,89 +1,257 @@
 import { Component, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { DecimalPipe } from '@angular/common';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PedidoService } from '../../servicios/pedido.service';
 import { AvisoService } from '../../servicios/aviso.service';
+import {
+  CrearPedidoRequest,
+  CrearPedidoResponse,
+  TipoExencion,
+} from '../../modelos/pedido.model';
+
+interface DetalleForm {
+  idProducto: FormControl<string>;
+  cantidad: FormControl<number>;
+  precioUnitario: FormControl<number>;
+}
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // Quité RouterLink
+  imports: [DecimalPipe, ReactiveFormsModule, RouterLink],
   selector: 'app-pedidos',
   templateUrl: './pedidos.html',
-  styleUrl: './pedidos.css'
+  styleUrl: './pedidos.css',
 })
 export class Pedidos {
   private readonly fb = inject(FormBuilder);
   private readonly pedidoService = inject(PedidoService);
   private readonly avisoService = inject(AvisoService);
-  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   protected readonly cargando = signal(false);
-  protected readonly exencionSeleccionada = signal<string>('SIN_EXENCION');
+  protected readonly mensajeError = signal<string | null>(null);
+  protected readonly respuesta = signal<CrearPedidoResponse | null>(null);
+  protected readonly exencionSeleccionada = signal<TipoExencion>('SIN_EXENCION');
 
-  protected readonly form = this.fb.nonNullable.group({
-    direccion: ['', [Validators.required, Validators.minLength(10)]],
-    tipoExencion: ['SIN_EXENCION', [Validators.required]],
-    aceptaExencion: [true]
+  protected readonly form = this.fb.group({
+    direccion: this.fb.nonNullable.control('', [
+      Validators.required,
+      Validators.minLength(10),
+    ]),
+    tipoExencion: this.fb.nonNullable.control<TipoExencion>('SIN_EXENCION', [
+      Validators.required,
+    ]),
+    porcentajeExencion: this.fb.control<number | null>(null),
+    aceptaExencion: this.fb.nonNullable.control(true),
+    detalles: this.fb.array([this.crearDetalle()]),
   });
 
-  private readonly idEjemplarPrueba = 'especie-001'; 
-  private readonly precioPrueba = 25000;
+  constructor() {
+    this.form.controls.tipoExencion.valueChanges.subscribe((tipo) => {
+      this.exencionSeleccionada.set(tipo);
+      this.actualizarValidadoresExencion(tipo);
+    });
 
-  protected get direccion() { return this.form.controls.direccion; }
+    this.route.queryParamMap.subscribe((params) => {
+      const ejemplarId = params.get('ejemplarId');
+      const precio = Number(params.get('precio'));
 
-  protected actualizarExencion(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    this.exencionSeleccionada.set(select.value);
-    if (select.value === 'SIN_EXENCION') {
-      this.form.controls.aceptaExencion.setValue(true);
+      if (!ejemplarId) {
+        return;
+      }
+
+      this.detalles.at(0).patchValue({
+        idProducto: ejemplarId,
+        precioUnitario: Number.isFinite(precio) && precio > 0 ? precio : 0,
+      });
+      this.avisoService.mostrarInfo(
+        `Ejemplar ${ejemplarId} agregado al pedido.`,
+      );
+    });
+  }
+
+  protected get direccion() {
+    return this.form.controls.direccion;
+  }
+
+  protected get detalles() {
+    return this.form.controls.detalles;
+  }
+
+  protected get porcentajeExencion() {
+    return this.form.controls.porcentajeExencion;
+  }
+
+  protected get aceptaExencion() {
+    return this.form.controls.aceptaExencion;
+  }
+
+  protected agregarDetalle(): void {
+    this.detalles.push(this.crearDetalle());
+  }
+
+  protected quitarDetalle(indice: number): void {
+    if (this.detalles.length > 1) {
+      this.detalles.removeAt(indice);
     }
   }
 
   protected enviar(): void {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+    if (this.cargando()) {
       return;
     }
 
-    this.cargando.set(true);
-    const formValues = this.form.getRawValue();
-    const idCliente = 'cliente-001'; 
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.mensajeError.set('Revisa los campos marcados antes de confirmar.');
+      return;
+    }
 
-    const request = {
-      idCliente: idCliente,
-      detalles: [
-        {
-          idProducto: this.idEjemplarPrueba,
-          cantidad: 1,
-          precioUnitario: this.precioPrueba
-        }
-      ],
-      direccion: formValues.direccion,
-      tipoExencion: formValues.tipoExencion as any,
-      terminosExencion: 'Acepto los términos de transporte de Raíz Local',
+    const valores = this.form.getRawValue();
+    const tipoExencion = valores.tipoExencion;
+    const porcentaje =
+      tipoExencion === 'ACUERDO_PARCIAL_PERDIDA'
+        ? Number(valores.porcentajeExencion)
+        : null;
+
+    const request: CrearPedidoRequest = {
+      detalles: valores.detalles.map((detalle) => ({
+        idProducto: detalle.idProducto.trim(),
+        cantidad: Number(detalle.cantidad),
+        precioUnitario: Number(detalle.precioUnitario),
+      })),
+      direccion: valores.direccion.trim(),
+      tipoExencion,
+      porcentajeExencion: porcentaje,
+      terminosExencion: this.construirTerminosExencion(tipoExencion, porcentaje),
       versionExencion: '1.0',
-      exencionAceptada: formValues.aceptaExencion
+      exencionAceptada:
+        tipoExencion === 'SIN_EXENCION' ? true : valores.aceptaExencion,
     };
 
-    // Aquí le puse : any a respuesta para evitar el error de TS
+    this.cargando.set(true);
+    this.mensajeError.set(null);
+    this.respuesta.set(null);
+
     this.pedidoService.crearPedido(request).subscribe({
-      next: (respuesta: any) => { 
-        this.avisoService.mostrarExito(`Pedido creado con éxito. ID: ${respuesta.idPedido}`);
+      next: (respuesta) => {
+        this.respuesta.set(respuesta);
         this.cargando.set(false);
-        this.router.navigateByUrl('/catalogo'); 
+        this.avisoService.mostrarExito(
+          `Pedido creado exitosamente. ID: ${respuesta.idPedido}`,
+        );
       },
       error: (error: HttpErrorResponse) => {
+        const mensaje = this.traducirError(error);
+        this.mensajeError.set(mensaje);
         this.cargando.set(false);
-        if (error.status === 422) {
-          this.avisoService.mostrarError('El vivero no cubre esta dirección o los datos son inválidos.');
-        } else if (error.status === 400) {
-          this.avisoService.mostrarError('Revisa los datos ingresados en el formulario.');
-        } else {
-          this.avisoService.mostrarError('Error inesperado al crear el pedido.');
-        }
-      }
+        this.avisoService.mostrarError(mensaje);
+      },
     });
+  }
+
+  private crearDetalle(
+    idProducto = '',
+    precioUnitario = 0,
+  ): FormGroup<DetalleForm> {
+    return this.fb.group<DetalleForm>({
+      idProducto: this.fb.nonNullable.control(idProducto, [
+        Validators.required,
+      ]),
+      cantidad: this.fb.nonNullable.control(1, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+      precioUnitario: this.fb.nonNullable.control(precioUnitario, [
+        Validators.required,
+        Validators.min(0.01),
+      ]),
+    });
+  }
+
+  private actualizarValidadoresExencion(tipo: TipoExencion): void {
+    if (tipo === 'ACUERDO_PARCIAL_PERDIDA') {
+      this.porcentajeExencion.setValidators([
+        Validators.required,
+        Validators.min(1),
+        Validators.max(100),
+      ]);
+    } else {
+      this.porcentajeExencion.clearValidators();
+      this.porcentajeExencion.setValue(null);
+    }
+    this.porcentajeExencion.updateValueAndValidity({ emitEvent: false });
+
+    if (tipo === 'SIN_EXENCION') {
+      this.aceptaExencion.setValue(true);
+      this.aceptaExencion.clearValidators();
+    } else {
+      this.aceptaExencion.setValue(false);
+      this.aceptaExencion.setValidators([Validators.requiredTrue]);
+    }
+    this.aceptaExencion.updateValueAndValidity({ emitEvent: false });
+  }
+
+  private construirTerminosExencion(
+    tipo: TipoExencion,
+    porcentaje: number | null,
+  ): string {
+    switch (tipo) {
+      case 'EXENCION_TOTAL':
+        return 'El cliente exime al vivero de toda responsabilidad por daños durante el transporte.';
+      case 'ACUERDO_PARCIAL_PERDIDA':
+        return `Acuerdo parcial del ${porcentaje}% de responsabilidad por daños durante el transporte.`;
+      default:
+        return 'Sin exención de responsabilidad aplicada.';
+    }
+  }
+
+  private traducirError(error: HttpErrorResponse): string {
+    if (error.status === 0) {
+      return 'No se pudo conectar con el servidor. Verifica tu conexión e intenta nuevamente.';
+    }
+    if (error.status === 400) {
+      return this.extraerMensaje(error) || 'Revisa los datos ingresados en el formulario.';
+    }
+    if (error.status === 403) {
+      return 'No tienes permisos para crear pedidos.';
+    }
+    if (error.status === 404) {
+      return 'El ejemplar o el cliente asociado no existe.';
+    }
+    if (error.status === 422) {
+      return (
+        this.extraerMensaje(error) ||
+        'El vivero no cubre la dirección indicada o los datos del pedido no son válidos.'
+      );
+    }
+    return 'Ocurrió un error inesperado al crear el pedido.';
+  }
+
+  private extraerMensaje(error: HttpErrorResponse): string | null {
+    const cuerpo = error.error;
+    if (typeof cuerpo === 'string') {
+      return cuerpo;
+    }
+    if (cuerpo && typeof cuerpo === 'object') {
+      if (typeof cuerpo.message === 'string') {
+        return cuerpo.message;
+      }
+      const mensajes = Object.values(cuerpo).filter(
+        (valor): valor is string => typeof valor === 'string',
+      );
+      if (mensajes.length > 0) {
+        return mensajes.join(' ');
+      }
+    }
+    return null;
   }
 }

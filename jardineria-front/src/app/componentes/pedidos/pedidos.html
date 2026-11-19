@@ -1,58 +1,221 @@
 <section class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-      <div class="card shadow-sm border-0">
+    <div class="col-lg-9 col-xl-8">
+      <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4 p-md-5">
-          
-          <h2 class="fw-bold text-success mb-3">Finalizar Pedido</h2>
-          <p class="text-muted mb-4">Ingresa los datos de entrega y define la responsabilidad por daños en el transporte.</p>
+          <span class="badge badge-terracota mb-3">Pedido protegido</span>
+          <h2 class="fw-bold text-success mb-2">Finalizar Pedido</h2>
+          <p class="text-muted mb-4">
+            Confirma los ejemplares, la dirección de entrega y la exención de
+            responsabilidad aplicable al transporte.
+          </p>
 
-          <form [formGroup]="form" (ngSubmit)="enviar()">
-            
-            <!-- Dirección -->
+          <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
             <div class="mb-4">
-              <label class="form-label fw-semibold">Dirección de Entrega</label>
-              <input 
-                type="text" 
-                class="form-control" 
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <label class="form-label fw-semibold mb-0">Ejemplares del pedido</label>
+                <button
+                  type="button"
+                  class="btn btn-outline-success btn-sm"
+                  (click)="agregarDetalle()"
+                >
+                  <i class="bi bi-plus-circle me-1"></i>Agregar ejemplar
+                </button>
+              </div>
+
+              <div formArrayName="detalles" class="d-flex flex-column gap-3">
+                @for (detalle of detalles.controls; track $index; let i = $index) {
+                  <div class="border rounded-3 p-3 bg-light-subtle" [formGroupName]="i">
+                    <div class="row g-3 align-items-start">
+                      <div class="col-md-6">
+                        <label class="form-label small fw-semibold">ID del ejemplar</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="idProducto"
+                          placeholder="Ej: ejemplar-001"
+                          [class.is-invalid]="
+                            detalle.get('idProducto')?.invalid &&
+                            detalle.get('idProducto')?.touched
+                          "
+                        />
+                        <div class="invalid-feedback">
+                          El ID del ejemplar es obligatorio.
+                        </div>
+                      </div>
+
+                      <div class="col-6 col-md-2">
+                        <label class="form-label small fw-semibold">Cantidad</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="cantidad"
+                          min="1"
+                          [class.is-invalid]="
+                            detalle.get('cantidad')?.invalid &&
+                            detalle.get('cantidad')?.touched
+                          "
+                        />
+                        <div class="invalid-feedback">Mínimo 1.</div>
+                      </div>
+
+                      <div class="col-6 col-md-3">
+                        <label class="form-label small fw-semibold">Precio unitario (COP)</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="precioUnitario"
+                          min="0.01"
+                          step="0.01"
+                          [class.is-invalid]="
+                            detalle.get('precioUnitario')?.invalid &&
+                            detalle.get('precioUnitario')?.touched
+                          "
+                        />
+                        <div class="invalid-feedback">Ingresa un precio válido.</div>
+                      </div>
+
+                      <div class="col-md-1 d-flex justify-content-md-end pt-md-4">
+                        <button
+                          type="button"
+                          class="btn btn-outline-danger btn-sm"
+                          (click)="quitarDetalle(i)"
+                          [disabled]="detalles.length === 1"
+                          aria-label="Quitar ejemplar"
+                        >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+              <p class="form-text mt-2 mb-0">
+                Puedes iniciar un pedido desde el catálogo o ingresar el ID del
+                ejemplar. Cada ejemplar debe tener cantidad y precio unitario.
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold" for="direccion">Dirección de entrega</label>
+              <input
+                id="direccion"
+                type="text"
+                class="form-control"
                 formControlName="direccion"
                 placeholder="Ej: Calle 20 #10-05, Armenia"
                 [class.is-invalid]="direccion.invalid && direccion.touched"
-              >
+              />
               <div class="invalid-feedback">
-                La dirección es obligatoria (mínimo 10 caracteres).
+                La dirección es obligatoria y debe tener al menos 10 caracteres.
               </div>
             </div>
 
-            <!-- Exención -->
             <div class="mb-4">
-              <label class="form-label fw-semibold">Exención de Responsabilidad</label>
-              <select class="form-select" formControlName="tipoExencion" (change)="actualizarExencion($event)">
-                <option value="SIN_EXENCION">Sin exención (Cobertura total)</option>
-                <option value="ACUERDO_PARCIAL_PERDIDA">Acuerdo Parcial (Cubrimos el 50%)</option>
-                <option value="EXENCION_TOTAL">Exención Total (El cliente asume el riesgo)</option>
+              <label class="form-label fw-semibold" for="tipoExencion">
+                Exención de responsabilidad
+              </label>
+              <select
+                id="tipoExencion"
+                class="form-select"
+                formControlName="tipoExencion"
+              >
+                <option value="SIN_EXENCION">Sin exención (cobertura total)</option>
+                <option value="ACUERDO_PARCIAL_PERDIDA">Acuerdo parcial por pérdida</option>
+                <option value="EXENCION_TOTAL">Exención total (el cliente asume el riesgo)</option>
               </select>
             </div>
 
-            <!-- Términos y Condiciones -->
-            @if (exencionSeleccionada() !== 'SIN_EXENCION') {
-              <div class="mb-4 form-check bg-light p-3 rounded">
-                <input type="checkbox" class="form-check-input" id="acepta" formControlName="aceptaExencion">
-                <label class="form-check-label text-secondary small" for="acepta">
-                  Acepto los términos y condiciones de la exención de responsabilidad seleccionada.
+            @if (exencionSeleccionada() === 'ACUERDO_PARCIAL_PERDIDA') {
+              <div class="mb-4">
+                <label class="form-label fw-semibold" for="porcentajeExencion">
+                  Porcentaje de exención
                 </label>
+                <div class="input-group">
+                  <input
+                    id="porcentajeExencion"
+                    type="number"
+                    class="form-control"
+                    formControlName="porcentajeExencion"
+                    min="1"
+                    max="100"
+                    placeholder="Entre 1 y 100"
+                    [class.is-invalid]="
+                      porcentajeExencion.invalid && porcentajeExencion.touched
+                    "
+                  />
+                  <span class="input-group-text">%</span>
+                </div>
+                @if (porcentajeExencion.invalid && porcentajeExencion.touched) {
+                  <p class="text-danger small mb-0 mt-1">
+                    El porcentaje debe estar entre 1 y 100.
+                  </p>
+                }
               </div>
             }
 
-            <!-- Botón Submit -->
-            <button type="submit" class="btn btn-success w-100 py-2 fw-bold" [disabled]="cargando() || (form.invalid) || (exencionSeleccionada() !== 'SIN_EXENCION' && !form.value.aceptaExencion)">
+            @if (exencionSeleccionada() !== 'SIN_EXENCION') {
+              <div class="mb-4 form-check bg-light p-3 rounded-3">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="aceptaExencion"
+                  formControlName="aceptaExencion"
+                />
+                <label class="form-check-label text-secondary small" for="aceptaExencion">
+                  Acepto los términos y condiciones de la exención de
+                  responsabilidad seleccionada.
+                </label>
+                @if (aceptaExencion.invalid && aceptaExencion.touched) {
+                  <p class="text-danger small mb-0 mt-1">
+                    Debes aceptar la exención para continuar.
+                  </p>
+                }
+              </div>
+            }
+
+            @if (mensajeError()) {
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>{{ mensajeError() }}
+              </div>
+            }
+
+            <button
+              type="submit"
+              class="btn btn-success w-100 py-2 fw-bold"
+              [disabled]="cargando() || form.invalid"
+            >
               @if (cargando()) {
-                <span class="spinner-border spinner-border-sm me-2"></span> Procesando...
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Procesando...
               } @else {
-                Confirmar Pedido <i class="bi bi-arrow-right ms-1"></i>
+                Confirmar pedido <i class="bi bi-arrow-right ms-1"></i>
               }
             </button>
           </form>
+
+          @if (respuesta(); as confirmacion) {
+            <div class="alert alert-success mt-4 mb-0" role="status">
+              <h3 class="h6 fw-bold mb-2">
+                <i class="bi bi-check-circle me-2"></i>Pedido confirmado
+              </h3>
+              <p class="mb-1">
+                ID: <strong>{{ confirmacion.idPedido }}</strong> · Estado:
+                <strong>{{ confirmacion.estado }}</strong>
+              </p>
+              <p class="mb-1">
+                Total: <strong>{{ confirmacion.total | number: '1.0-0' }} COP</strong>
+              </p>
+              @if (confirmacion.nombreVivero) {
+                <p class="mb-2">
+                  Vivero asignado: <strong>{{ confirmacion.nombreVivero }}</strong>
+                </p>
+              }
+              <a routerLink="/catalogo" class="btn btn-outline-success btn-sm mt-2">
+                Volver al catálogo
+              </a>
+            </div>
+          }
         </div>
       </div>
     </div>

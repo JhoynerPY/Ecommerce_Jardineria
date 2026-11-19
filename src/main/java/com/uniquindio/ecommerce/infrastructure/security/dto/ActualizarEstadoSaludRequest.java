@@ -1,6 +1,7 @@
 package com.uniquindio.ecommerce.infrastructure.security.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class ActualizarEstadoSaludRequest {
 
@@ -8,6 +9,9 @@ public class ActualizarEstadoSaludRequest {
     private String idEjemplar;
 
     @NotBlank(message = "El nuevo estado es obligatorio (SANO, MARCHITO, CON_PLAGA, etc.)")
+    @Pattern(
+            regexp = "SANO|EN_RECUPERACION|CON_PLAGA|MARCHITO",
+            message = "El estado de salud debe ser SANO, EN_RECUPERACION, CON_PLAGA o MARCHITO")
     private String nuevoEstado;
 
     public String getIdEjemplar() {

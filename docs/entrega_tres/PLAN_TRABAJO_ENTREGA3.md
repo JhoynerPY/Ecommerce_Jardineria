@@ -180,3 +180,35 @@
 - [x] Verificar compilación con `npm run build`.
 
 **Verificación:** En F12 → Network, al buscar y cambiar de página se envían peticiones con `page` y `size` a `localhost:8080`; la respuesta incluye `contenido` y `totalPaginas`. Los registros con `deleted = true` no aparecen porque la query filtra `e.deleted = false`.
+
+---
+
+## FASE 4: Operación del Negocio y Pedidos
+
+### Tarea 4.1 — Modelo y servicio de pedidos + vista protegida `/pedidos`
+**Rama sugerida:** `feature/operacion-negocio`
+**Criterios cubiertos:** Frontend Conectado al Backend + Interfaz de usuario + Seguridad + Reglas de negocio
+
+- [x] Extender `CrearPedidoRequest` y `CrearPedidoResponse` con exención de responsabilidad, porcentaje (1–100), términos, versión, aceptación y datos del vivero asignado.
+- [x] Resolver el `idCliente` desde el usuario autenticado (`Principal` + `ClienteRepositoryPort.buscarPorEmail`) y validar cantidad mínima, porcentaje y aceptación de la exención en el backend.
+- [x] Agregar manejadores de error 400/404 para cuerpos inválidos y recursos no encontrados; registrar el cliente seed `comprador@test.com` en `data.sql`.
+- [x] Crear `src/app/modelos/pedido.model.ts` y `src/app/servicios/pedido.service.ts` con `crearPedido`, `cancelarPedido`, `procesarPago` y los DTOs exactos del backend.
+- [x] Implementar `src/app/componentes/pedidos/` con `FormArray` de ejemplares, selección de exención, porcentaje condicional, aceptación obligatoria y confirmación con vivero y total.
+- [x] Precargar el ejemplar desde `queryParam` y navegar desde el catálogo a `/pedidos`; proteger la ruta con `authGuard` y agregar “Mis Pedidos” al navbar.
+- [x] Traducir errores HTTP 400, 403, 404, 422 y 0 a mensajes de dominio visibles en pantalla y con `AvisoService`.
+- [x] Verificar `npm run build`, `.\gradlew.bat test` y flujo real de creación de pedido autenticado como `COMPRADOR`.
+
+**Verificación:** `POST /api/pedidos` responde 201 con `idPedido`, `estado`, `total`, `idVivero` y `nombreVivero`; responde 400 para porcentaje fuera de rango, cantidad 0 o exención sin aceptar.
+
+### Tarea 4.2 — Servicio y vista protegida `/inventario-vivero`
+**Rama sugerida:** `feature/operacion-negocio`
+**Criterios cubiertos:** Frontend Conectado al Backend + Interfaz de usuario + Seguridad (rol VENDEDOR/ADMIN)
+
+- [x] Crear `src/app/modelos/inventario.model.ts` con `ActualizarEstadoSaludRequest` y `ActualizarEstadoSaludResponse`, alineados al backend.
+- [x] Crear `src/app/servicios/inventario.service.ts` con `actualizarEstadoSalud(idEjemplar, request)` contra `PUT /api/inventario/ejemplar/{id}/estado-salud`.
+- [x] Implementar `src/app/componentes/inventario-vivero/` con formulario reactivo de ID y estado (`SANO`, `EN_RECUPERACION`, `CON_PLAGA`, `MARCHITO`), validaciones, estado de carga y confirmación con disponibilidad.
+- [x] Traducir errores HTTP 400, 403, 404, 422 y 0 a mensajes de dominio visibles en pantalla y con `AvisoService`.
+- [x] Registrar la ruta `/inventario-vivero` con `[authGuard, rolGuard(['VENDEDOR', 'ADMIN'])]`; el guard normaliza `VENDEDOR` a la autoridad real `VENDEDOR_VIVERO` y el navbar muestra “Gestión de Vivero” solo para vendedor o administrador.
+- [x] Verificar `npm run build`, `.\gradlew.bat test` y flujo real: VENDEDOR_VIVERO actualiza estado con 200, COMPRADOR recibe 403, ejemplar inexistente 404 y estado inválido 400.
+
+**Verificación:** `PUT /api/inventario/ejemplar/{id}/estado-salud` responde 200 con `idEjemplar`, `estadoSalud`, `disponibleParaVenta` y `mensaje`; `MARCHITO` y `CON_PLAGA` retiran el ejemplar de la venta.

@@ -21,7 +21,8 @@ INSERT INTO clientes (id, nombre, email, telefono, direccion_calle, direccion_ci
 ('cliente-004', 'Luis Fernández', 'luis.fernandez@email.com', '3004445566', 'Calle 80 #12-30', 'Bogotá', 'Cundinamarca', '110112', 'Colombia', 4.7150, -74.0700, 'vivero-004', false),
 ('cliente-005', 'Sofía Herrera', 'sofia.herrera@email.com', '3005556677', 'Carrera 25 #8-15', 'Cali', 'Valle del Cauca', '760002', 'Colombia', 3.4550, -76.5300, 'vivero-005', false),
 ('cliente-006', 'Jorge López', 'jorge.lopez@email.com', '3006667788', 'Calle 12 #5-50', 'Armenia', 'Quindío', '630003', 'Colombia', 4.5300, -75.6850, 'vivero-001', false),
-('cliente-007', 'Paula Jiménez', 'paula.jimenez@email.com', '3007778899', 'Carrera 30 #20-10', 'Pereira', 'Risaralda', '660003', 'Colombia', 4.8100, -75.7000, 'vivero-002', false);
+('cliente-007', 'Paula Jiménez', 'paula.jimenez@email.com', '3007778899', 'Carrera 30 #20-10', 'Pereira', 'Risaralda', '660003', 'Colombia', 4.8100, -75.7000, 'vivero-002', false),
+('cliente-008', 'Comprador Test', 'comprador@test.com', '3008889900', 'Calle 1 #2-3', 'Armenia', 'Quindío', '630001', 'Colombia', 4.5350, -75.6800, 'vivero-001', false);
 
 -- ============================================
 -- USUARIOS (para autenticación JWT)

@@ -2,18 +2,30 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { CrearPedidoRequest, CancelarPedidoRequest, PedidoResponse } from '../modelos/pedido.model';
+import {
+  CancelarPedidoRequest,
+  CancelarPedidoResponse,
+  CrearPedidoRequest,
+  CrearPedidoResponse,
+  ProcesarCompraRequest,
+  ProcesarCompraResponse,
+} from '../modelos/pedido.model';
 
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = `${environment.apiUrl}/pedidos`;
+  private readonly pagosUrl = `${environment.apiUrl}/pagos`;
 
-  crearPedido(request: CrearPedidoRequest): Observable<PedidoResponse> {
-    return this.http.post<PedidoResponse>(this.apiUrl, request);
+  crearPedido(request: CrearPedidoRequest): Observable<CrearPedidoResponse> {
+    return this.http.post<CrearPedidoResponse>(this.apiUrl, request);
   }
 
-  cancelarPedido(request: CancelarPedidoRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/cancelar`, request);
+  cancelarPedido(request: CancelarPedidoRequest): Observable<CancelarPedidoResponse> {
+    return this.http.post<CancelarPedidoResponse>(`${this.apiUrl}/cancelar`, request);
+  }
+
+  procesarPago(request: ProcesarCompraRequest): Observable<ProcesarCompraResponse> {
+    return this.http.post<ProcesarCompraResponse>(`${this.pagosUrl}/procesar`, request);
   }
 }

@@ -55,6 +55,21 @@
             >
           </li>
         } @else {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/pedidos" routerLinkActive="active"
+              >Mis Pedidos</a
+            >
+          </li>
+          @if (tieneAccesoVivero()) {
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/inventario-vivero"
+                routerLinkActive="active"
+                >Gestión de Vivero</a
+              >
+            </li>
+          }
           <li class="nav-item ms-lg-3">
             <span class="nav-link small d-inline-flex align-items-center gap-2">
               <i class="bi bi-person-circle"></i>

@@ -1,5 +1,6 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CatalogoService } from '../../servicios/catalogo.service';
 import { AvisoService } from '../../servicios/aviso.service';
@@ -19,6 +20,7 @@ import {
 export class Catalogo {
   private readonly catalogoService = inject(CatalogoService);
   private readonly avisoService = inject(AvisoService);
+  private readonly router = inject(Router);
 
   protected readonly etapas: { valor: EtapaCrecimiento; etiqueta: string }[] = [
     { valor: 'PLANTULA', etiqueta: 'Plántula en desarrollo' },
@@ -133,9 +135,12 @@ export class Catalogo {
   }
 
   protected iniciarPedido(ejemplar: PlantaBusquedaDTO): void {
-    this.avisoService.mostrarInfo(
-      `Ejemplar "${ejemplar.especieNombreComun}" seleccionado para iniciar tu pedido.`,
-    );
+    this.router.navigate(['/pedidos'], {
+      queryParams: {
+        ejemplarId: ejemplar.ejemplarId,
+        precio: ejemplar.precio ?? 0,
+      },
+    });
   }
 
   private aNumeroOpcional(valor: string): number | null {

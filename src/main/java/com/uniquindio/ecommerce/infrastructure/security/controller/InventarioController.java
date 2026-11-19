@@ -5,15 +5,14 @@ import com.uniquindio.ecommerce.application.ports.input.ActualizarEstadoSaludUse
 import com.uniquindio.ecommerce.domain.ejemplar.Ejemplar;
 import com.uniquindio.ecommerce.infrastructure.security.dto.ActualizarEstadoSaludRequest;
 import com.uniquindio.ecommerce.infrastructure.security.dto.ActualizarEstadoSaludResponse;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 @RequestMapping("/api/inventario")
 public class InventarioController {

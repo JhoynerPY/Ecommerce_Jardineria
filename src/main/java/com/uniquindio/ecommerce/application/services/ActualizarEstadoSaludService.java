@@ -3,6 +3,7 @@ package com.uniquindio.ecommerce.application.services;
 import com.uniquindio.ecommerce.application.dto.ActualizarEstadoSaludCommand;
 import com.uniquindio.ecommerce.application.ports.input.ActualizarEstadoSaludUseCase;
 import com.uniquindio.ecommerce.application.ports.output.EjemplarRepositoryPort;
+import com.uniquindio.ecommerce.domain.common.RecursoNoEncontradoException;
 import com.uniquindio.ecommerce.domain.common.ReglaDominioException;
 import com.uniquindio.ecommerce.domain.ejemplar.Ejemplar;
 import com.uniquindio.ecommerce.domain.ejemplar.EstadoDeSalud;
@@ -18,7 +19,7 @@ public class ActualizarEstadoSaludService implements ActualizarEstadoSaludUseCas
     @Override
     public Ejemplar actualizar(ActualizarEstadoSaludCommand command) {
         Ejemplar ejemplar = ejemplarRepositoryPort.buscarPorId(command.getIdEjemplar()).
-                orElseThrow(() -> new ReglaDominioException("Ejemplar no encontrado: " + command.getIdEjemplar()));
+                orElseThrow(() -> new RecursoNoEncontradoException("Ejemplar no encontrado: " + command.getIdEjemplar()));
 
         try {
             EstadoDeSalud nuevoEstado = EstadoDeSalud.valueOf(command.getNuevoEstado().toUpperCase());

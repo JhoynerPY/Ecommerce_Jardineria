@@ -4,8 +4,10 @@ import { Login } from './componentes/login/login';
 import { Registro } from './componentes/registro/registro';
 import { Catalogo } from './componentes/catalogo/catalogo';
 import { Pedidos } from './componentes/pedidos/pedidos'; 
+import { InventarioVivero } from './componentes/inventario-vivero/inventario-vivero';
 import { noAuthGuard } from './guards/no-auth.guard';
 import { authGuard } from './guards/auth.guard'; 
+import { rolGuard } from './guards/rol.guard';
 
 export const routes: Routes = [
   { path: '', component: Inicio },
@@ -13,5 +15,10 @@ export const routes: Routes = [
   { path: 'registro', component: Registro, canActivate: [noAuthGuard] },
   { path: 'catalogo', component: Catalogo },
   { path: 'pedidos', component: Pedidos, canActivate: [authGuard] }, // nueva ruta de pedidos
+  {
+    path: 'inventario-vivero',
+    component: InventarioVivero,
+    canActivate: [authGuard, rolGuard(['VENDEDOR', 'ADMIN'])],
+  },
   { path: '**', pathMatch: 'full', redirectTo: '' },
 ];

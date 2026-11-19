@@ -4,11 +4,11 @@ import com.uniquindio.ecommerce.application.dto.ProcesarCompraCommand;
 import com.uniquindio.ecommerce.application.ports.input.ProcesarCompraUseCase;
 import com.uniquindio.ecommerce.domain.pedido.Pedido;
 import com.uniquindio.ecommerce.infrastructure.security.dto.ProcesarCompraRequest;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

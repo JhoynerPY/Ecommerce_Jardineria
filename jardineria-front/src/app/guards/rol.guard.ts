@@ -3,8 +3,10 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
 import { AvisoService } from '../servicios/aviso.service';
 
-const normalizarRol = (rol: string): string =>
-  rol.replace(/^ROLE_/i, '').toUpperCase();
+const normalizarRol = (rol: string): string => {
+  const limpio = rol.replace(/^ROLE_/i, '').toUpperCase();
+  return limpio === 'VENDEDOR' ? 'VENDEDOR_VIVERO' : limpio;
+};
 
 export const rolGuard = (rolesPermitidos: string[]): CanActivateFn => {
   return () => {
