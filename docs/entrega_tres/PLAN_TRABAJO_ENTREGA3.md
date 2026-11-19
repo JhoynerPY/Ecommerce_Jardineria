@@ -66,3 +66,18 @@
 > "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: reemplaza `src/app/app.html` por un layout profesional con navbar en Verde Bosque (#234E36), botón hamburguesa, enlaces routerLink a /, /catalogo, /kits, /login, /registro; main con router-outlet y footer con 'Universidad del Quindío - Programación Avanzada'. Actualiza `src/app/app.ts` importando RouterOutlet, RouterLink, RouterLinkActive y usando signal para título y footer. Maqueta `src/app/componentes/inicio/inicio.html` e `inicio.css` con Bootstrap 5 (row, col-md-*, card, shadow-sm, rounded-3, btn) sobre intermediación con Viveros locales cercanos, Ficha de Cuidado garantizada y alertas de Riesgo de toxicidad para mascotas/niños. Cero palabras prohibidas. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 1.2 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 2.1 — Servicio y componente de avisos globales en `jardineria-front/`
+**Rama sugerida:** `feature/avisos-globales`
+**Criterios cubiertos:** Frontend Conectado al Backend + Interfaz de usuario
+
+- [x] Crear `src/app/servicios/aviso.service.ts` con `signal<Aviso[]>` para mantener avisos con tipo (`success | danger | warning | info`) y mensaje, métodos `mostrarExito(msg)`, `mostrarError(msg)`, `mostrarInfo(msg)` y `cerrar(id)`, y desaparición automática tras 4 segundos (`setTimeout`).
+- [x] Crear componente standalone `src/app/componentes/avisos/` (`avisos.ts`, `avisos.html`, `avisos.css`, sin sufijo `.component`) que renderice alertas flotantes de Bootstrap (`alert`, `shadow`, `position-fixed top-0 end-0 m-3`) usando `@if` y `@for`, con botón de cierre manual.
+- [x] Insertar `<app-avisos />` en `src/app/app.html` para disponibilidad global en la SPA.
+- [x] Registrar `Avisos` en los `imports` de `src/app/app.ts`.
+- [x] Verificar compilación con `npm run build`.
+
+**Prompt para el Agente:**
+> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: crea `src/app/servicios/aviso.service.ts` usando signal para una lista de avisos con tipo (success | danger | warning | info) y mensaje, e incluye métodos mostrarExito(msg), mostrarError(msg), mostrarInfo(msg) y cerrar(id) que desaparezcan automáticamente tras 4 segundos. Crea el componente standalone `src/app/componentes/avisos/` (avisos.ts, avisos.html, avisos.css, sin sufijo .component) que renderice alertas flotantes de Bootstrap (alert, shadow, position-fixed top-0 end-0 m-3) usando @if y @for con botón de cierre manual. Inserta `<app-avisos />` en `src/app/app.html` para que esté disponible globalmente en la SPA y regístralo en los imports de `src/app/app.ts`. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 2.1 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
+
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
