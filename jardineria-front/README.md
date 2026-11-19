@@ -33,11 +33,16 @@ npm run build
 
 | Correo | Contraseña | Rol |
 |---|---|---|
+| `admin@raizlocal.com` | `Admin123*` | `ADMIN` |
+| `vendedor@raizlocal.com` | `Vendedor123*` | `VENDEDOR_VIVERO` |
+| `comprador@raizlocal.com` | `Comprador123*` | `COMPRADOR` |
 | `comprador@test.com` | `password123` | `COMPRADOR` |
 | `vendedor@test.com` | `password123` | `VENDEDOR_VIVERO` |
 | `admin@test.com` | `password123` | `ADMIN` (+ `COMPRADOR`, `VENDEDOR_VIVERO`) |
 | `maria.gonzalez@email.com` | `password123` | `COMPRADOR` |
 | `contacto@eljardin.com` | `password123` | `VENDEDOR_VIVERO` |
+
+> Para levantar todo el ecosistema desde la raíz: `.\start-all.ps1` o `./start-all.sh`. Para detenerlo: `.\stop-all.ps1` o `./stop-all.sh`.
 
 ## Pantallas y rutas
 
@@ -49,6 +54,7 @@ npm run build
 | `/catalogo` | Catálogo de ejemplares | Pública |
 | `/pedidos` | Mis pedidos / crear pedido | Privada (`authGuard`) |
 | `/kits` | Configurador de kits de jardinería | Privada (`authGuard`) |
+| `/perfil` | Mi perfil, pedidos y kits guardados | Privada (`authGuard`) |
 | `/inventario-vivero` | Gestión de vivero / estado de salud | `VENDEDOR_VIVERO` / `ADMIN` |
 | `**` | Redirección a inicio | — |
 

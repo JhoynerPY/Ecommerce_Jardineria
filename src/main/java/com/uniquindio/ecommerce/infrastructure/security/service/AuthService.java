@@ -1,5 +1,9 @@
 package com.uniquindio.ecommerce.infrastructure.security.service;
 
+import com.uniquindio.ecommerce.application.ports.output.ClienteRepositoryPort;
+import com.uniquindio.ecommerce.domain.cliente.Cliente;
+import com.uniquindio.ecommerce.domain.cliente.Email;
+import com.uniquindio.ecommerce.domain.common.Direccion;
 import com.uniquindio.ecommerce.infrastructure.security.dto.AuthResponse;
 import com.uniquindio.ecommerce.infrastructure.security.dto.LoginRequest;
 import com.uniquindio.ecommerce.infrastructure.security.dto.RegisterRequest;
@@ -27,6 +31,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+    private final ClienteRepositoryPort clienteRepositoryPort;
 
     @Transactional
     public AuthResponse registrar(RegisterRequest request) {
@@ -48,6 +53,7 @@ public class AuthService {
                 .build();
 
         usuarioRepository.save(usuario);
+        sincronizarClienteSiEsComprador(usuario);
 
         String token = jwtUtil.generateToken(usuario);
         return AuthResponse.builder()
@@ -58,6 +64,7 @@ public class AuthService {
                 .build();
     }
 
+    @Transactional
     public AuthResponse login(LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
@@ -65,6 +72,7 @@ public class AuthService {
 
         UsuarioEntity usuario = usuarioRepository.findByEmailAndDeletedFalse(request.getEmail())
                 .orElseThrow(() -> new ReglaDominioException("Usuario no encontrado"));
+        sincronizarClienteSiEsComprador(usuario);
 
         String token = jwtUtil.generateToken(usuario);
         return AuthResponse.builder()
@@ -73,5 +81,24 @@ public class AuthService {
                 .nombre(usuario.getNombre())
                 .roles(usuario.getRoles())
                 .build();
+    }
+
+    private void sincronizarClienteSiEsComprador(UsuarioEntity usuario) {
+        if (usuario.getRoles() == null || !usuario.getRoles().contains("COMPRADOR")) {
+            return;
+        }
+        if (clienteRepositoryPort.existePorEmail(usuario.getEmail())) {
+            return;
+        }
+
+        Cliente cliente = Cliente.registrar(
+                UUID.randomUUID().toString(),
+                usuario.getNombre(),
+                new Email(usuario.getEmail()),
+                "3000000000",
+                Direccion.de("Calle 1 #2-3", "Armenia", "Quindío", "630001", "Colombia", 4.5350, -75.6800)
+        );
+        cliente.asignarVivero("vivero-001");
+        clienteRepositoryPort.guardar(cliente);
     }
 }

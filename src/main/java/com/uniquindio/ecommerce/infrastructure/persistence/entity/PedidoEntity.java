@@ -2,6 +2,7 @@ package com.uniquindio.ecommerce.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,9 @@ public class PedidoEntity {
 
     @Column(name = "direccion_entrega", nullable = false, length = 500)
     private String direccionEntrega;
+
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
 
     @Embedded
     @AttributeOverrides({

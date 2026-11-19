@@ -149,10 +149,11 @@ Requisitos: **Java 21** y Gradle (usar el wrapper incluido).
 
 **Opción B — MariaDB 11 con Docker**
 ```bash
-docker run --name jardineria-mariadb \
+docker run --name mariadb-jardineria \
   -e MARIADB_ROOT_PASSWORD=root \
   -e MARIADB_DATABASE=jardineria_db \
   -p 3307:3306 \
+  -v mariadb-jardineria-data:/var/lib/mysql \
   -d mariadb:11
 
 # Windows PowerShell
@@ -226,6 +227,41 @@ Programación Avanzada — Universidad del Quindío.
 
 ### Cómo ejecutar el proyecto completo
 
+#### 🚀 Ejecución Rápida (Todo en Uno: MariaDB + Backend + Frontend)
+
+**Windows PowerShell**
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\start-all.ps1
+```
+
+**macOS / Linux**
+```bash
+chmod +x start-all.sh stop-all.sh
+./start-all.sh
+```
+
+Los scripts verifican Docker, levantan MariaDB 11 en el puerto `3307`, inician el backend con el perfil `mariadb` en `8080`, cargan `data.sql` solo si la base está vacía y arrancan Angular en `4200`.
+
+Si el frontend está en otra ruta:
+```powershell
+$env:FRONTEND_DIR = "C:\ruta\al\frontend"
+.\start-all.ps1
+```
+```bash
+FRONTEND_DIR=/ruta/al/frontend ./start-all.sh
+```
+
+Para detener todo (backend, frontend y contenedor MariaDB):
+```powershell
+.\stop-all.ps1
+```
+```bash
+./stop-all.sh
+```
+
+URLs: Frontend `http://localhost:4200`, Backend `http://localhost:8080`, Swagger `http://localhost:8080/swagger-ui.html`.
+
 **1. Backend (raíz del repositorio)**
 
 ```bash
@@ -233,10 +269,11 @@ Programación Avanzada — Universidad del Quindío.
 .\gradlew.bat bootRun
 
 # MariaDB 11 con Docker
-docker run --name jardineria-mariadb \
+docker run --name mariadb-jardineria \
   -e MARIADB_ROOT_PASSWORD=root \
   -e MARIADB_DATABASE=jardineria_db \
   -p 3307:3306 \
+  -v mariadb-jardineria-data:/var/lib/mysql \
   -d mariadb:11
 .\gradlew.bat bootRun --args=--spring.profiles.active=mariadb
 ```
@@ -255,13 +292,16 @@ Abrir `http://localhost:4200`. El backend debe estar corriendo en `http://localh
 
 | Correo | Contraseña | Rol |
 |---|---|---|
+| `admin@raizlocal.com` | `Admin123*` | `ADMIN` |
+| `vendedor@raizlocal.com` | `Vendedor123*` | `VENDEDOR_VIVERO` |
+| `comprador@raizlocal.com` | `Comprador123*` | `COMPRADOR` |
 | `comprador@test.com` | `password123` | `COMPRADOR` |
 | `vendedor@test.com` | `password123` | `VENDEDOR_VIVERO` |
 | `admin@test.com` | `password123` | `ADMIN` (+ `COMPRADOR`, `VENDEDOR_VIVERO`) |
 | `maria.gonzalez@email.com` | `password123` | `COMPRADOR` |
 | `contacto@eljardin.com` | `password123` | `VENDEDOR_VIVERO` |
 
-> En el código el rol de vendedor es `VENDEDOR_VIVERO`; la rúbrica lo abrevia como `VENDEDOR`.
+> En el código el rol de vendedor es `VENDEDOR_VIVERO`; la rúbrica lo abrevia como `VENDEDOR`. Los tres primeros usuarios son creados por `DataInitializer` con contraseñas cifradas mediante `PasswordEncoder`.
 
 ### Pantallas y rutas de Angular
 
@@ -273,6 +313,7 @@ Abrir `http://localhost:4200`. El backend debe estar corriendo en `http://localh
 | `/catalogo` | Catálogo de ejemplares | Pública |
 | `/pedidos` | Mis pedidos / crear pedido | Privada (`authGuard`) |
 | `/kits` | Configurador de kits de jardinería | Privada (`authGuard`) |
+| `/perfil` | Mi perfil, pedidos y kits guardados | Privada (`authGuard`) |
 | `/inventario-vivero` | Gestión de vivero / estado de salud | Privada por rol (`VENDEDOR_VIVERO` / `ADMIN`) |
 | `**` | Redirección a inicio | — |
 
@@ -282,7 +323,7 @@ Abrir `http://localhost:4200`. El backend debe estar corriendo en `http://localh
 - Catálogo paginado con filtros y búsqueda contra el backend.
 - Creación de pedidos con exención de responsabilidad y validaciones.
 - Panel de vendedor para actualizar `EstadoDeSalud` de ejemplares.
-- Configurador de kits con selección de artículos, cálculo en vivo, validación de maceta compatible, nombre y persistencia real.
+- Configurador de kits con selección múltiple de ArticuloKit, cantidades, cálculo en vivo, descuento y persistencia real.
 - Perfil MariaDB listo para Docker; perfil por defecto H2 intacto para desarrollo y pruebas.
 
 ---

@@ -17,4 +17,5 @@ public class PlantaBusquedaDTO {
     private Boolean disponible;
     private String viveroNombre;
     private String viveroId;
+    private String nivelRiesgo;
 }

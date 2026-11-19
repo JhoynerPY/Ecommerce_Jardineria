@@ -1,25 +1,49 @@
 package com.uniquindio.ecommerce.domain.kit;
 
 import com.uniquindio.ecommerce.domain.common.ReglaDominioException;
+
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 public class KitJardineria {
     private final String idKit;
-    private final ArticuloKit planta;
-    private ArticuloKit maceta;
-    private final ArticuloKit sustrato;
+    private final List<ArticuloKitSeleccionado> articulos;
     private final String nombreKit;
+    private final String idCliente;
     private static final double DESCUENTO_PAQUETE = 0.15;
 
-
-    private KitJardineria(String idKit, ArticuloKit planta, ArticuloKit maceta,
-                          ArticuloKit sustrato, String nombreKit) {
+    private KitJardineria(String idKit, List<ArticuloKitSeleccionado> articulos,
+                          String nombreKit, String idCliente) {
         this.idKit = idKit;
-        this.planta = planta;
-        this.maceta = maceta;
-        this.sustrato = sustrato;
+        this.articulos = articulos;
         this.nombreKit = nombreKit;
+        this.idCliente = idCliente;
+    }
+
+    public static KitJardineria crear(List<ArticuloKitSeleccionado> articulos, String nombreKit) {
+        return crear(articulos, nombreKit, null);
+    }
+
+    public static KitJardineria crear(List<ArticuloKitSeleccionado> articulos, String nombreKit,
+                                      String idCliente) {
+        if (articulos == null || articulos.isEmpty()) {
+            throw new ReglaDominioException("El KitJardineria debe contener al menos un ArticuloKit.");
+        }
+
+        Set<String> identificadores = new HashSet<>();
+        for (ArticuloKitSeleccionado seleccionado : articulos) {
+            if (seleccionado == null || seleccionado.articulo() == null) {
+                throw new ReglaDominioException("Todos los ArticuloKit del kit son obligatorios.");
+            }
+            if (!identificadores.add(seleccionado.articulo().getId())) {
+                throw new ReglaDominioException("No se puede repetir el mismo ArticuloKit en un KitJardineria.");
+            }
+        }
+
+        return new KitJardineria(UUID.randomUUID().toString(), List.copyOf(articulos), nombreKit, idCliente);
     }
 
     public static KitJardineria crear(ArticuloKit planta, ArticuloKit maceta, ArticuloKit sustrato) {
@@ -28,48 +52,45 @@ public class KitJardineria {
 
     public static KitJardineria crear(ArticuloKit planta, ArticuloKit maceta,
                                       ArticuloKit sustrato, String nombreKit) {
-        // Invariante 1: Un kit requiere estrictamente los 3 elementos bases
         if (planta == null || maceta == null || sustrato == null) {
-            throw new ReglaDominioException("El kit debe contener una planta, una maceta y un sustrato.");
+            throw new ReglaDominioException("El KitJardineria debe contener una planta, una maceta y un sustrato.");
         }
 
-        // Invariante 2: La maceta debe ser al menos igual o más grande que la planta
-        if (!esMacetaCompatible(planta, maceta)) {
+        if (maceta.getDiametro() < planta.getDiametro()) {
             throw new ReglaDominioException("La maceta seleccionada no es compatible con las dimensiones de la planta.");
         }
 
-        return new KitJardineria(UUID.randomUUID().toString(), planta, maceta, sustrato, nombreKit);
+        return crear(List.of(
+                new ArticuloKitSeleccionado(planta, 1),
+                new ArticuloKitSeleccionado(maceta, 1),
+                new ArticuloKitSeleccionado(sustrato, 1)
+        ), nombreKit);
     }
 
-    private static boolean esMacetaCompatible(ArticuloKit planta, ArticuloKit maceta) {
-        return maceta.getDiametro() >= planta.getDiametro();
+    public static KitJardineria restaurar(String idKit, List<ArticuloKitSeleccionado> articulos,
+                                          String nombreKit, String idCliente) {
+        return new KitJardineria(idKit, List.copyOf(articulos), nombreKit, idCliente);
+    }
+
+    public double calcularSubtotal() {
+        return articulos.stream()
+                .mapToDouble(seleccionado -> seleccionado.articulo().getPrecio().getValor() * seleccionado.cantidad())
+                .sum();
+    }
+
+    public double calcularDescuento() {
+        return calcularSubtotal() * DESCUENTO_PAQUETE;
     }
 
     public double calcularPrecioTotal() {
-        double subtotal = planta.getPrecio().getValor() +
-                maceta.getPrecio().getValor() +
-                sustrato.getPrecio().getValor();
-        return subtotal - (subtotal * DESCUENTO_PAQUETE);
-    }
-
-    public void cambiarMaceta(ArticuloKit nuevaMaceta) {
-        // Invariante 3: No se puede dejar el kit sin maceta ni poner una incompatible
-        if (nuevaMaceta == null) {
-            throw new ReglaDominioException("La nueva maceta no puede ser nula.");
-        }
-        if (nuevaMaceta.getDiametro() < planta.getDiametro()) {
-            throw new ReglaDominioException("La maceta es muy pequeña para la planta actual.");
-        }
-        this.maceta = nuevaMaceta;
+        return calcularSubtotal() - calcularDescuento();
     }
 
     public String getIdKit() { return idKit; }
-    public ArticuloKit getPlanta() { return planta; }
-    public ArticuloKit getMaceta() { return maceta; }
-    public ArticuloKit getSustrato() { return sustrato; }
+    public List<ArticuloKitSeleccionado> getArticulos() { return articulos; }
     public String getNombreKit() { return nombreKit; }
+    public String getIdCliente() { return idCliente; }
 
-    // equals/hashCode por identidad
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -6,6 +6,7 @@ import com.uniquindio.ecommerce.infrastructure.persistence.entity.PedidoEntity;
 import com.uniquindio.ecommerce.infrastructure.persistence.mapper.JpaMapper;
 import com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.PedidoJpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -28,5 +29,12 @@ public class PedidoRepositoryAdapter implements PedidoRepositoryPort {
     public Optional<Pedido> buscarPorId(String idPedido) {
         return jpaRepository.findByIdAndDeletedFalse(idPedido)
                 .map(JpaMapper::toDomain);
+    }
+
+    @Override
+    public List<Pedido> buscarPorClienteId(String idCliente) {
+        return jpaRepository.findByIdClienteAndDeletedFalse(idCliente).stream()
+                .map(JpaMapper::toDomain)
+                .toList();
     }
 }

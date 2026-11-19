@@ -10,6 +10,7 @@ import {
   ProcesarCompraRequest,
   ProcesarCompraResponse,
 } from '../modelos/pedido.model';
+import { PedidoResumenResponse } from '../modelos/perfil.model';
 
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
@@ -19,6 +20,10 @@ export class PedidoService {
 
   crearPedido(request: CrearPedidoRequest): Observable<CrearPedidoResponse> {
     return this.http.post<CrearPedidoResponse>(this.apiUrl, request);
+  }
+
+  listarMios(): Observable<PedidoResumenResponse[]> {
+    return this.http.get<PedidoResumenResponse[]>(`${this.apiUrl}/mios`);
   }
 
   cancelarPedido(request: CancelarPedidoRequest): Observable<CancelarPedidoResponse> {

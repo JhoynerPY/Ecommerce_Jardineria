@@ -2,312 +2,341 @@
   <div class="row g-4">
     <div class="col-lg-8">
       <span class="badge badge-terracota mb-3">Configurador de kits</span>
-      <h1 class="h3 fw-bold text-success mb-2">Arma tu kit de jardinería</h1>
+      <h1 class="h3 fw-bold text-success mb-2">KitJardineria</h1>
       <p class="text-muted mb-4">
-        Selecciona una planta, una maceta compatible y un sustrato. El resumen y
-        el descuento se calculan en tiempo real.
+        Elige un kit preconfigurado o personaliza el tuyo con los ArticuloKit del
+        vivero. El carrito conserva todo mientras exploras.
       </p>
 
-      <div class="card shadow-sm border-0 rounded-4 mb-4">
-        <div class="card-body p-3 p-md-4">
-          <label class="form-label fw-semibold mb-2" for="nombreKit">
-            Nombre del kit
-          </label>
-          <input
-            id="nombreKit"
-            type="text"
-            class="form-control"
-            [value]="nombreKit()"
-            (input)="actualizarNombre($event)"
-            placeholder="Ej: Kit de aromáticas para balcón"
-            maxlength="80"
-          />
-          <p class="form-text mb-0">
-            El nombre se guarda junto con los artículos y el precio del kit.
-          </p>
-        </div>
-      </div>
+      <ul class="nav nav-tabs mb-4" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            type="button"
+            class="nav-link"
+            [class.active]="pestana() === 'listos'"
+            (click)="cambiarPestana('listos')"
+          >
+            Elegir Kit Listo
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            type="button"
+            class="nav-link"
+            [class.active]="pestana() === 'personalizar'"
+            (click)="cambiarPestana('personalizar')"
+          >
+            Personalizar mi Kit
+          </button>
+        </li>
+      </ul>
 
-      @if (cargandoArticulos()) {
-        <div class="d-flex align-items-center gap-2 text-muted py-4">
-          <span class="spinner-border spinner-border-sm"></span>
-          Cargando artículos del vivero...
-        </div>
-      } @else if (articulos().length === 0) {
-        <div class="alert alert-warning">
-          No se encontraron artículos para armar kits.
-        </div>
-      } @else {
-        @if (plantas().length > 0) {
-          <div class="mb-4">
-            <h2 class="h5 fw-bold mb-3">
-              <i class="bi bi-flower1 me-2 text-success"></i>Plantas
-            </h2>
-            <div class="row row-cols-1 row-cols-md-2 g-3">
-              @for (articulo of plantas(); track articulo.id) {
-                <div class="col">
-                  <button
-                    type="button"
-                    class="card w-100 text-start border kit-card"
-                    [class.border-success]="esSeleccionado(articulo)"
-                    [class.bg-success-subtle]="esSeleccionado(articulo)"
-                    (click)="seleccionar(articulo)"
-                  >
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-start gap-2">
-                        <h3 class="h6 mb-1">{{ articulo.nombre }}</h3>
-                        @if (esSeleccionado(articulo)) {
-                          <span class="badge text-bg-success">Elegida</span>
-                        }
-                      </div>
-                      <p class="small text-muted mb-2">{{ articulo.id }}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span class="fw-semibold">
-                          {{ articulo.precio | number: '1.0-0' }} {{ articulo.moneda }}
-                        </span>
-                        @if (articulo.diametro > 0) {
-                          <span class="small text-muted">Ø {{ articulo.diametro }} cm</span>
-                        }
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              }
-            </div>
+      @if (pestana() === 'listos') {
+        @if (cargandoKits()) {
+          <div class="d-flex align-items-center gap-2 text-muted py-4">
+            <span class="spinner-border spinner-border-sm"></span>
+            Cargando kits disponibles...
           </div>
-        }
-
-        @if (macetas().length > 0) {
-          <div class="mb-4">
-            <h2 class="h5 fw-bold mb-3">
-              <i class="bi bi-bucket me-2 text-success"></i>Macetas
-            </h2>
-            <div class="row row-cols-1 row-cols-md-2 g-3">
-              @for (articulo of macetas(); track articulo.id) {
-                <div class="col">
-                  <button
-                    type="button"
-                    class="card w-100 text-start border kit-card"
-                    [class.border-success]="esSeleccionado(articulo)"
-                    [class.bg-success-subtle]="esSeleccionado(articulo)"
-                    (click)="seleccionar(articulo)"
-                  >
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-start gap-2">
-                        <h3 class="h6 mb-1">{{ articulo.nombre }}</h3>
-                        @if (esSeleccionado(articulo)) {
-                          <span class="badge text-bg-success">Elegida</span>
-                        }
-                      </div>
-                      <p class="small text-muted mb-2">{{ articulo.id }}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span class="fw-semibold">
-                          {{ articulo.precio | number: '1.0-0' }} {{ articulo.moneda }}
-                        </span>
-                        <span class="small text-muted">Ø {{ articulo.diametro }} cm</span>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              }
-            </div>
+        } @else if (kitsDisponibles().length === 0) {
+          <div class="alert alert-warning">
+            No hay KitJardineria preconfigurados disponibles.
           </div>
-        }
-
-        @if (sustratos().length > 0) {
-          <div class="mb-4">
-            <h2 class="h5 fw-bold mb-3">
-              <i class="bi bi-moisture me-2 text-success"></i>Sustratos
-            </h2>
-            <div class="row row-cols-1 row-cols-md-2 g-3">
-              @for (articulo of sustratos(); track articulo.id) {
-                <div class="col">
-                  <button
-                    type="button"
-                    class="card w-100 text-start border kit-card"
-                    [class.border-success]="esSeleccionado(articulo)"
-                    [class.bg-success-subtle]="esSeleccionado(articulo)"
-                    (click)="seleccionar(articulo)"
-                  >
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-start gap-2">
-                        <h3 class="h6 mb-1">{{ articulo.nombre }}</h3>
-                        @if (esSeleccionado(articulo)) {
-                          <span class="badge text-bg-success">Elegido</span>
-                        }
+        } @else {
+          <div class="row row-cols-1 row-cols-md-2 g-3">
+            @for (kit of kitsDisponibles(); track kit.idKit) {
+              <div class="col">
+                <div class="card h-100 shadow-sm border-0 rounded-4">
+                  <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                      <div>
+                        <h2 class="h6 mb-1">{{ kit.nombreKit || 'Kit sin nombre' }}</h2>
+                        <p class="small text-muted mb-0">{{ kit.idKit }}</p>
                       </div>
-                      <p class="small text-muted mb-2">{{ articulo.id }}</p>
-                      <span class="fw-semibold">
-                        {{ articulo.precio | number: '1.0-0' }} {{ articulo.moneda }}
+                      <span class="badge text-bg-success">
+                        {{ kit.precioTotal | number: '1.0-0' }} COP
                       </span>
                     </div>
-                  </button>
+
+                    <ul class="small text-muted mb-2">
+                      @for (articulo of kit.articulos; track articulo.id) {
+                        <li>{{ articulo.cantidad }} x {{ articulo.nombre }}</li>
+                      }
+                    </ul>
+
+                    <p class="small mb-3">
+                      Descuento: {{ kit.descuento | number: '1.0-0' }} COP
+                    </p>
+
+                    <button
+                      type="button"
+                      class="btn btn-success w-100 mt-auto"
+                      (click)="agregarKitAlCarrito(kit)"
+                    >
+                      <i class="bi bi-bag-plus me-2"></i>Añadir Kit al Carrito
+                    </button>
+                  </div>
                 </div>
-              }
-            </div>
+              </div>
+            }
           </div>
         }
+      } @else {
+        <div class="card shadow-sm border-0 rounded-4 mb-4">
+          <div class="card-body p-3 p-md-4">
+            <label class="form-label fw-semibold mb-2" for="nombreKit">
+              Nombre del kit
+            </label>
+            <input
+              id="nombreKit"
+              type="text"
+              class="form-control"
+              [value]="nombreKit()"
+              (input)="actualizarNombre($event)"
+              placeholder="Ej: Kit de aromáticas para balcón"
+              maxlength="80"
+            />
+            <p class="form-text mb-0">
+              El nombre se guarda junto con los ArticuloKit y el precio del kit.
+            </p>
+          </div>
+        </div>
 
-        @if (accesorios().length > 0) {
-          <div class="mb-4">
-            <h2 class="h5 fw-bold mb-3">
-              <i class="bi bi-droplet me-2 text-success"></i>Accesorios
-            </h2>
-            <div class="row row-cols-1 row-cols-md-2 g-3">
-              @for (articulo of accesorios(); track articulo.id) {
-                <div class="col">
-                  <div class="card w-100 border opacity-75">
-                    <div class="card-body">
-                      <h3 class="h6 mb-1">{{ articulo.nombre }}</h3>
-                      <p class="small text-muted mb-2">{{ articulo.id }}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span class="fw-semibold">
-                          {{ articulo.precio | number: '1.0-0' }} {{ articulo.moneda }}
+        @if (cargandoArticulos()) {
+          <div class="d-flex align-items-center gap-2 text-muted py-4">
+            <span class="spinner-border spinner-border-sm"></span>
+            Cargando ArticuloKit del vivero...
+          </div>
+        } @else if (articulos().length === 0) {
+          <div class="alert alert-warning">
+            No se encontraron ArticuloKit para armar kits.
+          </div>
+        } @else {
+          <div class="row row-cols-1 row-cols-md-2 g-3">
+            @for (articulo of articulos(); track articulo.id) {
+              <div class="col">
+                <div
+                  class="card h-100 kit-card"
+                  [class.border-success]="estaSeleccionado(articulo.id)"
+                  [class.bg-success-subtle]="estaSeleccionado(articulo.id)"
+                  role="button"
+                  tabindex="0"
+                  (click)="alternar(articulo)"
+                  (keydown.enter)="alternar(articulo)"
+                  (keydown.space)="$event.preventDefault(); alternar(articulo)"
+                >
+                  <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start gap-2">
+                      <div>
+                        <h2 class="h6 mb-1">{{ articulo.nombre }}</h2>
+                        <span class="badge text-bg-secondary">
+                          {{ articulo.tipo }}
                         </span>
-                        <span class="badge text-bg-secondary">No aplica al kit</span>
                       </div>
+                      @if (estaSeleccionado(articulo.id)) {
+                        <span class="badge text-bg-success">Agregado</span>
+                      }
+                    </div>
+
+                    <p class="small text-muted mb-2">{{ articulo.id }}</p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span class="fw-semibold">
+                        {{ articulo.precio | number: '1.0-0' }}
+                        {{ articulo.moneda }}
+                      </span>
+                      @if (articulo.diametro > 0) {
+                        <span class="small text-muted">Ø {{ articulo.diametro }} cm</span>
+                      }
+                    </div>
+
+                    <div class="mt-3">
+                      @if (estaSeleccionado(articulo.id)) {
+                        <div class="d-flex align-items-center gap-2">
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary btn-sm"
+                            (click)="$event.stopPropagation(); disminuir(articulo.id)"
+                            aria-label="Disminuir cantidad"
+                          >
+                            -
+                          </button>
+                          <span class="fw-semibold">
+                            {{ cantidadSeleccionada(articulo.id) }}
+                          </span>
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary btn-sm"
+                            (click)="$event.stopPropagation(); aumentar(articulo.id)"
+                            aria-label="Aumentar cantidad"
+                          >
+                            +
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline-danger btn-sm ms-auto"
+                            (click)="$event.stopPropagation(); quitar(articulo.id)"
+                          >
+                            Quitar
+                          </button>
+                        </div>
+                      } @else {
+                        <span class="small text-success">
+                          <i class="bi bi-plus-circle me-1"></i>Agregar
+                        </span>
+                      }
                     </div>
                   </div>
                 </div>
-              }
-            </div>
+              </div>
+            }
           </div>
         }
+
+        <div class="card shadow-sm border-0 rounded-4 mt-4">
+          <div class="card-body p-4">
+            <span class="badge badge-terracota mb-3">Resumen en vivo</span>
+            <h2 class="h5 fw-bold mb-3">Tu KitJardineria</h2>
+
+            @if (seleccionados().length === 0) {
+              <p class="small text-muted">
+                Aún no has agregado ArticuloKit al kit.
+              </p>
+            } @else {
+              <ul class="list-unstyled small mb-3">
+                @for (seleccionado of seleccionados(); track seleccionado.articulo.id) {
+                  <li class="d-flex justify-content-between gap-2 border-bottom py-2">
+                    <span class="text-muted">
+                      {{ seleccionado.cantidad }} x {{ seleccionado.articulo.nombre }}
+                    </span>
+                    <strong class="text-end">
+                      {{ (seleccionado.articulo.precio * seleccionado.cantidad) | number: '1.0-0' }} COP
+                    </strong>
+                  </li>
+                }
+              </ul>
+            }
+
+            <div class="border-top pt-3">
+              <div class="d-flex justify-content-between py-1">
+                <span class="text-muted">Subtotal</span>
+                <strong>{{ subtotal() | number: '1.0-0' }} COP</strong>
+              </div>
+              <div class="d-flex justify-content-between py-1 text-success">
+                <span>Descuento (15%)</span>
+                <strong>- {{ descuento() | number: '1.0-0' }} COP</strong>
+              </div>
+              <div class="d-flex justify-content-between align-items-center fs-5 border-top mt-2 pt-2">
+                <span>Total estimado</span>
+                <strong>{{ total() | number: '1.0-0' }} COP</strong>
+              </div>
+            </div>
+
+            @if (mensajeError()) {
+              <div class="alert alert-danger py-2 small mt-3">
+                {{ mensajeError() }}
+              </div>
+            }
+
+            <button
+              type="button"
+              class="btn btn-success w-100 py-2 fw-bold mt-3"
+              [disabled]="!kitValido() || cargando()"
+              (click)="guardar()"
+            >
+              @if (cargando()) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Guardando...
+              } @else {
+                <i class="bi bi-bag-check me-2"></i>Guardar y Añadir al Carrito
+              }
+            </button>
+          </div>
+        </div>
       }
+
+      <section class="mt-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h2 class="h4 fw-bold mb-0">Kits guardados</h2>
+          <button
+            type="button"
+            class="btn btn-outline-success btn-sm"
+            (click)="cargarKits()"
+            [disabled]="cargandoKits()"
+          >
+            <i class="bi bi-arrow-clockwise me-1"></i>Refrescar
+          </button>
+        </div>
+
+        @if (cargandoKits()) {
+          <div class="d-flex align-items-center gap-2 text-muted py-4">
+            <span class="spinner-border spinner-border-sm"></span>
+            Cargando kits guardados...
+          </div>
+        } @else if (kits().length === 0) {
+          <div class="alert alert-light border">
+            Aún no has guardado kits. Arma uno y aparecerá aquí.
+          </div>
+        } @else {
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            @for (kit of kits(); track kit.idKit) {
+              <div class="col">
+                <div class="card h-100 shadow-sm border-0 rounded-4">
+                  <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                      <div>
+                        <h3 class="h6 mb-1">{{ kit.nombreKit || 'Kit sin nombre' }}</h3>
+                        <p class="small text-muted mb-0">{{ kit.idKit }}</p>
+                      </div>
+                      <span class="badge text-bg-success">
+                        {{ kit.precioTotal | number: '1.0-0' }} COP
+                      </span>
+                    </div>
+                    <ul class="small text-muted mb-2">
+                      @for (articulo of kit.articulos; track articulo.id) {
+                        <li>{{ articulo.cantidad }} x {{ articulo.nombre }}</li>
+                      }
+                    </ul>
+                    <p class="small mb-3">
+                      Descuento: {{ kit.descuento | number: '1.0-0' }} COP
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-outline-success w-100 mt-auto"
+                      (click)="agregarKitAlCarrito(kit)"
+                    >
+                      <i class="bi bi-bag-plus me-2"></i>Añadir al Carrito
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </section>
     </div>
 
     <div class="col-lg-4">
       <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4">
-          <span class="badge badge-terracota mb-3">Resumen en vivo</span>
-          <h2 class="h5 fw-bold mb-3">Tu kit</h2>
-
-          <ul class="list-unstyled small mb-3">
-            <li class="d-flex justify-content-between gap-2 border-bottom py-2">
-              <span class="text-muted">Planta</span>
-              <strong class="text-end">{{ plantaSeleccionada()?.nombre || 'Sin seleccionar' }}</strong>
-            </li>
-            <li class="d-flex justify-content-between gap-2 border-bottom py-2">
-              <span class="text-muted">Maceta</span>
-              <strong class="text-end">{{ macetaSeleccionada()?.nombre || 'Sin seleccionar' }}</strong>
-            </li>
-            <li class="d-flex justify-content-between gap-2 border-bottom py-2">
-              <span class="text-muted">Sustrato</span>
-              <strong class="text-end">{{ sustratoSeleccionado()?.nombre || 'Sin seleccionar' }}</strong>
-            </li>
-          </ul>
-
-          @if (!macetaCompatible()) {
-            <div class="alert alert-warning py-2 small">
-              La maceta seleccionada es más pequeña que la planta. El backend
-              rechazará el kit.
-            </div>
-          }
-
-          <div class="border-top pt-3">
-            <div class="d-flex justify-content-between py-1">
-              <span class="text-muted">Subtotal</span>
-              <strong>{{ subtotal() | number: '1.0-0' }} COP</strong>
-            </div>
-            <div class="d-flex justify-content-between py-1 text-success">
-              <span>Descuento (15%)</span>
-              <strong>- {{ descuento() | number: '1.0-0' }} COP</strong>
-            </div>
-            <div class="d-flex justify-content-between align-items-center fs-5 border-top mt-2 pt-2">
-              <span>Total estimado</span>
-              <strong>{{ total() | number: '1.0-0' }} COP</strong>
-            </div>
+          <span class="badge badge-terracota mb-3">Carrito</span>
+          <h2 class="h5 fw-bold mb-3">Resumen general</h2>
+          <div class="d-flex justify-content-between py-1">
+            <span>Ejemplares</span>
+            <strong>{{ carritoService.subtotalEjemplares() | number: '1.0-0' }} COP</strong>
           </div>
-
-          @if (mensajeError()) {
-            <div class="alert alert-danger py-2 small mt-3">
-              {{ mensajeError() }}
-            </div>
-          }
-
-          <button
-            type="button"
-            class="btn btn-success w-100 py-2 fw-bold mt-3"
-            [disabled]="!kitCompleto() || !macetaCompatible() || cargando()"
-            (click)="guardar()"
-          >
-            @if (cargando()) {
-              <span class="spinner-border spinner-border-sm me-2"></span>
-              Guardando...
-            } @else {
-              <i class="bi bi-bag-check me-2"></i>Guardar kit
-            }
-          </button>
-
-          @if (ultimoKit(); as kit) {
-            <div class="alert alert-success mt-3 mb-0 py-3">
-              <h3 class="h6 fw-bold mb-2">
-                <i class="bi bi-check-circle me-2"></i>Kit guardado
-              </h3>
-              <p class="small mb-1">ID: <strong>{{ kit.idKit }}</strong></p>
-              <p class="small mb-1">
-                Nombre: <strong>{{ kit.nombreKit || 'Sin nombre' }}</strong>
-              </p>
-              <p class="small mb-0">
-                Total: <strong>{{ kit.precioTotal | number: '1.0-0' }} COP</strong>
-              </p>
-            </div>
-          }
+          <div class="d-flex justify-content-between py-1">
+            <span>Kits</span>
+            <strong>{{ carritoService.subtotalKits() | number: '1.0-0' }} COP</strong>
+          </div>
+          <div class="d-flex justify-content-between fs-5 border-top mt-2 pt-2">
+            <span>Total</span>
+            <strong>{{ carritoService.totalGeneral() | number: '1.0-0' }} COP</strong>
+          </div>
+          <a routerLink="/pedidos" class="btn btn-success w-100 mt-3">
+            Finalizar Pedido
+          </a>
         </div>
       </div>
     </div>
   </div>
-
-  <section class="mt-5">
-    <div class="d-flex align-items-center justify-content-between mb-3">
-      <h2 class="h4 fw-bold mb-0">Kits guardados</h2>
-      <button
-        type="button"
-        class="btn btn-outline-success btn-sm"
-        (click)="cargarKits()"
-        [disabled]="cargandoKits()"
-      >
-        <i class="bi bi-arrow-clockwise me-1"></i>Refrescar
-      </button>
-    </div>
-
-    @if (cargandoKits()) {
-      <div class="d-flex align-items-center gap-2 text-muted py-4">
-        <span class="spinner-border spinner-border-sm"></span>
-        Cargando kits guardados...
-      </div>
-    } @else if (kits().length === 0) {
-      <div class="alert alert-light border">
-        Aún no has guardado kits. Arma uno y aparecerá aquí.
-      </div>
-    } @else {
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        @for (kit of kits(); track kit.idKit) {
-          <div class="col">
-            <div class="card h-100 shadow-sm border-0 rounded-4">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                  <div>
-                    <h3 class="h6 mb-1">{{ kit.nombreKit || 'Kit sin nombre' }}</h3>
-                    <p class="small text-muted mb-0">{{ kit.idKit }}</p>
-                  </div>
-                  <span class="badge text-bg-success">
-                    {{ kit.precioTotal | number: '1.0-0' }} COP
-                  </span>
-                </div>
-                <ul class="small text-muted mb-2">
-                  <li>{{ kit.planta.nombre }}</li>
-                  <li>{{ kit.maceta.nombre }}</li>
-                  <li>{{ kit.sustrato.nombre }}</li>
-                </ul>
-                <p class="small mb-0">
-                  Descuento: {{ kit.descuento | number: '1.0-0' }} COP
-                </p>
-              </div>
-            </div>
-          </div>
-        }
-      </div>
-    }
-  </section>
 </section>

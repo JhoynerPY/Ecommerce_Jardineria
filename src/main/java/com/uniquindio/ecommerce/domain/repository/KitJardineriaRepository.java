@@ -8,4 +8,5 @@ public interface KitJardineriaRepository {
     Optional<KitJardineria> obtenerKitPorIdentificador(String id);
     void almacenarKit(KitJardineria kit);
     List<KitJardineria> obtenerKits();
+    List<KitJardineria> buscarPorClienteId(String idCliente);
 }

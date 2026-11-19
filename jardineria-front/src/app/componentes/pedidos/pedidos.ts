@@ -2,26 +2,20 @@ import { Component, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import {
   FormBuilder,
-  FormControl,
-  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PedidoService } from '../../servicios/pedido.service';
 import { AvisoService } from '../../servicios/aviso.service';
+import { CarritoService } from '../../servicios/carrito.service';
 import {
   CrearPedidoRequest,
   CrearPedidoResponse,
+  DetallePedidoRequest,
   TipoExencion,
 } from '../../modelos/pedido.model';
-
-interface DetalleForm {
-  idProducto: FormControl<string>;
-  cantidad: FormControl<number>;
-  precioUnitario: FormControl<number>;
-}
 
 @Component({
   standalone: true,
@@ -34,7 +28,7 @@ export class Pedidos {
   private readonly fb = inject(FormBuilder);
   private readonly pedidoService = inject(PedidoService);
   private readonly avisoService = inject(AvisoService);
-  private readonly route = inject(ActivatedRoute);
+  protected readonly carritoService = inject(CarritoService);
 
   protected readonly cargando = signal(false);
   protected readonly mensajeError = signal<string | null>(null);
@@ -51,7 +45,6 @@ export class Pedidos {
     ]),
     porcentajeExencion: this.fb.control<number | null>(null),
     aceptaExencion: this.fb.nonNullable.control(true),
-    detalles: this.fb.array([this.crearDetalle()]),
   });
 
   constructor() {
@@ -59,31 +52,10 @@ export class Pedidos {
       this.exencionSeleccionada.set(tipo);
       this.actualizarValidadoresExencion(tipo);
     });
-
-    this.route.queryParamMap.subscribe((params) => {
-      const ejemplarId = params.get('ejemplarId');
-      const precio = Number(params.get('precio'));
-
-      if (!ejemplarId) {
-        return;
-      }
-
-      this.detalles.at(0).patchValue({
-        idProducto: ejemplarId,
-        precioUnitario: Number.isFinite(precio) && precio > 0 ? precio : 0,
-      });
-      this.avisoService.mostrarInfo(
-        `Ejemplar ${ejemplarId} agregado al pedido.`,
-      );
-    });
   }
 
   protected get direccion() {
     return this.form.controls.direccion;
-  }
-
-  protected get detalles() {
-    return this.form.controls.detalles;
   }
 
   protected get porcentajeExencion() {
@@ -94,18 +66,14 @@ export class Pedidos {
     return this.form.controls.aceptaExencion;
   }
 
-  protected agregarDetalle(): void {
-    this.detalles.push(this.crearDetalle());
-  }
-
-  protected quitarDetalle(indice: number): void {
-    if (this.detalles.length > 1) {
-      this.detalles.removeAt(indice);
-    }
-  }
-
   protected enviar(): void {
     if (this.cargando()) {
+      return;
+    }
+
+    const detalles = this.construirDetalles();
+    if (detalles.length === 0) {
+      this.mensajeError.set('Agrega ejemplares o kits al carrito antes de finalizar.');
       return;
     }
 
@@ -123,11 +91,7 @@ export class Pedidos {
         : null;
 
     const request: CrearPedidoRequest = {
-      detalles: valores.detalles.map((detalle) => ({
-        idProducto: detalle.idProducto.trim(),
-        cantidad: Number(detalle.cantidad),
-        precioUnitario: Number(detalle.precioUnitario),
-      })),
+      detalles,
       direccion: valores.direccion.trim(),
       tipoExencion,
       porcentajeExencion: porcentaje,
@@ -145,6 +109,7 @@ export class Pedidos {
       next: (respuesta) => {
         this.respuesta.set(respuesta);
         this.cargando.set(false);
+        this.carritoService.vaciar();
         this.avisoService.mostrarExito(
           `Pedido creado exitosamente. ID: ${respuesta.idPedido}`,
         );
@@ -158,23 +123,22 @@ export class Pedidos {
     });
   }
 
-  private crearDetalle(
-    idProducto = '',
-    precioUnitario = 0,
-  ): FormGroup<DetalleForm> {
-    return this.fb.group<DetalleForm>({
-      idProducto: this.fb.nonNullable.control(idProducto, [
-        Validators.required,
-      ]),
-      cantidad: this.fb.nonNullable.control(1, [
-        Validators.required,
-        Validators.min(1),
-      ]),
-      precioUnitario: this.fb.nonNullable.control(precioUnitario, [
-        Validators.required,
-        Validators.min(0.01),
-      ]),
-    });
+  private construirDetalles(): DetallePedidoRequest[] {
+    const ejemplares: DetallePedidoRequest[] = this.carritoService.ejemplares().map(
+      (ejemplar) => ({
+        idProducto: ejemplar.ejemplarId,
+        cantidad: ejemplar.cantidad,
+        precioUnitario: ejemplar.precio,
+      }),
+    );
+
+    const kits: DetallePedidoRequest[] = this.carritoService.kits().map((kit) => ({
+      idProducto: kit.kitId,
+      cantidad: kit.cantidad,
+      precioUnitario: kit.precioConDescuento,
+    }));
+
+    return [...ejemplares, ...kits];
   }
 
   private actualizarValidadoresExencion(tipo: TipoExencion): void {

@@ -59,7 +59,8 @@ class AuthControllerIntegrationTest {
     @BeforeEach
     void setUp() throws Exception {
         // Limpiar y crear usuarios de prueba
-        usuarioRepository.deleteAll();
+        entityManager.createNativeQuery("DELETE FROM usuario_roles").executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM usuarios").executeUpdate();
         entityManager.flush();
 
         UsuarioEntity comprador = new UsuarioEntity();

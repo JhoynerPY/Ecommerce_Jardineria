@@ -5,6 +5,7 @@ import { Registro } from './componentes/registro/registro';
 import { Catalogo } from './componentes/catalogo/catalogo';
 import { Pedidos } from './componentes/pedidos/pedidos'; 
 import { Kits } from './componentes/kits/kits';
+import { Perfil } from './componentes/perfil/perfil';
 import { InventarioVivero } from './componentes/inventario-vivero/inventario-vivero';
 import { noAuthGuard } from './guards/no-auth.guard';
 import { authGuard } from './guards/auth.guard'; 
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'catalogo', component: Catalogo },
   { path: 'pedidos', component: Pedidos, canActivate: [authGuard] }, // nueva ruta de pedidos
   { path: 'kits', component: Kits, canActivate: [authGuard] },
+  { path: 'perfil', component: Perfil, canActivate: [authGuard] },
   {
     path: 'inventario-vivero',
     component: InventarioVivero,

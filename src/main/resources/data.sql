@@ -25,24 +25,10 @@ INSERT INTO clientes (id, nombre, email, telefono, direccion_calle, direccion_ci
 ('cliente-008', 'Comprador Test', 'comprador@test.com', '3008889900', 'Calle 1 #2-3', 'Armenia', 'Quindío', '630001', 'Colombia', 4.5350, -75.6800, 'vivero-001', false);
 
 -- ============================================
--- USUARIOS (para autenticación JWT)
+-- USUARIOS Y ROLES
+-- Los usuarios y roles se siembran desde DataInitializer
+-- para que funcionen igual en H2 y en MariaDB.
 -- ============================================
-INSERT INTO usuarios (id, email, password, nombre, activo, deleted) VALUES
-('usuario-001', 'comprador@test.com', '$2a$12$eA4.5toy4k51pgMYDJ.q3ObYN1OJZpcUOyiNusJg6kVzpgEPNdTL6', 'Comprador Test', true, false),
-('usuario-002', 'vendedor@test.com', '$2a$12$VyDgA3gZ4AuI/C72cvYTPu.4q1fAD0PcjngVbIYYgUeTm28ZS7lzO', 'Vendedor Test', true, false),
-('usuario-003', 'admin@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Admin Test', true, false),
-('usuario-004', 'maria.gonzalez@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'María González', true, false),
-('usuario-005', 'contacto@eljardin.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PZvO.S', 'Vivero El Jardín', true, false);
-
--- ROLES (Tabla separada por @ElementCollection)
-INSERT INTO usuario_roles (usuario_id, rol) VALUES
-('usuario-001', 'COMPRADOR'),
-('usuario-002', 'VENDEDOR_VIVERO'),
-('usuario-003', 'ADMIN'),
-('usuario-003', 'COMPRADOR'),
-('usuario-003', 'VENDEDOR_VIVERO'),
-('usuario-004', 'COMPRADOR'),
-('usuario-005', 'VENDEDOR_VIVERO');
 
 -- ============================================
 -- ESPECIES

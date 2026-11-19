@@ -4,6 +4,7 @@ build/
 .idea/
 .DS_Store
 Thumbs.db
+.start-all-logs/
 # Carpetas de compilación de Java
 target/
 build/

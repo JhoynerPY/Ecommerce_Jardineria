@@ -14,6 +14,8 @@ public interface KitJardineriaJpaRepository extends JpaRepository<KitJardineriaE
 
     java.util.List<KitJardineriaEntity> findByDeletedFalseOrderByIdAsc();
 
+    java.util.List<KitJardineriaEntity> findByIdClienteAndDeletedFalseOrderByIdAsc(String idCliente);
+
     @Query("SELECT k FROM KitJardineriaEntity k WHERE k.deleted = false " +
            "AND (:plantaId IS NULL OR k.planta.id = :plantaId) " +
            "AND (:macetaId IS NULL OR k.maceta.id = :macetaId) " +

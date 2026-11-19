@@ -107,10 +107,12 @@ class KitControllerIntegrationTest {
     void crearKitAutenticadoPersisteYCalculaDescuento() throws Exception {
         String request = """
                 {
-                  "idPlanta": "planta-test",
-                  "idMaceta": "maceta-test",
-                  "idSustrato": "sustrato-test",
-                  "nombreKit": "Kit de prueba"
+                  "nombreKit": "Kit de prueba",
+                  "articulos": [
+                    { "articuloId": "planta-test", "cantidad": 2 },
+                    { "articuloId": "maceta-test", "cantidad": 1 },
+                    { "articuloId": "sustrato-test", "cantidad": 1 }
+                  ]
                 }
                 """;
 
@@ -121,24 +123,27 @@ class KitControllerIntegrationTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.idKit").isNotEmpty())
                 .andExpect(jsonPath("$.nombreKit").value("Kit de prueba"))
-                .andExpect(jsonPath("$.subtotal").value(39000.0))
-                .andExpect(jsonPath("$.descuento").value(5850.0))
-                .andExpect(jsonPath("$.precioTotal").value(33150.0));
+                .andExpect(jsonPath("$.articulos.length()").value(3))
+                .andExpect(jsonPath("$.articulos[0].cantidad").value(2))
+                .andExpect(jsonPath("$.subtotal").value(54000.0))
+                .andExpect(jsonPath("$.descuento").value(8100.0))
+                .andExpect(jsonPath("$.precioTotal").value(45900.0));
 
         mockMvc.perform(get("/api/kits")
                         .header("Authorization", "Bearer " + tokenComprador))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
-                .andExpect(jsonPath("$[0].planta.nombre").value("Rosa miniatura"));
+                .andExpect(jsonPath("$[0].articulos.length()").value(3))
+                .andExpect(jsonPath("$[0].articulos[0].nombre").value("Rosa miniatura"));
     }
 
     @Test
     void crearKitSinTokenDevuelveNoAutorizado() throws Exception {
         String request = """
                 {
-                  "idPlanta": "planta-test",
-                  "idMaceta": "maceta-test",
-                  "idSustrato": "sustrato-test"
+                  "articulos": [
+                    { "articuloId": "planta-test", "cantidad": 1 }
+                  ]
                 }
                 """;
 

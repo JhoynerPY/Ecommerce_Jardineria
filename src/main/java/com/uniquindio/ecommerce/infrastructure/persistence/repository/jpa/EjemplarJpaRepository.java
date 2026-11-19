@@ -35,7 +35,7 @@ public interface EjemplarJpaRepository extends JpaRepository<EjemplarEntity, Str
     long countDisponibles();
 
     // Búsqueda avanzada de plantas por nombre de especie y rango de precio con paginación
-    @Query("SELECT e.id, e.especie.nombreComun, e.especie.nombreCientifico, e.etapaCrecimiento, e.precio.valor, e.precio.moneda, e.disponibilidad " +
+    @Query("SELECT e.id, e.especie.nombreComun, e.especie.nombreCientifico, e.etapaCrecimiento, e.precio.valor, e.precio.moneda, e.disponibilidad, e.especie.riesgo.nivel " +
            "FROM EjemplarEntity e " +
            "JOIN e.especie esp " +
            "WHERE e.deleted = false " +

@@ -1,6 +1,7 @@
 package com.uniquindio.ecommerce.domain.pedido;
 
 import com.uniquindio.ecommerce.domain.common.ReglaDominioException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -12,19 +13,24 @@ public class Pedido {
     private final List<DetallePedido> detalles;
     private EstadoPedido estado;
     private final String direccionEntrega;
-    private ExencionResponsabilidad exencionResponsabilidad;
+    private final ExencionResponsabilidad exencionResponsabilidad;
+    private final LocalDateTime fechaCreacion;
 
-    private Pedido(String idPedido, String idCliente, String idVivero, List<DetallePedido> detalles, String direccionEntrega, ExencionResponsabilidad exencionResponsabilidad) {
+    private Pedido(String idPedido, String idCliente, String idVivero, List<DetallePedido> detalles,
+                   String direccionEntrega, ExencionResponsabilidad exencionResponsabilidad,
+                   EstadoPedido estado, LocalDateTime fechaCreacion) {
         this.idPedido = idPedido;
         this.idCliente = idCliente;
         this.idVivero = idVivero;
         this.detalles = detalles;
         this.direccionEntrega = direccionEntrega;
         this.exencionResponsabilidad = exencionResponsabilidad;
-        this.estado = EstadoPedido.PENDIENTE_PAGO;
+        this.estado = estado;
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public static Pedido crear(String idCliente, String idVivero, List<DetallePedido> detalles, String direccionEntrega, ExencionResponsabilidad exencionResponsabilidad) {
+    public static Pedido crear(String idCliente, String idVivero, List<DetallePedido> detalles,
+                               String direccionEntrega, ExencionResponsabilidad exencionResponsabilidad) {
         if (detalles == null || detalles.isEmpty()) {
             throw new ReglaDominioException("El pedido debe contener al menos un detalle (artículo o kit).");
         }
@@ -41,7 +47,17 @@ public class Pedido {
             throw new ReglaDominioException("La exención de responsabilidad es obligatoria.");
         }
 
-        return new Pedido(UUID.randomUUID().toString(), idCliente, idVivero, detalles, direccionEntrega, exencionResponsabilidad);
+        return new Pedido(UUID.randomUUID().toString(), idCliente, idVivero, detalles,
+                direccionEntrega, exencionResponsabilidad, EstadoPedido.PENDIENTE_PAGO,
+                LocalDateTime.now());
+    }
+
+    public static Pedido restaurar(String idPedido, String idCliente, String idVivero,
+                                   List<DetallePedido> detalles, String direccionEntrega,
+                                   ExencionResponsabilidad exencionResponsabilidad,
+                                   EstadoPedido estado, LocalDateTime fechaCreacion) {
+        return new Pedido(idPedido, idCliente, idVivero, detalles, direccionEntrega,
+                exencionResponsabilidad, estado, fechaCreacion);
     }
 
     public double calcularTotal() {
@@ -57,7 +73,7 @@ public class Pedido {
 
     public void marcarComoPagado() {
         if (this.estado != EstadoPedido.PENDIENTE_PAGO) {
-            throw new ReglaDominioException("Solo se puede pagar un pedido que esté pendiente de pago.");
+            throw new ReglaDominioException("Solo se puede pagar un pedido que está pendiente de pago.");
         }
         this.estado = EstadoPedido.PAGADO;
     }
@@ -93,6 +109,7 @@ public class Pedido {
     public EstadoPedido getEstado() { return estado; }
     public String getDireccionEntrega() { return direccionEntrega; }
     public ExencionResponsabilidad getExencionResponsabilidad() { return exencionResponsabilidad; }
+    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
 
     @Override
     public boolean equals(Object o) {

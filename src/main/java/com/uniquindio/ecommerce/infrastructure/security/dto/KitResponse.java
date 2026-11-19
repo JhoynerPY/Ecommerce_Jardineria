@@ -1,12 +1,13 @@
 package com.uniquindio.ecommerce.infrastructure.security.dto;
 
+import java.util.List;
+
 public class KitResponse {
 
     private String idKit;
     private String nombreKit;
-    private ArticuloKitResponse planta;
-    private ArticuloKitResponse maceta;
-    private ArticuloKitResponse sustrato;
+    private String idCliente;
+    private List<ArticuloKitResponse> articulos;
     private double subtotal;
     private double descuento;
     private double precioTotal;
@@ -16,17 +17,15 @@ public class KitResponse {
 
     public KitResponse(String idKit,
                        String nombreKit,
-                       ArticuloKitResponse planta,
-                       ArticuloKitResponse maceta,
-                       ArticuloKitResponse sustrato,
+                       String idCliente,
+                       List<ArticuloKitResponse> articulos,
                        double subtotal,
                        double descuento,
                        double precioTotal) {
         this.idKit = idKit;
         this.nombreKit = nombreKit;
-        this.planta = planta;
-        this.maceta = maceta;
-        this.sustrato = sustrato;
+        this.idCliente = idCliente;
+        this.articulos = articulos;
         this.subtotal = subtotal;
         this.descuento = descuento;
         this.precioTotal = precioTotal;
@@ -44,23 +43,17 @@ public class KitResponse {
     public void setNombreKit(String nombreKit) {
         this.nombreKit = nombreKit; }
 
-    public ArticuloKitResponse getPlanta() {
-        return planta; }
+    public String getIdCliente() {
+        return idCliente; }
 
-    public void setPlanta(ArticuloKitResponse planta) {
-        this.planta = planta; }
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente; }
 
-    public ArticuloKitResponse getMaceta() {
-        return maceta; }
+    public List<ArticuloKitResponse> getArticulos() {
+        return articulos; }
 
-    public void setMaceta(ArticuloKitResponse maceta) {
-        this.maceta = maceta; }
-
-    public ArticuloKitResponse getSustrato() {
-        return sustrato; }
-
-    public void setSustrato(ArticuloKitResponse sustrato) {
-        this.sustrato = sustrato; }
+    public void setArticulos(List<ArticuloKitResponse> articulos) {
+        this.articulos = articulos; }
 
     public double getSubtotal() {
         return subtotal; }

@@ -10,6 +10,7 @@ export interface PlantaBusquedaDTO {
   disponible: boolean | null;
   viveroNombre: string | null;
   viveroId: string | null;
+  nivelRiesgo: string | null;
 }
 
 export interface FiltrosCatalogo {

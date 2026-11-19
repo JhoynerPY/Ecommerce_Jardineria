@@ -1,9 +1,10 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CatalogoService } from '../../servicios/catalogo.service';
 import { AvisoService } from '../../servicios/aviso.service';
+import { CarritoService } from '../../servicios/carrito.service';
 import {
   EtapaCrecimiento,
   FiltrosCatalogo,
@@ -13,14 +14,14 @@ import {
 
 @Component({
   selector: 'app-catalogo',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RouterLink],
   styleUrl: './catalogo.css',
   templateUrl: './catalogo.html',
 })
 export class Catalogo {
   private readonly catalogoService = inject(CatalogoService);
   private readonly avisoService = inject(AvisoService);
-  private readonly router = inject(Router);
+  protected readonly carritoService = inject(CarritoService);
 
   protected readonly etapas: { valor: EtapaCrecimiento; etiqueta: string }[] = [
     { valor: 'PLANTULA', etiqueta: 'Plántula en desarrollo' },
@@ -134,13 +135,17 @@ export class Catalogo {
     }
   }
 
-  protected iniciarPedido(ejemplar: PlantaBusquedaDTO): void {
-    this.router.navigate(['/pedidos'], {
-      queryParams: {
-        ejemplarId: ejemplar.ejemplarId,
-        precio: ejemplar.precio ?? 0,
-      },
+  protected agregarAlCarrito(ejemplar: PlantaBusquedaDTO): void {
+    this.carritoService.agregarEjemplar({
+      ejemplarId: ejemplar.ejemplarId,
+      nombreEspecie: ejemplar.especieNombreComun,
+      etapaCrecimiento: ejemplar.etapaCrecimiento ?? '',
+      precio: ejemplar.precio ?? 0,
+      nivelRiesgo: ejemplar.nivelRiesgo ?? 'NINGUNO',
     });
+    this.avisoService.mostrarExito(
+      `Ejemplar "${ejemplar.especieNombreComun}" agregado al carrito.`,
+    );
   }
 
   private aNumeroOpcional(valor: string): number | null {

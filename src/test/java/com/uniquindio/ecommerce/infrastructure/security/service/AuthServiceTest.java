@@ -1,5 +1,6 @@
 package com.uniquindio.ecommerce.infrastructure.security.service;
 
+import com.uniquindio.ecommerce.application.ports.output.ClienteRepositoryPort;
 import com.uniquindio.ecommerce.infrastructure.security.dto.AuthResponse;
 import com.uniquindio.ecommerce.infrastructure.security.dto.LoginRequest;
 import com.uniquindio.ecommerce.infrastructure.security.dto.RegisterRequest;
@@ -44,6 +45,9 @@ class AuthServiceTest {
     @Mock
     private Authentication authentication;
 
+    @Mock
+    private ClienteRepositoryPort clienteRepositoryPort;
+
     @InjectMocks
     private AuthService authService;
 
@@ -76,6 +80,7 @@ class AuthServiceTest {
     void registrar_usuarioNuevo_debeGuardarYRetornarToken() {
         // Given
         when(usuarioRepository.existsByEmailAndDeletedFalse("nuevo@test.com")).thenReturn(false);
+        when(clienteRepositoryPort.existePorEmail("nuevo@test.com")).thenReturn(false);
         when(passwordEncoder.encode("password123")).thenReturn("$2a$12$encodedPassword");
         when(jwtUtil.generateToken(any())).thenReturn("jwt-token-123");
 
@@ -123,6 +128,7 @@ class AuthServiceTest {
         // Given
         registerRequest.setRoles(null);
         when(usuarioRepository.existsByEmailAndDeletedFalse("nuevo@test.com")).thenReturn(false);
+        when(clienteRepositoryPort.existePorEmail("nuevo@test.com")).thenReturn(false);
         when(passwordEncoder.encode("password123")).thenReturn("$2a$12$encodedPassword");
         when(jwtUtil.generateToken(any())).thenReturn("jwt-token-123");
 
@@ -141,6 +147,7 @@ class AuthServiceTest {
         // Given
         registerRequest.setRoles(List.of());
         when(usuarioRepository.existsByEmailAndDeletedFalse("nuevo@test.com")).thenReturn(false);
+        when(clienteRepositoryPort.existePorEmail("nuevo@test.com")).thenReturn(false);
         when(passwordEncoder.encode("password123")).thenReturn("$2a$12$encodedPassword");
         when(jwtUtil.generateToken(any())).thenReturn("jwt-token-123");
 
@@ -161,6 +168,7 @@ class AuthServiceTest {
                 .thenReturn(authentication);
         when(usuarioRepository.findByEmailAndDeletedFalse("existente@test.com"))
                 .thenReturn(Optional.of(usuarioEntity));
+        when(clienteRepositoryPort.existePorEmail("existente@test.com")).thenReturn(false);
         when(jwtUtil.generateToken(usuarioEntity)).thenReturn("jwt-token-456");
 
         // When

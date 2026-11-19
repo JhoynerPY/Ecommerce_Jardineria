@@ -61,6 +61,7 @@ public class CatalogoController {
                 (String) row[5],
                 (Boolean) row[6],
                 null,
-                null);
+                null,
+                row[7] != null ? row[7].toString() : null);
     }
 }

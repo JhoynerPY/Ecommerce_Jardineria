@@ -21,6 +21,10 @@ export class KitService {
     return this.http.get<KitResponse[]>(this.apiUrl);
   }
 
+  listarMios(): Observable<KitResponse[]> {
+    return this.http.get<KitResponse[]>(`${this.apiUrl}/mios`);
+  }
+
   crearKit(request: ConfigurarKitRequest): Observable<KitResponse> {
     return this.http.post<KitResponse>(this.apiUrl, request);
   }

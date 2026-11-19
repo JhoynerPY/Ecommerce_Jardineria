@@ -1,5 +1,6 @@
 package com.uniquindio.ecommerce.infrastructure.security.controller;
 
+import com.uniquindio.ecommerce.application.dto.ArticuloKitSeleccionadoCommand;
 import com.uniquindio.ecommerce.application.ports.input.ConfigurarKitUseCase;
 import com.uniquindio.ecommerce.application.ports.output.CatalogoArticulosPort;
 import com.uniquindio.ecommerce.application.ports.output.ClienteRepositoryPort;
@@ -41,7 +42,7 @@ public class KitController {
     @GetMapping("/articulos")
     public ResponseEntity<List<ArticuloKitResponse>> listarArticulos() {
         List<ArticuloKitResponse> articulos = catalogoArticulosPort.listarArticulos().stream()
-                .map(this::mapearArticulo)
+                .map(articulo -> mapearArticulo(articulo, 1))
                 .toList();
         return ResponseEntity.ok(articulos);
     }
@@ -50,6 +51,20 @@ public class KitController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<KitResponse>> listarKits() {
         List<KitResponse> kits = configurarKitUseCase.listarKits().stream()
+                .map(this::mapearKit)
+                .toList();
+        return ResponseEntity.ok(kits);
+    }
+
+    @GetMapping("/mios")
+    @PreAuthorize("hasAuthority('COMPRADOR')")
+    public ResponseEntity<List<KitResponse>> misKits(Principal principal) {
+        String idCliente = clienteRepositoryPort.buscarPorEmail(principal.getName())
+                .orElseThrow(() -> new ReglaDominioException(
+                        "No existe un cliente asociado al usuario autenticado: " + principal.getName()))
+                .getId();
+
+        List<KitResponse> kits = configurarKitUseCase.listarKitsPorCliente(idCliente).stream()
                 .map(this::mapearKit)
                 .toList();
         return ResponseEntity.ok(kits);
@@ -64,10 +79,20 @@ public class KitController {
                         "No existe un cliente asociado al usuario autenticado: " + principal.getName()))
                 .getId();
 
+        List<ArticuloKitSeleccionadoCommand> articulos = request.getArticulos() != null
+                && !request.getArticulos().isEmpty()
+                ? request.getArticulos().stream()
+                        .map(articulo -> new ArticuloKitSeleccionadoCommand(
+                                articulo.getArticuloId(), articulo.getCantidad()))
+                        .toList()
+                : List.of(
+                        new ArticuloKitSeleccionadoCommand(request.getIdPlanta(), 1),
+                        new ArticuloKitSeleccionadoCommand(request.getIdMaceta(), 1),
+                        new ArticuloKitSeleccionadoCommand(request.getIdSustrato(), 1)
+                );
+
         KitJardineria kit = configurarKitUseCase.armarKit(
-                request.getIdPlanta(),
-                request.getIdMaceta(),
-                request.getIdSustrato(),
+                articulos,
                 idCliente,
                 request.getNombreKit()
         );
@@ -76,28 +101,30 @@ public class KitController {
                 .body(mapearKit(kit));
     }
 
-    private ArticuloKitResponse mapearArticulo(ArticuloKit articulo) {
+    private ArticuloKitResponse mapearArticulo(ArticuloKit articulo, int cantidad) {
         return new ArticuloKitResponse(
                 articulo.getId(),
                 articulo.getNombre(),
                 articulo.getPrecio().getValor(),
                 articulo.getPrecio().getMoneda(),
-                articulo.getDiametro()
+                articulo.getDiametro(),
+                cantidad
         );
     }
 
     private KitResponse mapearKit(KitJardineria kit) {
-        double subtotal = kit.getPlanta().getPrecio().getValor()
-                + kit.getMaceta().getPrecio().getValor()
-                + kit.getSustrato().getPrecio().getValor();
+        double subtotal = kit.calcularSubtotal();
         double total = kit.calcularPrecioTotal();
+        List<ArticuloKitResponse> articulos = kit.getArticulos().stream()
+                .map(seleccionado -> mapearArticulo(
+                        seleccionado.articulo(), seleccionado.cantidad()))
+                .toList();
 
         return new KitResponse(
                 kit.getIdKit(),
                 kit.getNombreKit(),
-                mapearArticulo(kit.getPlanta()),
-                mapearArticulo(kit.getMaceta()),
-                mapearArticulo(kit.getSustrato()),
+                kit.getIdCliente(),
+                articulos,
                 subtotal,
                 subtotal - total,
                 total

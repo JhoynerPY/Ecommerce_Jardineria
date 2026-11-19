@@ -13,6 +13,7 @@ import com.uniquindio.ecommerce.domain.especie.NivelRiesgo;
 import com.uniquindio.ecommerce.domain.especie.RequerimientoLuz;
 import com.uniquindio.ecommerce.domain.especie.Riesgo;
 import com.uniquindio.ecommerce.domain.kit.ArticuloKit;
+import com.uniquindio.ecommerce.domain.kit.ArticuloKitSeleccionado;
 import com.uniquindio.ecommerce.domain.kit.KitJardineria;
 import com.uniquindio.ecommerce.domain.pedido.DetallePedido;
 import com.uniquindio.ecommerce.domain.pedido.ExencionResponsabilidad;
@@ -28,6 +29,7 @@ import com.uniquindio.ecommerce.infrastructure.persistence.entity.EmailEmbeddabl
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.EspecieEntity;
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.ExencionResponsabilidadEmbeddable;
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.FichaDeCuidadoEmbeddable;
+import com.uniquindio.ecommerce.infrastructure.persistence.entity.KitArticuloEmbeddable;
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.KitJardineriaEntity;
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.PedidoEntity;
 import com.uniquindio.ecommerce.infrastructure.persistence.entity.PrecioEmbeddable;
@@ -189,29 +191,50 @@ public class JpaMapper {
         KitJardineriaEntity entity = new KitJardineriaEntity();
         entity.setId(domain.getIdKit());
         entity.setNombreKit(domain.getNombreKit());
-        entity.setPlanta(toEntity(domain.getPlanta()));
-        entity.setMaceta(toEntity(domain.getMaceta()));
-        entity.setSustrato(toEntity(domain.getSustrato()));
+        entity.setIdCliente(domain.getIdCliente());
+
+        List<ArticuloKitSeleccionado> seleccionados = domain.getArticulos();
+        entity.setArticulos(seleccionados.stream()
+                .map(seleccionado -> new KitArticuloEmbeddable(
+                        toEntity(seleccionado.articulo()), seleccionado.cantidad()))
+                .toList());
+
+        ArticuloKit primero = seleccionados.get(0).articulo();
+        entity.setPlanta(toEntity(primero));
+        entity.setMaceta(toEntity(seleccionados.size() > 1
+                ? seleccionados.get(1).articulo() : primero));
+        entity.setSustrato(toEntity(seleccionados.size() > 2
+                ? seleccionados.get(2).articulo() : primero));
         return entity;
     }
 
     public static KitJardineria toDomain(KitJardineriaEntity entity) {
         if (entity == null) return null;
-        try {
-            Constructor<KitJardineria> constructor = KitJardineria.class.getDeclaredConstructor(
-                String.class, ArticuloKit.class, ArticuloKit.class, ArticuloKit.class, String.class
-            );
-            constructor.setAccessible(true);
-            return constructor.newInstance(
-                entity.getId(),
-                toDomain(entity.getPlanta()),
-                toDomain(entity.getMaceta()),
-                toDomain(entity.getSustrato()),
-                entity.getNombreKit()
-            );
-        } catch (Exception e) {
-            throw new RuntimeException("Error mapping KitJardineriaEntity to domain", e);
+
+        List<ArticuloKitSeleccionado> seleccionados = new ArrayList<>();
+        if (entity.getArticulos() != null) {
+            for (KitArticuloEmbeddable embebido : entity.getArticulos()) {
+                if (embebido.getArticulo() != null) {
+                    seleccionados.add(new ArticuloKitSeleccionado(
+                            toDomain(embebido.getArticulo()), embebido.getCantidad()));
+                }
+            }
         }
+
+        if (seleccionados.isEmpty()) {
+            if (entity.getPlanta() != null) {
+                seleccionados.add(new ArticuloKitSeleccionado(toDomain(entity.getPlanta()), 1));
+            }
+            if (entity.getMaceta() != null) {
+                seleccionados.add(new ArticuloKitSeleccionado(toDomain(entity.getMaceta()), 1));
+            }
+            if (entity.getSustrato() != null) {
+                seleccionados.add(new ArticuloKitSeleccionado(toDomain(entity.getSustrato()), 1));
+            }
+        }
+
+        return KitJardineria.restaurar(entity.getId(), seleccionados, entity.getNombreKit(),
+                entity.getIdCliente());
     }
 
     // Pedido Mappers
@@ -223,6 +246,7 @@ public class JpaMapper {
         entity.setIdVivero(domain.getIdVivero());
         entity.setEstado(toEstadoPedidoEntity(domain.getEstado()));
         entity.setDireccionEntrega(domain.getDireccionEntrega());
+        entity.setFechaCreacion(domain.getFechaCreacion());
         entity.setExencionResponsabilidad(toExencionEmbeddable(domain.getExencionResponsabilidad()));
 
         List<DetallePedidoEntity> detalleEntities = new ArrayList<>();
@@ -251,27 +275,16 @@ public class JpaMapper {
             ));
         }
 
-        Pedido pedido = Pedido.crear(
-            entity.getIdCliente(),
-            entity.getIdVivero(),
-            detalles,
-            entity.getDireccionEntrega(),
-            toExencionDomain(entity.getExencionResponsabilidad())
+        return Pedido.restaurar(
+                entity.getId(),
+                entity.getIdCliente(),
+                entity.getIdVivero(),
+                detalles,
+                entity.getDireccionEntrega(),
+                toExencionDomain(entity.getExencionResponsabilidad()),
+                toEstadoPedidoDomain(entity.getEstado()),
+                entity.getFechaCreacion()
         );
-
-        // Override the generated ID with the persisted ID
-        try {
-            Field idField = Pedido.class.getDeclaredField("idPedido");
-            idField.setAccessible(true);
-            idField.set(pedido, entity.getId());
-
-            Field estadoField = Pedido.class.getDeclaredField("estado");
-            estadoField.setAccessible(true);
-            estadoField.set(pedido, toEstadoPedidoDomain(entity.getEstado()));
-        } catch (Exception e) {
-            // ignore
-        }
-        return pedido;
     }
 
     // Helper methods

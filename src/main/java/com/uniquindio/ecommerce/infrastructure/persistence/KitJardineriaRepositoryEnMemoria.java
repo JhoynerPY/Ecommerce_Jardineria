@@ -28,4 +28,11 @@ public class KitJardineriaRepositoryEnMemoria implements KitJardineriaRepository
     public List<KitJardineria> obtenerKits() {
         return new ArrayList<>(baseDeDatos.values());
     }
+
+    @Override
+    public List<KitJardineria> buscarPorClienteId(String idCliente) {
+        return baseDeDatos.values().stream()
+                .filter(kit -> idCliente != null && idCliente.equals(kit.getIdCliente()))
+                .toList();
+    }
 }

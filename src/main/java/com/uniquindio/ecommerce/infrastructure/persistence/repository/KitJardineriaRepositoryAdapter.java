@@ -36,4 +36,11 @@ public class KitJardineriaRepositoryAdapter implements KitJardineriaRepository {
                 .map(JpaMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public List<KitJardineria> buscarPorClienteId(String idCliente) {
+        return jpaRepository.findByIdClienteAndDeletedFalseOrderByIdAsc(idCliente).stream()
+                .map(JpaMapper::toDomain)
+                .toList();
+    }
 }

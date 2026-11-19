@@ -3,9 +3,11 @@ import { DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { KitService } from '../../servicios/kit.service';
 import { AvisoService } from '../../servicios/aviso.service';
+import { CarritoService } from '../../servicios/carrito.service';
 import {
   ArticuloKitResponse,
   ArticuloKitSeleccionable,
+  ArticuloSeleccionado,
   ConfigurarKitRequest,
   KitResponse,
   TipoAplicacion,
@@ -21,6 +23,9 @@ import {
 export class Kits {
   private readonly kitService = inject(KitService);
   private readonly avisoService = inject(AvisoService);
+  protected readonly carritoService = inject(CarritoService);
+
+  protected readonly pestana = signal<'listos' | 'personalizar'>('listos');
 
   protected readonly cargando = signal(false);
   protected readonly cargandoArticulos = signal(false);
@@ -31,10 +36,11 @@ export class Kits {
 
   protected readonly articulos = signal<ArticuloKitSeleccionable[]>([]);
   protected readonly kits = signal<KitResponse[]>([]);
+  protected readonly seleccion = signal<Record<string, number>>({});
 
-  protected readonly plantaSeleccionada = signal<ArticuloKitSeleccionable | null>(null);
-  protected readonly macetaSeleccionada = signal<ArticuloKitSeleccionable | null>(null);
-  protected readonly sustratoSeleccionado = signal<ArticuloKitSeleccionable | null>(null);
+  protected readonly kitsDisponibles = computed(() =>
+    this.kits().filter((kit) => !kit.idCliente),
+  );
 
   protected readonly plantas = computed(() =>
     this.articulos().filter((articulo) => articulo.tipo === 'PLANTA'),
@@ -49,32 +55,31 @@ export class Kits {
     this.articulos().filter((articulo) => articulo.tipo === 'ACCESORIO'),
   );
 
-  protected readonly seleccionados = computed(() =>
-    [this.plantaSeleccionada(), this.macetaSeleccionada(), this.sustratoSeleccionado()].filter(
-      (articulo): articulo is ArticuloKitSeleccionable => articulo !== null,
-    ),
-  );
+  protected readonly seleccionados = computed<ArticuloSeleccionado[]>(() => {
+    const seleccion = this.seleccion();
+    return this.articulos()
+      .filter((articulo) => seleccion[articulo.id] !== undefined)
+      .map((articulo) => ({ articulo, cantidad: seleccion[articulo.id] }));
+  });
 
   protected readonly subtotal = computed(() =>
-    this.seleccionados().reduce((total, articulo) => total + articulo.precio, 0),
+    this.seleccionados().reduce(
+      (total, seleccionado) =>
+        total + seleccionado.articulo.precio * seleccionado.cantidad,
+      0,
+    ),
   );
   protected readonly descuento = computed(() => this.subtotal() * 0.15);
   protected readonly total = computed(() => this.subtotal() - this.descuento());
-  protected readonly kitCompleto = computed(
-    () =>
-      this.plantaSeleccionada() !== null &&
-      this.macetaSeleccionada() !== null &&
-      this.sustratoSeleccionado() !== null,
-  );
-  protected readonly macetaCompatible = computed(() => {
-    const planta = this.plantaSeleccionada();
-    const maceta = this.macetaSeleccionada();
-    return !planta || !maceta || maceta.diametro >= planta.diametro;
-  });
+  protected readonly kitValido = computed(() => this.seleccionados().length > 0);
 
   constructor() {
     this.cargarArticulos();
     this.cargarKits();
+  }
+
+  protected cambiarPestana(pestana: 'listos' | 'personalizar'): void {
+    this.pestana.set(pestana);
   }
 
   protected actualizarNombre(event: Event): void {
@@ -82,41 +87,53 @@ export class Kits {
     this.nombreKit.set(input.value);
   }
 
-  protected seleccionar(articulo: ArticuloKitSeleccionable): void {
-    if (articulo.tipo === 'ACCESORIO') {
-      return;
+  protected alternar(articulo: ArticuloKitSeleccionable): void {
+    const nuevaSeleccion = { ...this.seleccion() };
+    if (nuevaSeleccion[articulo.id] !== undefined) {
+      delete nuevaSeleccion[articulo.id];
+    } else {
+      nuevaSeleccion[articulo.id] = 1;
     }
-
-    switch (articulo.tipo) {
-      case 'PLANTA':
-        this.plantaSeleccionada.update((actual) =>
-          actual?.id === articulo.id ? null : articulo,
-        );
-        break;
-      case 'MACETA':
-        this.macetaSeleccionada.update((actual) =>
-          actual?.id === articulo.id ? null : articulo,
-        );
-        break;
-      case 'SUSTRATO':
-        this.sustratoSeleccionado.update((actual) =>
-          actual?.id === articulo.id ? null : articulo,
-        );
-        break;
-    }
+    this.seleccion.set(nuevaSeleccion);
   }
 
-  protected esSeleccionado(articulo: ArticuloKitSeleccionable): boolean {
-    switch (articulo.tipo) {
-      case 'PLANTA':
-        return this.plantaSeleccionada()?.id === articulo.id;
-      case 'MACETA':
-        return this.macetaSeleccionada()?.id === articulo.id;
-      case 'SUSTRATO':
-        return this.sustratoSeleccionado()?.id === articulo.id;
-      default:
-        return false;
+  protected aumentar(articuloId: string): void {
+    this.actualizarCantidad(articuloId, this.cantidadSeleccionada(articuloId) + 1);
+  }
+
+  protected disminuir(articuloId: string): void {
+    const cantidad = this.cantidadSeleccionada(articuloId);
+    if (cantidad <= 1) {
+      this.quitar(articuloId);
+      return;
     }
+    this.actualizarCantidad(articuloId, cantidad - 1);
+  }
+
+  protected quitar(articuloId: string): void {
+    const nuevaSeleccion = { ...this.seleccion() };
+    delete nuevaSeleccion[articuloId];
+    this.seleccion.set(nuevaSeleccion);
+  }
+
+  protected cantidadSeleccionada(articuloId: string): number {
+    return this.seleccion()[articuloId] ?? 0;
+  }
+
+  protected estaSeleccionado(articuloId: string): boolean {
+    return this.seleccion()[articuloId] !== undefined;
+  }
+
+  protected agregarKitAlCarrito(kit: KitResponse): void {
+    this.carritoService.agregarKit({
+      kitId: kit.idKit,
+      nombre: kit.nombreKit || 'KitJardineria sin nombre',
+      cantidadArticulos: kit.articulos.length,
+      precioConDescuento: kit.precioTotal,
+    });
+    this.avisoService.mostrarExito(
+      `KitJardineria "${kit.nombreKit || kit.idKit}" agregado al carrito.`,
+    );
   }
 
   protected guardar(): void {
@@ -124,25 +141,17 @@ export class Kits {
       return;
     }
 
-    if (!this.kitCompleto() || !this.macetaCompatible()) {
-      this.mensajeError.set(
-        'Selecciona una planta, una maceta compatible y un sustrato antes de guardar.',
-      );
-      return;
-    }
-
-    const planta = this.plantaSeleccionada();
-    const maceta = this.macetaSeleccionada();
-    const sustrato = this.sustratoSeleccionado();
-    if (!planta || !maceta || !sustrato) {
+    if (!this.kitValido()) {
+      this.mensajeError.set('Selecciona al menos un ArticuloKit antes de guardar.');
       return;
     }
 
     const nombreGuardado = this.nombreKit().trim();
     const request: ConfigurarKitRequest = {
-      idPlanta: planta.id,
-      idMaceta: maceta.id,
-      idSustrato: sustrato.id,
+      articulos: this.seleccionados().map((seleccionado) => ({
+        articuloId: seleccionado.articulo.id,
+        cantidad: seleccionado.cantidad,
+      })),
       nombreKit: nombreGuardado || undefined,
     };
 
@@ -153,9 +162,15 @@ export class Kits {
     this.kitService.crearKit(request).subscribe({
       next: (kit) => {
         this.ultimoKit.set(kit);
+        this.carritoService.agregarKit({
+          kitId: kit.idKit,
+          nombre: kit.nombreKit || 'KitJardineria sin nombre',
+          cantidadArticulos: kit.articulos.length,
+          precioConDescuento: kit.precioTotal,
+        });
         this.cargando.set(false);
         this.avisoService.mostrarExito(
-          `Kit ${nombreGuardado || kit.idKit} guardado correctamente.`,
+          `Kit ${nombreGuardado || kit.idKit} guardado y añadido al carrito.`,
         );
         this.limpiarSeleccion();
         this.cargarKits();
@@ -164,22 +179,6 @@ export class Kits {
         const mensaje = this.traducirError(error);
         this.mensajeError.set(mensaje);
         this.cargando.set(false);
-        this.avisoService.mostrarError(mensaje);
-      },
-    });
-  }
-
-  private cargarArticulos(): void {
-    this.cargandoArticulos.set(true);
-    this.kitService.listarArticulos().subscribe({
-      next: (articulos) => {
-        this.articulos.set(articulos.map((articulo) => this.clasificarArticulo(articulo)));
-        this.cargandoArticulos.set(false);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.cargandoArticulos.set(false);
-        const mensaje = this.traducirError(error);
-        this.mensajeError.set(mensaje);
         this.avisoService.mostrarError(mensaje);
       },
     });
@@ -200,14 +199,36 @@ export class Kits {
     });
   }
 
+  private actualizarCantidad(articuloId: string, cantidad: number): void {
+    this.seleccion.set({ ...this.seleccion(), [articuloId]: cantidad });
+  }
+
   private limpiarSeleccion(): void {
-    this.plantaSeleccionada.set(null);
-    this.macetaSeleccionada.set(null);
-    this.sustratoSeleccionado.set(null);
+    this.seleccion.set({});
     this.nombreKit.set('');
   }
 
-  private clasificarArticulo(articulo: ArticuloKitResponse): ArticuloKitSeleccionable {
+  private cargarArticulos(): void {
+    this.cargandoArticulos.set(true);
+    this.kitService.listarArticulos().subscribe({
+      next: (articulos) => {
+        this.articulos.set(
+          articulos.map((articulo) => this.clasificarArticulo(articulo)),
+        );
+        this.cargandoArticulos.set(false);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.cargandoArticulos.set(false);
+        const mensaje = this.traducirError(error);
+        this.mensajeError.set(mensaje);
+        this.avisoService.mostrarError(mensaje);
+      },
+    });
+  }
+
+  private clasificarArticulo(
+    articulo: ArticuloKitResponse,
+  ): ArticuloKitSeleccionable {
     const id = articulo.id.toLowerCase();
     const nombre = articulo.nombre.toLowerCase();
 
@@ -233,7 +254,8 @@ export class Kits {
       nombre.includes('sustrato') ||
       nombre.includes('compost') ||
       nombre.includes('tierra') ||
-      nombre.includes('abono')
+      nombre.includes('abono') ||
+      nombre.includes('perlita')
     ) {
       tipo = 'SUSTRATO';
     }
@@ -255,12 +277,12 @@ export class Kits {
       return 'No tienes permisos para configurar kits.';
     }
     if (error.status === 404) {
-      return 'Uno de los artículos seleccionados ya no existe en el catálogo.';
+      return 'Uno de los ArticuloKit seleccionados ya no existe en el catálogo.';
     }
     if (error.status === 422) {
       return (
         this.extraerMensaje(error) ||
-        'La maceta seleccionada no es compatible con la planta o los datos del kit no son válidos.'
+        'Los datos del KitJardineria no son válidos.'
       );
     }
     return 'Ocurrió un error inesperado al guardar el kit.';

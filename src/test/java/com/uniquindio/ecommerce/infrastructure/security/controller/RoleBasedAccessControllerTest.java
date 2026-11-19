@@ -3,6 +3,8 @@ package com.uniquindio.ecommerce.infrastructure.security.controller;
 import com.uniquindio.ecommerce.infrastructure.security.entity.UsuarioEntity;
 import com.uniquindio.ecommerce.infrastructure.security.jwt.JwtUtil;
 import com.uniquindio.ecommerce.infrastructure.security.repository.UsuarioRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ class RoleBasedAccessControllerTest {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     private String compradorToken;
     private String vendedorToken;
     private String adminToken;
@@ -49,7 +54,9 @@ class RoleBasedAccessControllerTest {
 
     @BeforeEach
     void setUp() {
-        usuarioRepository.deleteAll();
+        entityManager.createNativeQuery("DELETE FROM usuario_roles").executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM usuarios").executeUpdate();
+        entityManager.flush();
 
         // Crear usuarios con diferentes roles
         crearUsuario("comprador@test.com", "Comprador Test", List.of("COMPRADOR"));
