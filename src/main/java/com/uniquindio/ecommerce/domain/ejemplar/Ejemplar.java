@@ -6,31 +6,73 @@ import java.util.Objects;
 
 public class Ejemplar {
 
-    private Long id;
-    private Especie especie;
+    private final String id;
+    private final Especie especie;
     private EtapaCrecimiento etapaCrecimiento;
-    private double precio;
+    private Precio precio;
     private boolean disponibilidad;
+    private EstadoDeSalud estadoDeSalud;
 
-    public Ejemplar(Long id, Especie especie, EtapaCrecimiento etapaCrecimiento,
-                    double precio, boolean disponibilidad) {
+    private Ejemplar(String id, Especie especie, EtapaCrecimiento etapaCrecimiento,
+                    Precio precio) {
         this.id = id;
         this.especie = especie;
         this.etapaCrecimiento = etapaCrecimiento;
         this.precio = precio;
-        this.disponibilidad = disponibilidad;
+        this.disponibilidad = true;
+        this.estadoDeSalud = EstadoDeSalud.SANO;
     }
 
-    public Long getId() {
+    public static Ejemplar registrarEnInventario(String id, Especie especie, EtapaCrecimiento etapaCrecimiento,
+                                                 Precio precio){
+        return new Ejemplar(id, especie, etapaCrecimiento, precio);
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Especie getEspecie() {
+        return especie;
+    }
+
+    public EtapaCrecimiento getEtapaCrecimiento() {
+        return etapaCrecimiento;
+    }
+
+    public Precio getPrecio() {
+        return precio;
+    }
+
+    public void avanzarEtapa(EtapaCrecimiento nuevaEtapa){
+        this.etapaCrecimiento = nuevaEtapa;
+    }
+
+    public boolean isDisponibilidad() {
+        return disponibilidad;
     }
 
     public boolean estaDisponibleParaVenta(){
         return disponibilidad;
+    }
+
+    public void retirarDeVenta(){
+        this.disponibilidad = false;
+    }
+
+    public EstadoDeSalud getEstadoDeSalud() {
+        return estadoDeSalud;
+    }
+
+    public void actualizarEstadoSalud(EstadoDeSalud nuevoEstado){
+        if (nuevoEstado == null){
+            throw new IllegalArgumentException("El estado de salud no puede ser nulo");
+        }
+        this.estadoDeSalud = nuevoEstado;
+        //Si esta marchito o con plaga se tira de la venta (REGLA DE NEGOCIO)
+        if (nuevoEstado == EstadoDeSalud.MARCHITO || nuevoEstado == EstadoDeSalud.CON_PLAGA){
+            this.retirarDeVenta();
+        }
     }
 
     //Compara los objetos para saber si son iguales por su id

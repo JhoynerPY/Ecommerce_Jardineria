@@ -1,0 +1,97 @@
+:root {
+  --color-base-lino: #F6F4EC;
+  --color-primario-bosque: #234E36;
+  --color-acento-terracota: #C96A3B;
+  --color-texto-carbon: #1F2922;
+
+  /* Sobrescritura limpia de Bootstrap 5 */
+  --bs-primary: #234E36;
+  --bs-primary-rgb: 35, 78, 54;
+  --bs-body-bg: #F6F4EC;
+  --bs-body-color: #1F2922;
+}
+
+/* Bootstrap compila .btn-primary con azul estático (#0d6efd):
+   cambiar --bs-primary en :root NO lo recolorea. Se sobrescribe aquí. */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #234E36;
+  --bs-btn-border-color: #234E36;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #1b3d2a;
+  --bs-btn-hover-border-color: #173523;
+  --bs-btn-focus-shadow-rgb: 35, 78, 54;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #173523;
+  --bs-btn-active-border-color: #143020;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #234E36;
+  --bs-btn-disabled-border-color: #234E36;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #234E36;
+  --bs-btn-border-color: #234E36;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #234E36;
+  --bs-btn-hover-border-color: #234E36;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #1b3d2a;
+  --bs-btn-active-border-color: #173523;
+  --bs-btn-focus-shadow-rgb: 35, 78, 54;
+}
+
+a {
+  --bs-link-color: #234E36;
+  --bs-link-color-rgb: 35, 78, 54;
+  --bs-link-hover-color: #C96A3B;
+  --bs-link-hover-color-rgb: 201, 106, 59;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: #234E36;
+}
+
+.text-primary {
+  color: #234E36 !important;
+}
+
+.bg-primary {
+  background-color: #234E36 !important;
+}
+
+.border-primary {
+  border-color: #234E36 !important;
+}
+
+/* Clases utilitarias color acento terracota */
+.btn-terracota {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #C96A3B;
+  --bs-btn-border-color: #C96A3B;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #b35a32;
+  --bs-btn-hover-border-color: #a8542f;
+  --bs-btn-focus-shadow-rgb: 201, 106, 59;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #a8542f;
+  --bs-btn-active-border-color: #9d4e2c;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #C96A3B;
+  --bs-btn-disabled-border-color: #C96A3B;
+}
+
+.bg-terracota {
+  background-color: #C96A3B !important;
+}
+
+.text-terracota {
+  color: #C96A3B !important;
+}
+
+.badge-terracota {
+  --bs-badge-bg: #C96A3B;
+  color: #fff !important;
+}

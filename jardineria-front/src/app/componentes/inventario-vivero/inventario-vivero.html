@@ -1,0 +1,104 @@
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4 p-md-5">
+          <span class="badge badge-terracota mb-3">Gestión de vivero</span>
+          <h2 class="fw-bold text-success mb-2">Actualizar estado de salud</h2>
+          <p class="text-muted mb-4">
+            Registra el estado fitosanitario de un ejemplar. Los ejemplares
+            marchitos o con plaga se retiran automáticamente de la venta.
+          </p>
+
+          <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+            <div class="mb-4">
+              <label class="form-label fw-semibold" for="idEjemplar">ID del ejemplar</label>
+              <input
+                id="idEjemplar"
+                type="text"
+                class="form-control"
+                formControlName="idEjemplar"
+                placeholder="Ej: ejemplar-001"
+                [class.is-invalid]="idEjemplar.invalid && idEjemplar.touched"
+              />
+              <div class="invalid-feedback">
+                El ID del ejemplar es obligatorio.
+              </div>
+              <p class="form-text mb-0">
+                Puedes copiar el ID desde el catálogo de ejemplares.
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold" for="nuevoEstado">Nuevo estado de salud</label>
+              <select
+                id="nuevoEstado"
+                class="form-select"
+                formControlName="nuevoEstado"
+              >
+                @for (estado of estados; track estado.valor) {
+                  <option [value]="estado.valor">{{ estado.etiqueta }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="alert alert-light border rounded-3 mb-4" role="note">
+              <p class="fw-semibold mb-1">
+                <i class="bi bi-info-circle me-2"></i>{{ opcionSeleccionada().etiqueta }}
+              </p>
+              <p class="mb-0 small text-secondary">
+                {{ opcionSeleccionada().descripcion }}
+              </p>
+            </div>
+
+            @if (mensajeError()) {
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>{{ mensajeError() }}
+              </div>
+            }
+
+            <button
+              type="submit"
+              class="btn btn-success w-100 py-2 fw-bold"
+              [disabled]="cargando() || form.invalid"
+            >
+              @if (cargando()) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Actualizando...
+              } @else {
+                Guardar estado de salud <i class="bi bi-check2-circle ms-1"></i>
+              }
+            </button>
+          </form>
+
+          @if (respuesta(); as resultado) {
+            <div class="alert alert-success mt-4 mb-0" role="status">
+              <h3 class="h6 fw-bold mb-2">
+                <i class="bi bi-check-circle me-2"></i>Estado actualizado
+              </h3>
+              <p class="mb-1">
+                Ejemplar: <strong>{{ resultado.idEjemplar }}</strong>
+              </p>
+              <p class="mb-1">
+                Estado: <strong>{{ resultado.estadoSalud }}</strong>
+              </p>
+              <p class="mb-2">
+                Disponible para venta:
+                <span
+                  class="badge"
+                  [class.text-bg-success]="resultado.disponibleParaVenta"
+                  [class.text-bg-danger]="!resultado.disponibleParaVenta"
+                >
+                  {{ resultado.disponibleParaVenta ? 'Sí' : 'No' }}
+                </span>
+              </p>
+              <a routerLink="/catalogo" class="btn btn-outline-success btn-sm mt-2">
+                Ver catálogo de ejemplares
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

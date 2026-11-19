@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Raíz Local - Mercado Botánico</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e4e3db", "on-primary": "#ffffff", "on-tertiary-container": "#e4a2a7", "surface-container-high": "#eae8e0", "inverse-on-surface": "#f3f1e9", "on-error": "#ffffff", "error-container": "#ffdad6", "surface": "#fbf9f1", "surface-dim": "#dcdad2", "on-primary-fixed-variant": "#244f37", "on-secondary-fixed-variant": "#7b2f02", "primary-fixed-dim": "#a2d1b2", "primary-fixed": "#beeecd", "secondary-fixed": "#ffdbcc", "on-tertiary": "#ffffff", "primary-container": "#234e36", "surface-tint": "#3c674d", "on-error-container": "#93000a", "inverse-surface": "#30312c", "secondary-fixed-dim": "#ffb695", "surface-variant": "#e4e3db", "surface-container-lowest": "#ffffff", "on-tertiary-fixed-variant": "#6a383d", "background": "#fbf9f1", "surface-bright": "#fbf9f1", "on-tertiary-fixed": "#350e14", "on-secondary": "#ffffff", "tertiary-container": "#68373c", "surface-container-low": "#f6f4ec", "secondary": "#994619", "secondary-container": "#ff9563", "on-secondary-container": "#762c00", "on-primary-fixed": "#002111", "on-primary-container": "#90bea0", "tertiary": "#4d2127", "primary": "#083721", "inverse-primary": "#a2d1b2", "outline-variant": "#c1c9c0", "on-surface-variant": "#414943", "on-surface": "#1b1c17", "tertiary-fixed-dim": "#fab5ba", "surface-container": "#f0eee6", "on-background": "#1b1c17", "on-secondary-fixed": "#351000", "outline": "#717972", "error": "#ba1a1a", "tertiary-fixed": "#ffdadb" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1.5rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter-sm": "1rem", "space-xl": "2rem", "gutter": "1.5rem", "space-xs": "0.25rem", "margin-sm": "1rem", "space-md": "1rem", "margin-lg": "3rem", "gutter-lg": "2rem", "space-2xl": "3rem" }, "fontFamily": { "label-sm": ["Manrope"], "headline-lg": ["Epilogue"], "display-lg": ["Epilogue"], "label-md": ["Manrope"], "body-md": ["Manrope"], "body-sm": ["Manrope"], "body-lg": ["Manrope"], "label-lg": ["Manrope"], "headline-md": ["Epilogue"], "headline-sm": ["Epilogue"], "display-lg-mobile": ["Epilogue"] }, "fontSize": { "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }] } } } };</script></head><body class="bg-surface-container-low font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-primary-container shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-[1280px] mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Raíz Local Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrAL9XP5y3ntN0XUr2rdQZgr4qL2Pkn4tyYnB8vs8kiN3KF_Pb4h1EJl5gZMctmh7tgxn7rro67NCajIbV8rxoOdaD0od3c5BiOyZ5Gia_Et4RjRNzUtDsec8RLrVnM9_MERQA1FeAmRCfrJ_7USTLGZEQE0PogA2oQZt7mCrYocj9dgvHZ4xtNp7q-HU4rFxLfNwZ5ZiUzk2iutLMeWItiZPwHKLvFZLhGpNmqtEnyb"/><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span></div><nav class="hidden md:flex items-center gap-space-xl" data-active-classes="text-on-primary font-bold border-b-2 border-secondary-container"><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="inicio" href="#">Inicio</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="catalogo-de-ejemplares" href="#">Catálogo de Ejemplares</a><a class="font-label-lg text-label-lg text-on-primary-container hover:text-on-primary transition-colors py-space-xs" data-path="armar-kit" href="#">Armar Kit</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg px-space-lg py-space-sm rounded-lg transition-colors shadow-[0_1px_3px_rgba(35,78,54,0.05)]" data-path="iniciar-sesion" href="#">Iniciar Sesión</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button aria-label="Abrir menú" class="md:hidden flex items-center justify-center p-space-sm rounded-lg text-on-primary hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button></div></div></header><main class="w-full pt-20 bg-surface-container-low flex-1"><div class="flex flex-col w-full">
+<!-- Dynamic script active link highlighter for Shell nav -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const armarKitLink = document.querySelector('header nav a[data-path="armar-kit"]');
+      if (armarKitLink) {
+        armarKitLink.className = "font-label-lg text-label-lg text-on-primary font-bold border-b-2 border-secondary-container py-space-xs transition-colors";
+      }
+    });
+  </script>
+<!-- Context Navigation & Header Banner Section -->
+<section class="w-full bg-surface-container-low pt-space-xl pb-space-lg">
+<div class="max-w-[1280px] mx-auto px-gutter flex flex-col gap-space-md">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="#">Inicio</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Armar Kit</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Configurador de Kit Personalizado</span>
+</nav>
+<!-- Main Headline Group -->
+<div class="max-w-4xl flex flex-col gap-space-xs">
+<div class="inline-flex items-center gap-2 self-start bg-surface-container px-3 py-1 rounded-full text-primary font-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px] text-secondary">potted_plant</span>
+          Viverismo Consciente del Quindío
+        </div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+          Arma tu Kit de Jardinería Personalizado
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Combina ejemplares botánicos y artículos esenciales de cuidado artesanal (sustrato preparado, macetas de terracota torneadas a mano, abono orgánico y regaderas de precisión) de viveros locales del Quindío y obtén hasta un 20% de descuento automático en tu despacho.
+        </p>
+</div>
+<!-- Progressive Discount Tier Banner -->
+<div class="w-full mt-space-sm bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">eco</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Descuento escalonado automático</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Entre más complementas el hábitat de tus plantas, más ahorras en empaque y flete.</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="px-3 py-1 rounded-full text-on-surface-variant bg-surface-container font-label-sm text-label-sm">
+            2 artículos = <strong>5% OFF</strong>
+</span>
+<span class="px-3 py-1 rounded-full text-on-secondary bg-primary-container font-label-sm text-label-sm shadow-sm ring-1 ring-primary-container">
+            3 artículos = <strong>10% OFF</strong> ✨ Activo
+          </span>
+<span class="px-3 py-1 rounded-full text-secondary bg-secondary-fixed font-label-sm text-label-sm font-bold">
+            4+ artículos = <strong>20% OFF</strong>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 2-Column Responsive Layout -->
+<section class="w-full pb-space-2xl">
+<div class="max-w-[1280px] mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column: Catalog & Selection (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Category Pills Filter Bar -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-xs" id="categoryFilters">
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-primary-container text-on-primary transition-all shadow-sm" type="button">
+              Todos (6)
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors" type="button">
+              Macetas Artesanales
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors" type="button">
+              Sustratos Vivos
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors" type="button">
+              Nutrición y Abonos
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors" type="button">
+              Herramientas de Cuidado
+            </button>
+</div>
+<!-- Product Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md" id="catalogGrid">
+<!-- Item 1: Maceta Filandia (Selected) -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-300 flex flex-col justify-between group hover:shadow-md ring-2 ring-primary">
+<div class="flex flex-col gap-space-sm">
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Handcrafted terracotta planter from Filandia Quindio with natural earthy porous texture, warm daylight, artisanal pottery with subtle clay marks and matching saucer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChrhIpomP_s9Yn88GRCu3fC2E0FC4ZRIPVK1HbdSdcNbT7v2HHE1sEN1iD09RBonMFeV8HwCxyJVqqTb29LIhHt_KWZIZNbcB1XSnkmLnxhNZbSB_vf9IIQq1Nt1gyMwgTmMjVJAbtX41YDToLDu5eW9vjeXPz3kj0ej5BPRPeFmlwv5ZXu_UBF7bx4EjFA2RmZcxuHJdIOWkX2a83o9-oAlCOHRzP3CT4_LxANpI"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                    Macetas Artesanales
+                  </span>
+<span class="absolute top-2 right-2 w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">
+                    Maceta de Terracota Filandia (20cm)
+                  </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                    Torneada en arcilla roja transpirable. Incluye plato base independiente y orificio de drenaje optimizado para oxigenación radicular.
+                  </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio unitario</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$24.000 <span class="font-label-sm text-label-sm font-normal">COP</span></span>
+</div>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">done</span>
+                  Agregado al Kit
+                </button>
+</div>
+</article>
+<!-- Item 2: Sustrato Aráceas (Selected) -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-300 flex flex-col justify-between group hover:shadow-md ring-2 ring-primary">
+<div class="flex flex-col gap-space-sm">
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Special living airy substrate mix for aroids and monstera plants showing pine bark, volcanic perlite, chunky coconut chips with rich botanical earthy texture, warm diffuse light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClxUPF3unsX-uDL2LXh0IzLvNMyNfz3-6lli2LaU7BPWxMdYO1ad2FkeNMmx17Xsn3Nod1Ju8CSao0rIMT8NJgYgHXm_rh8aPGFi61UQkfruimUzuY2rez3zjRovi2wEP5xzST4yJXt3lH9vI6ZJR_DBcdxW2qesjglafl-4J-N3d85O7Gf7aDWbpqWPOMccydaeRotGbXRyBd9VeU3q0SYKQy2UZFCmo5AHG4MBM"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                    Sustratos Vivos
+                  </span>
+<span class="absolute top-2 right-2 w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">
+                    Sustrato Especial Aráceas y Monsteras (4L)
+                  </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                    Mezcla premium con corteza de pino compostada, trozos de coco desalinizado, carbón activado y perlita volcánica de alta aireación.
+                  </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio unitario</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$16.000 <span class="font-label-sm text-label-sm font-normal">COP</span></span>
+</div>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">done</span>
+                  Agregado al Kit
+                </button>
+</div>
+</article>
+<!-- Item 3: Humus de Lombriz (Unselected) -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-300 flex flex-col justify-between group hover:shadow-md">
+<div class="flex flex-col gap-space-sm">
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Organic californian earthworm humus with beneficial mycorrhizae inoculants in artisanal craft paper packaging with botanical Quindio coffee farm stamp, soft rustic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVDllJxN54B9ibIJYQVm4FRBOWJXgUwE185FoEq54tLSYX1-Y3Wll8fWbG3AKD74UG6WL9z6jzXReZNhw68p8Gc8eMZ4heQShZ9drYpRWeSaY5vXWTYLqEWhHOm--v5hS__PdbpMMIzuVTgqLaxuLEQmx2ClawaDUBcb-yb3PwMIlGSjRwX2Lq_bTmBnoYWgSY5aqkh6QrFSAJ9q0-_mAfyBT2snU1xAM5XylaM6Q"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                    Nutrición Botánica
+                  </span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">
+                    Humus de Lombriz y Micorrizas (1.5 kg)
+                  </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                    Abono 100% orgánico madurado de fincas cafeteras de Armenia. Regenera microbiología del suelo e incrementa asimilación radicular.
+                  </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio unitario</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$14.000 <span class="font-label-sm text-label-sm font-normal">COP</span></span>
+</div>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                  Agregar al Kit
+                </button>
+</div>
+</article>
+<!-- Item 4: Regadera de Precisión (Selected) -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-300 flex flex-col justify-between group hover:shadow-md ring-2 ring-primary">
+<div class="flex flex-col gap-space-sm">
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Elegant long narrow spout watering can made of spun copper and terracotta accents resting on wooden greenhouse table with gentle mist and soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLPTNB14xm8t5psLgJp3t7l_-H5BlcUdDSgdk4eimmx7t6fozd_KoIyjZOhBtyiw8Iim8B3pQVVjoxSQcm65tdPEZui0OtpH4_3dKTgYVWyrtxcL_l4r1RoKAaI0WwxDlQSAeYVsuJn7koukzKybqQzI6ut8b9iTn3afJ8pjAaYActvTG4D5f-Xy5qmGd6JwSp0I4T4Efx7AH1ueOVedRXipan3YbDhIYhPdOx9Uo"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                    Herramientas
+                  </span>
+<span class="absolute top-2 right-2 w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">
+                    Regadera de Precisión Cuello Largo (1.2L)
+                  </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                    Fabricada en aleación de cobre y mango con acabado terracota. Riego foliar controlado hasta la base sin salpicar las hojas tiernas.
+                  </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio unitario</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$38.000 <span class="font-label-sm text-label-sm font-normal">COP</span></span>
+</div>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:opacity-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">done</span>
+                  Agregado al Kit
+                </button>
+</div>
+</article>
+<!-- Item 5: Aceite de Neem (Unselected) -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-300 flex flex-col justify-between group hover:shadow-md">
+<div class="flex flex-col gap-space-sm">
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Amber glass apothecary dropper bottle of cold pressed neem oil and potassium soap with botanical label next to lush green foliage in natural daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc6oIev1ZqqLu-_HFzU02D1x6Cw_UF_W-2BJTE65xH8cymh-QNVvivDHnN7Rx--C3xmX2YOR9IGTGrT5kp4UPE_p3ODOSCiuq5v_-ZZ8TxC8YGN-5nm2JDBITSSk3-iz7LoJU-tCa5WXP_uRsyDc_ZFhMvDbE5GyiUzT5LZwkyq2oBmQE-2y9fs_yvOhJ6komde7Kszg1MQtNnU4zF_bC_L_8mYjj9yuAzbHVI13M"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                    Fitosanidad Preventiva
+                  </span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">
+                    Aceite de Neem + Jabón Potásico (250 ml)
+                  </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                    Emulsión preventiva ecológica prensada en frío. Barrera bioactiva contra trips, ácaros, cochinilla algodonosa y hongos foliares.
+                  </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio unitario</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$18.000 <span class="font-label-sm text-label-sm font-normal">COP</span></span>
+</div>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                  Agregar al Kit
+                </button>
+</div>
+</article>
+<!-- Item 6: Tijeras de Poda Japonesas (Unselected) -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-300 flex flex-col justify-between group hover:shadow-md">
+<div class="flex flex-col gap-space-sm">
+<div class="relative w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Artisanal precision botanical pruning shears with ergonomic textured handle and sharp carbon steel blades cutting a healthy plant cutting in bright greenhouse" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhuxECd5O6kC24f0B6F9tmcsxqyHxF0BuKkSZgw2o3pFn1eAjvj_Os8j-iMC7giVQqUwX4sOBuskT4kjyrTx5V6OZH0aHmOOK0zS00K3LWlBwFqhUdpJlO0Fmx66Cd3hZqhyPHvtkDFishDpAvHwN8OGhT5c3FxnuIyGG102wsYtlX23QyIYQEoemNs3G4-eVErOQBCZYRdRuX4N2AN8U5AOTQcloEYavjdYX03Xo"/>
+<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+                    Herramientas
+                  </span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight">
+                    Tijeras de Poda Ergonómicas Acero Japonés
+                  </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                    Hojas con afilado de navaja para podas higiénicas de mantenimiento y esquejado de tallos leñosos sin magullar los tejidos vivos.
+                  </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio unitario</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$28.000 <span class="font-label-sm text-label-sm font-normal">COP</span></span>
+</div>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                  Agregar al Kit
+                </button>
+</div>
+</article>
+</div>
+</div>
+<!-- Right Column: Sticky Summary Panel (4 cols) -->
+<aside class="lg:col-span-4 sticky top-24">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-md flex flex-col gap-space-md">
+<!-- Header of Summary -->
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wider">Configuración en vivo</span>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Tu Kit Personalizado</h3>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+</div>
+<!-- Custom Kit Name Input -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-bold" for="kitName">
+                Nombre de tu kit
+              </label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="kitName" placeholder="Ej: Kit Selva Urbana Sala" type="text" value="Kit Bienvenida para mi Monstera"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant text-[20px] pointer-events-none">edit</span>
+</div>
+</div>
+<!-- Discount Step Progress Bar Widget -->
+<div class="bg-surface-container-low p-3.5 rounded-xl flex flex-col gap-2">
+<div class="flex items-center justify-between text-on-surface">
+<span class="font-label-sm text-label-sm font-bold flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[16px]">local_offer</span>
+                  10% OFF aplicado (3 artículos)
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">75% meta</span>
+</div>
+<!-- Custom Visual Track -->
+<div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full transition-all duration-700 ease-out" style="width: 75%;"></div>
+</div>
+<p class="font-body-sm text-body-sm text-primary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[16px] text-secondary">arrow_circle_up</span>
+                ¡Estás a 1 artículo del 20% de Descuento Total!
+              </p>
+</div>
+<!-- Current Selected Items List -->
+<div class="flex flex-col gap-2.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+<span>Artículos incluidos</span>
+<span>3 unidades</span>
+</div>
+<div class="flex flex-col gap-2 divide-y divide-surface-container">
+<!-- Selected 1 -->
+<div class="pt-2 first:pt-0 flex items-center justify-between gap-2 group">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Terracotta pot thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6G0HmxVrDpa2B8Rr0ZX3_cfAtlzzshNlFLHYeJuSzNnhX3MuxyLK9PdgGPM_Xu2PtU0YnDJx5BTWtUA0fSm6iZB1_EftdshDBr0q3MbnixOafLSsQjlpI65a0J3D2Dtyuq59pN7JFDGHCfwcjZghhb_tuGUh0ZpdD1gT5xia49WBKCiItDBUadFp6zLyJ_M05Bsqk6IuTVxjcdSGacSZ-bfnU1jNlm0e3-MPFjn4"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Maceta Filandia (20cm)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">$24.000 COP</span>
+</div>
+</div>
+<button aria-label="Eliminar Maceta" class="w-7 h-7 rounded-md hover:bg-error-container hover:text-on-error-container text-on-surface-variant flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Selected 2 -->
+<div class="pt-2 flex items-center justify-between gap-2 group">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Aroid substrate thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1BmHQA1ujVeC1x7A3v1K3Jd6sW0h-k-e3DtPkQ9TICtiPIHBGEtiDf5zaGcWdlHzasKrcT7jQm65o6xM17xpnGvU1kw8SmaavSPVx2gZReuxjukkOsLOyLew_moZDlMDerqfQs5uUdBuIaC5tvicr5K46RjMTHYqne8n2VQegQKo-Cw5ryGzSr1qTF7ARQnkmqA9f6p7W1UsrStPFNDao_m5MXj75qUdFyrhGNmc"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Sustrato Aráceas (4L)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">$16.000 COP</span>
+</div>
+</div>
+<button aria-label="Eliminar Sustrato" class="w-7 h-7 rounded-md hover:bg-error-container hover:text-on-error-container text-on-surface-variant flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Selected 3 -->
+<div class="pt-2 flex items-center justify-between gap-2 group">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Copper watering can thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiHWHtlgSQxGFn9A9YXzp02JL6wKqfdoBPdJxo2meBt3YGulEwnTU0cM88-pjbtuJOa0S4HqKlHwnwv6adWUu713XYs6oz7hwy0R5vNadqAHqcRAnwtPos3KVhHKopxJXiMZL6iBq0uOTHFuyr0Mfu8xPkVDQSZBU5GqNy4yP9wmGdJZ3tH7zMgl1rB_E837PBbSLcXitkHmEEb1MUv9fupcqRlCXvUnli6Ik9YK0"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Regadera de Precisión (1.2L)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">$38.000 COP</span>
+</div>
+</div>
+<button aria-label="Eliminar Regadera" class="w-7 h-7 rounded-md hover:bg-error-container hover:text-on-error-container text-on-surface-variant flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Price Breakdown Calculation -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-2 mt-space-xs">
+<div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Subtotal original:</span>
+<span class="line-through">$78.000 COP</span>
+</div>
+<div class="flex items-center justify-between font-label-md text-label-md text-secondary font-bold">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">percent</span>
+                  Descuento Kit (10%):
+                </span>
+<span>-$7.800 COP</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Envío local de proximidad:</span>
+<span class="text-primary font-semibold">$8.000 COP</span>
+</div>
+<div class="w-full bg-surface-container-highest h-px my-1"></div>
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase tracking-wider font-bold">Total Final Estimado</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Ahorras $7.800 COP en paquete</span>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-primary font-bold tracking-tight">$70.200</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">COP (IVA inc.)</span>
+</div>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="w-full min-h-[48px] px-space-lg py-3 rounded-lg bg-secondary hover:bg-on-secondary-container text-on-secondary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-sm transition-all hover:shadow hover:-translate-y-0.5 active:translate-y-0" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark_added</span>
+              Guardar Kit de Jardinería
+            </button>
+<!-- Trust Badge & Guarantee -->
+<div class="flex items-start gap-2 pt-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">verified_user</span>
+<p class="font-label-sm text-label-sm leading-relaxed">
+<strong>Garantía biológica Raíz Local:</strong> Empaque unificado 100% compostable con viruta de café y compatibilidad de sustrato verificada por agrónomos del Quindío.
+              </p>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-primary-container text-on-primary-container py-space-2xl"><div class="max-w-[1280px] mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-lg text-center md:text-left"><div class="flex flex-col gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">Raíz Local</span><p class="font-body-sm text-body-sm text-on-primary-container">Artesanía botánica, viveros locales y biodiversidad consciente.</p></div><div class="flex flex-col items-center md:items-end gap-space-xs"><p class="font-label-md text-label-md text-on-primary font-bold">Universidad del Quindío - Programación Avanzada</p><p class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Raíces vivas • Cultivo ético • Hecho con orgullo regional</p></div></div></footer></body></html>

@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Especie {
 
-    private Long id;
-    private String nombreComun;
-    private String nombreCientifico;
+    private final String id;
+    private final String nombreComun;
+    private final String nombreCientifico;
     private FichaDeCuidado fichaDeCuidado;
-    private Riesgo riesgo;
+    private final Riesgo riesgo;
 
-    public Especie(Long id, String nombreComun, String nombreCientifico,
+    private Especie(String id, String nombreComun, String nombreCientifico,
                    FichaDeCuidado fichaDeCuidado, Riesgo riesgo) {
         this.id = id;
         this.nombreComun = nombreComun;
@@ -19,12 +19,34 @@ public class Especie {
         this.riesgo = riesgo;
     }
 
-    public Long getId() {
+    public static Especie agregarAlCatalogo(String id, String nombreComun, String nombreCientifico,
+                                            FichaDeCuidado fichaDeCuidado, Riesgo riesgo){
+
+        return new Especie(id, nombreComun, nombreCientifico, fichaDeCuidado, riesgo);
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getNombreComun() {
+        return nombreComun;
+    }
+
+    public String getNombreCientifico() {
+        return nombreCientifico;
+    }
+
+    public FichaDeCuidado getFichaDeCuidado() {
+        return fichaDeCuidado;
+    }
+
+    public Riesgo getRiesgo() {
+        return riesgo;
+    }
+
+    public void actualizarFichaDeCuidado (FichaDeCuidado nuevaFicha){
+        this.fichaDeCuidado = nuevaFicha;
     }
 
     //Compara los objetos para saber si son iguales por su id

@@ -1,0 +1,126 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container-xxl px-4">
+    <div class="row g-5 align-items-center">
+      <!-- Columna Izquierda: Contenido Editorial -->
+      <div class="col-12 col-lg-6 order-2 order-lg-1">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Marketplace de Proximidad</span>
+        </div>
+
+        <h1 class="hero-title">
+          Plantas vivas desde el vivero más cercano a tu hogar
+        </h1>
+
+        <p class="hero-subtitle">
+          Actuamos como intermediarios conectando tu dirección con viveros
+          locales para evitar maltrato en envíos largos, asegurando que tus
+          plantas lleguen frescas, aclimatadas y llenas de vida.
+        </p>
+
+        <div class="d-flex flex-column flex-sm-row gap-3 mb-4">
+          <a routerLink="/catalogo" class="btn btn-primary hero-btn">
+            <span>Explorar Catálogo</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+          <a routerLink="/kits" class="btn hero-btn hero-btn-light">
+            <i class="bi bi-flower2"></i>
+            <span>Configurar Kit de Jardinería</span>
+          </a>
+        </div>
+
+        <div class="metrics-bar">
+          @for (metrica of metricas(); track metrica.etiqueta) {
+          <div class="metric-item">
+            <i class="bi {{ metrica.icono }}"
+              [class.metric-icon-accent]="metrica.color === 'terracota'"></i>
+            <span>
+              @if (metrica.valor) {
+                <strong>{{ metrica.valor }}</strong>
+              }
+              {{ metrica.etiqueta }}
+            </span>
+          </div>
+          }
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Marco Visual -->
+      <div class="col-12 col-lg-6 order-1 order-lg-2">
+        <div class="hero-visual">
+          <div class="hero-image">
+            <i class="bi bi-tree-fill"></i>
+          </div>
+          <div class="hero-guarantee">
+            <div class="hero-guarantee-icon">
+              <i class="bi bi-patch-check-fill"></i>
+            </div>
+            <div class="hero-guarantee-body">
+              <span class="hero-guarantee-title">Garantía Botánica Raíz</span>
+              <p class="hero-guarantee-text">
+                Ejemplares aclimatados a tu microclima local - 100% garantizados
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Propuesta de Valor (3 columnas) -->
+<section class="value-section">
+  <div class="container-xxl px-4">
+    <div class="value-header">
+      <span class="value-eyebrow">¿Por qué Raíz Local?</span>
+      <h2 class="value-title">
+        Cuidamos el trayecto y la vida de cada planta
+      </h2>
+      <div class="value-divider"></div>
+    </div>
+
+    <div class="row g-4">
+      @for (bloque of bloquesValor(); track bloque.titulo) {
+      <div class="col-12 col-md-4">
+        <div class="value-card">
+          <div class="value-icon"
+            [class.value-icon-accent]="bloque.color === 'terracota'">
+            <i class="bi {{ bloque.icono }}"></i>
+          </div>
+          <h3 class="value-card-title">{{ bloque.titulo }}</h3>
+          <p class="value-card-text">{{ bloque.descripcion }}</p>
+          <div class="value-card-footer"
+            [class.value-card-footer-accent]="bloque.color === 'terracota'">
+            <span class="value-dot"></span>
+            <span>{{ bloque.sello }}</span>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Banda Viveros Regionales -->
+<section class="nursery-section">
+  <div class="container-xxl px-4">
+    <div class="nursery-strip">
+      <div class="nursery-content">
+        <span class="nursery-eyebrow">
+          Red Hortícola del Eje Cafetero &amp; Región
+        </span>
+        <h3 class="nursery-title">
+          ¿Tienes un vivero o cultivas especies endémicas?
+        </h3>
+        <p class="nursery-text">
+          Súmate a la red de productores que entregan frescura inmediata y sin
+          intermediación industrial innecesaria.
+        </p>
+      </div>
+      <a routerLink="/registro" class="btn nursery-btn">
+        Registrar mi Vivero
+      </a>
+    </div>
+  </div>
+</section>

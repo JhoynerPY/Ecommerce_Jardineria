@@ -1,0 +1,198 @@
+<section class="auth-section">
+  <div class="container-xxl px-4">
+    <div class="auth-topbar">
+      <a routerLink="/" class="auth-back">
+        <i class="bi bi-arrow-left"></i>
+        <span>Volver al inicio</span>
+      </a>
+      <span class="auth-topbadge">
+        <i class="bi bi-flower1"></i>
+        <span>Viveros de Proximidad • Quindío</span>
+      </span>
+    </div>
+
+    <div class="auth-card">
+      <!-- Panel editorial -->
+      <aside class="auth-editorial">
+        <div class="auth-editorial-badge">
+          <i class="bi bi-flower2"></i>
+          <span>Raíz Local • Comunidad Botánica</span>
+        </div>
+        <h1 class="auth-editorial-title">
+          Conectando hogares con el alma de los viveros locales.
+        </h1>
+        <p class="auth-editorial-text">
+          Al comprar en Raíz Local garantizas ejemplares vivos aclimatados,
+          asesoría de agrónomos de la región y reducción medible de la huella de
+          transporte.
+        </p>
+        <ul class="auth-benefits">
+          <li>
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <strong>Ejemplares aclimatados</strong>
+              <span>Especies fortalecidas para adaptarse a tu microclima.</span>
+            </div>
+          </li>
+          <li>
+            <i class="bi bi-truck"></i>
+            <div>
+              <strong>Despacho de proximidad</strong>
+              <span>Entrega protegida sin largos confinamientos en cajas.</span>
+            </div>
+          </li>
+          <li>
+            <i class="bi bi-patch-check-fill"></i>
+            <div>
+              <strong>Trazabilidad directa</strong>
+              <span>Ficha biológica firmada por el cultivador artesanal.</span>
+            </div>
+          </li>
+        </ul>
+        <blockquote class="auth-quote">
+          “Nuestras plantas viajan minutos, no días. Llegan frescas, saludables y
+          listas para florecer en tu sala.”
+          <footer>
+            <span>Vivero El Bosque Nativo</span>
+            <span>Armenia, Quindío</span>
+          </footer>
+        </blockquote>
+      </aside>
+
+      <!-- Panel de formulario -->
+      <div class="auth-form-panel">
+        <div class="auth-tabs">
+          <a routerLink="/login" class="auth-tab active">Iniciar Sesión</a>
+          <a routerLink="/registro" class="auth-tab">Crear Cuenta</a>
+        </div>
+
+        <h2 class="auth-title">Iniciar Sesión</h2>
+        <p class="auth-subtitle">
+          Bienvenido de vuelta. Ingresa a tu cuenta para continuar con tus
+          pedidos, kits y ejemplares guardados.
+        </p>
+
+        <button type="button" class="auth-google" disabled>
+          <i class="bi bi-google"></i>
+          <span>Continuar con Google</span>
+        </button>
+        <div class="auth-separator"><span>o ingresa con tu correo</span></div>
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+          <div class="mb-3">
+            <label class="form-label auth-label" for="email"
+              >Correo electrónico</label
+            >
+            <div class="input-group auth-input-group">
+              <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="ejemplo@correo.com"
+                autocomplete="email"
+                [class.is-invalid]="email.invalid && (email.touched || email.dirty)"
+              />
+            </div>
+            @if (email.invalid && (email.touched || email.dirty)) {
+              <div class="invalid-feedback d-block">
+                @if (email.errors?.['required']) {
+                  El correo electrónico es obligatorio.
+                } @else if (email.errors?.['email']) {
+                  Ingresa un correo electrónico válido.
+                }
+              </div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <label class="form-label auth-label mb-0" for="password"
+                >Contraseña</label
+              >
+              <button
+                type="button"
+                class="auth-toggle"
+                (click)="alternarPassword()"
+              >
+                {{ mostrarPassword() ? 'Ocultar' : 'Ver' }}
+              </button>
+            </div>
+            <div class="input-group auth-input-group mt-1">
+              <span class="input-group-text"><i class="bi bi-lock"></i></span>
+              <input
+                id="password"
+                [type]="mostrarPassword() ? 'text' : 'password'"
+                class="form-control"
+                formControlName="password"
+                placeholder="Introduce tu contraseña"
+                autocomplete="current-password"
+                [class.is-invalid]="
+                  password.invalid && (password.touched || password.dirty)
+                "
+              />
+            </div>
+            @if (password.invalid && (password.touched || password.dirty)) {
+              <div class="invalid-feedback d-block">
+                La contraseña es obligatoria.
+              </div>
+            }
+          </div>
+
+          @if (mensajeError()) {
+            <div class="alert alert-danger auth-alert" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              {{ mensajeError() }}
+            </div>
+          }
+
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+            <label class="auth-remember">
+              <input type="checkbox" checked />
+              <span>Recordar mi sesión</span>
+            </label>
+            <a href="#" class="auth-link">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary auth-submit" [disabled]="cargando()">
+            @if (cargando()) {
+              <span class="spinner-border spinner-border-sm" role="status"></span>
+              <span>Ingresando...</span>
+            } @else {
+              <span>Ingresar a mi cuenta</span>
+              <i class="bi bi-arrow-right"></i>
+            }
+          </button>
+        </form>
+
+        <p class="auth-switch">
+          ¿No tienes cuenta aún?
+          <a routerLink="/registro">Regístrate como comprador</a>
+        </p>
+
+        <div class="auth-partner">
+          <span><i class="bi bi-flower3 me-2"></i>¿Eres un vivero o productor local?</span>
+          <a routerLink="/registro">Acceso Viveristas →</a>
+        </div>
+
+        <p class="auth-secure">
+          <i class="bi bi-shield-lock me-1"></i>
+          Conexión cifrada de extremo a extremo para tus pedidos y datos.
+        </p>
+      </div>
+    </div>
+
+    <div class="auth-footerbar">
+      <span>
+        <i class="bi bi-geo-alt me-1"></i>
+        Viveros afiliados: Salento, Calarcá, Montenegro y Armenia
+      </span>
+      <span class="d-flex gap-3">
+        <a href="#">Términos de Servicio</a>
+        <a href="#">Privacidad Botánica</a>
+        <a href="#">Soporte Agronómico</a>
+      </span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+.alert-light {
+  background-color: #f6f4ec;
+}

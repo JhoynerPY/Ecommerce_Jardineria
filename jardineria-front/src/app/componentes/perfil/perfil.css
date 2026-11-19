@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.nav-tabs .nav-link {
+  color: #234e36;
+}
+
+.nav-tabs .nav-link.active {
+  font-weight: 700;
+  border-color: #234e36 #234e36 #f6f4ec;
+}
+
+.tab-content {
+  min-height: 200px;
+}
