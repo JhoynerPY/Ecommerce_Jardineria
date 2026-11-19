@@ -129,37 +129,57 @@ GET    /api/admin/estadisticas
 
 ## 🔧 Configuración y Ejecución
 
-### Variables de entorno (application.yml)
-```yaml
-spring:
-  datasource:
-    url: jdbc:mariadb://localhost:3306/ecommerce_jardineria
-    username: root
-    password: root
+### Backend (Spring Boot)
 
-jwt:
-  secret: <clave-secreta-256-bits-minimo>
-  expiration: 86400000
-```
+Requisitos: **Java 21** y Gradle (usar el wrapper incluido).
 
-### Ejecutar
+**Opción A — H2 en memoria (perfil por defecto)**
 ```bash
-# Compilar
-./gradlew build
+# Windows PowerShell
+.\gradlew.bat bootRun
 
-# Ejecutar tests unitarios (sin BD)
-./gradlew test --tests "com.uniquindio.ecommerce.infrastructure.security.jwt.JwtUtilTest" \
-                  --tests "com.uniquindio.ecommerce.infrastructure.security.service.AuthServiceTest" \
-                  --tests "com.uniquindio.ecommerce.domain.*" \
-                  --tests "com.uniquindio.ecommerce.application.services.*"
-
-# Ejecutar TODOS los tests (requiere MariaDB corriendo)
-docker run -d -p 3306:3306 -e MARIADB_ROOT_PASSWORD=root -e MARIADB_DATABASE=ecommerce_jardineria mariadb:latest
-./gradlew test
-
-# Ejecutar aplicación
+# Linux / macOS
 ./gradlew bootRun
 ```
+- API: `http://localhost:8080`
+- Consola H2: `http://localhost:8080/h2-console`
+- JDBC URL: `jdbc:h2:mem:testdb`
+- Usuario: `sa` (sin contraseña)
+- `data.sql` se carga automáticamente al iniciar.
+
+**Opción B — MariaDB 11 con Docker**
+```bash
+docker run --name jardineria-mariadb \
+  -e MARIADB_ROOT_PASSWORD=root \
+  -e MARIADB_DATABASE=jardineria_db \
+  -p 3307:3306 \
+  -d mariadb:11
+
+# Windows PowerShell
+.\gradlew.bat bootRun --args=--spring.profiles.active=mariadb
+
+# Linux / macOS
+./gradlew bootRun --args='--spring.profiles.active=mariadb'
+```
+- URL: `jdbc:mariadb://localhost:3307/jardineria_db`
+- Usuario: `root` / contraseña: `root`
+- El perfil `mariadb` usa `ddl-auto=update` y `spring.sql.init.mode=never`.
+
+**Tests**
+```bash
+.\gradlew.bat test
+```
+
+### Frontend (Angular)
+```bash
+cd jardineria-front
+npm install
+npm start
+```
+- Aplicación: `http://localhost:4200`
+- Build de producción: `npm run build`
+
+> La sección **Entrega 3** incluye el detalle de usuarios de prueba, pantallas y funcionalidades.
 
 ## 📚 Documentación de Entregas
 
@@ -191,10 +211,89 @@ docker run -d -p 3306:3306 -e MARIADB_ROOT_PASSWORD=root -e MARIADB_DATABASE=eco
 
 ---
 
+## 🌱 Entrega 3 — Frontend Angular y Funcionalidad de Negocio
+
+### Nicho de negocio
+
+**Raíz Local** es un marketplace de proximidad para viveros y venta de plantas, macetas, sustratos y kits de jardinería. El sistema conecta compradores con viveros aliados, calcula cobertura por distancia, gestiona pedidos con exención de responsabilidad y permite armar kits personalizados con descuento por paquete.
+
+### Integrantes
+
+- **Jhoyner Santiago Páez Yate**
+- **Jeffry Ceballos**
+
+Programación Avanzada — Universidad del Quindío.
+
+### Cómo ejecutar el proyecto completo
+
+**1. Backend (raíz del repositorio)**
+
+```bash
+# H2 en memoria (por defecto)
+.\gradlew.bat bootRun
+
+# MariaDB 11 con Docker
+docker run --name jardineria-mariadb \
+  -e MARIADB_ROOT_PASSWORD=root \
+  -e MARIADB_DATABASE=jardineria_db \
+  -p 3307:3306 \
+  -d mariadb:11
+.\gradlew.bat bootRun --args=--spring.profiles.active=mariadb
+```
+
+**2. Frontend**
+
+```bash
+cd jardineria-front
+npm install
+npm start
+```
+
+Abrir `http://localhost:4200`. El backend debe estar corriendo en `http://localhost:8080`.
+
+### Usuarios de prueba
+
+| Correo | Contraseña | Rol |
+|---|---|---|
+| `comprador@test.com` | `password123` | `COMPRADOR` |
+| `vendedor@test.com` | `password123` | `VENDEDOR_VIVERO` |
+| `admin@test.com` | `password123` | `ADMIN` (+ `COMPRADOR`, `VENDEDOR_VIVERO`) |
+| `maria.gonzalez@email.com` | `password123` | `COMPRADOR` |
+| `contacto@eljardin.com` | `password123` | `VENDEDOR_VIVERO` |
+
+> En el código el rol de vendedor es `VENDEDOR_VIVERO`; la rúbrica lo abrevia como `VENDEDOR`.
+
+### Pantallas y rutas de Angular
+
+| Ruta | Pantalla | Acceso |
+|---|---|---|
+| `/` | Inicio | Pública |
+| `/login` | Iniciar sesión | Pública (redirige al catálogo si ya hay sesión) |
+| `/registro` | Registro | Pública (redirige al catálogo si ya hay sesión) |
+| `/catalogo` | Catálogo de ejemplares | Pública |
+| `/pedidos` | Mis pedidos / crear pedido | Privada (`authGuard`) |
+| `/kits` | Configurador de kits de jardinería | Privada (`authGuard`) |
+| `/inventario-vivero` | Gestión de vivero / estado de salud | Privada por rol (`VENDEDOR_VIVERO` / `ADMIN`) |
+| `**` | Redirección a inicio | — |
+
+### Funcionalidades de la Entrega 3
+
+- Autenticación JWT, guards funcionales y `rolGuard`.
+- Catálogo paginado con filtros y búsqueda contra el backend.
+- Creación de pedidos con exención de responsabilidad y validaciones.
+- Panel de vendedor para actualizar `EstadoDeSalud` de ejemplares.
+- Configurador de kits con selección de artículos, cálculo en vivo, validación de maceta compatible, nombre y persistencia real.
+- Perfil MariaDB listo para Docker; perfil por defecto H2 intacto para desarrollo y pruebas.
+
+---
+
 ## 👥 Autores
 
-- Equipo de desarrollo - Programación Avanzada - Universidad del Quindío
+- **Jhoyner Santiago Páez Yate**
+- **Jeffry Ceballos**
+
+Equipo de desarrollo — Programación Avanzada — Universidad del Quindío.
 
 ## 📄 Licencia
 
-Proyecto académico - Entrega 2
+Proyecto académico — Entrega 3

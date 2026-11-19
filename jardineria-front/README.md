@@ -1,59 +1,65 @@
-# JardineriaFront
+# Raíz Local — Frontend Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.8.
+Frontend de **Raíz Local**, marketplace de proximidad para viveros y venta de plantas, macetas, sustratos y kits de jardinería.
 
-## Development server
+## Integrantes
 
-To start a local development server, run:
+- **Jhoyner Santiago Páez Yate**
+- **Jeffry Ceballos**
 
-```bash
-ng serve
-```
+Programación Avanzada — Universidad del Quindío.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Requisitos
 
-## Code scaffolding
+- Node.js 20.19+ o 22.12+
+- Backend ejecutándose en `http://localhost:8080`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Ejecutar
 
 ```bash
-ng generate --help
+npm install
+npm start
 ```
 
-## Building
+Abrir `http://localhost:4200`.
 
-To build the project run:
+Build de producción:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Usuarios de prueba
 
-## Running unit tests
+| Correo | Contraseña | Rol |
+|---|---|---|
+| `comprador@test.com` | `password123` | `COMPRADOR` |
+| `vendedor@test.com` | `password123` | `VENDEDOR_VIVERO` |
+| `admin@test.com` | `password123` | `ADMIN` (+ `COMPRADOR`, `VENDEDOR_VIVERO`) |
+| `maria.gonzalez@email.com` | `password123` | `COMPRADOR` |
+| `contacto@eljardin.com` | `password123` | `VENDEDOR_VIVERO` |
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Pantallas y rutas
 
-```bash
-ng test
-```
+| Ruta | Pantalla | Acceso |
+|---|---|---|
+| `/` | Inicio | Pública |
+| `/login` | Iniciar sesión | Pública |
+| `/registro` | Registro | Pública |
+| `/catalogo` | Catálogo de ejemplares | Pública |
+| `/pedidos` | Mis pedidos / crear pedido | Privada (`authGuard`) |
+| `/kits` | Configurador de kits de jardinería | Privada (`authGuard`) |
+| `/inventario-vivero` | Gestión de vivero / estado de salud | `VENDEDOR_VIVERO` / `ADMIN` |
+| `**` | Redirección a inicio | — |
 
-## Running end-to-end tests
+## Funcionalidades destacadas
 
-For end-to-end (e2e) testing, run:
+- Autenticación JWT con interceptor y guards.
+- Catálogo paginado con filtros y búsqueda en backend.
+- Creación de pedidos con exención de responsabilidad.
+- Panel de vendedor para actualizar `EstadoDeSalud`.
+- Configurador de kits con resumen en vivo, descuento del 15% y persistencia real.
 
-```bash
-ng e2e
-```
+## Backend
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Consulta el [README principal](../README.md) para ejecutar el backend con H2 o con el perfil MariaDB en Docker.

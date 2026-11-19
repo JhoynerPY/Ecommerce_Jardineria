@@ -265,3 +265,21 @@
 - [x] Ejecutar `.\gradlew.bat clean test` y confirmar que los tests en H2 siguen pasando en verde.
 
 **Verificación:** `./gradlew test` en verde; el perfil por defecto sigue usando H2 y MariaDB queda disponible con `--spring.profiles.active=mariadb`.
+
+---
+
+## FASE 7: Documentación y Cierre
+
+### Tarea 7.1 — Completar README.md con nicho, integrantes, ejecución, usuarios y pantallas
+**Rama sugerida:** `feature/docs-entrega3`
+**Criterios cubiertos:** Documentación + Entrega 3
+
+- [x] Actualizar `README.md` de la raíz conservando la tabla de correcciones y la sección de pruebas avanzadas de la Entrega 2.
+- [x] Documentar el nicho de negocio y la lista de integrantes del equipo.
+- [x] Documentar la ejecución del backend con H2 por defecto y con el perfil `mariadb` en Docker, además del frontend con `npm install` y `npm start`.
+- [x] Agregar la tabla real de usuarios de prueba extraída de `data.sql` con correo, contraseña y rol.
+- [x] Agregar la lista completa de pantallas y rutas de Angular, indicando cuáles son públicas, privadas o por rol.
+- [x] Actualizar `jardineria-front/README.md` con requisitos, ejecución, usuarios de prueba y pantallas del frontend.
+- [x] Marcar la Tarea 7.1 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`.
+
+**Verificación:** El README de la raíz y el del frontend muestran instrucciones reproducibles, usuarios de prueba y el inventario de pantallas de la Entrega 3.
