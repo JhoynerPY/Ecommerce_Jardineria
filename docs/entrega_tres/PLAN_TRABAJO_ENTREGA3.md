@@ -166,3 +166,17 @@
 - [x] Verificar compilación con `npm run build`.
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 3.2 — Catálogo con cuadrícula, filtros con debounce y paginación real
+
+**Rama sugerida:** `feature/catalogo-ui`  
+**Criterios cubiertos:** Frontend Conectado al Backend + Interfaz de usuario
+
+- [x] Maquetar `src/app/componentes/catalogo/` (`catalogo.ts`, `catalogo.html`, `catalogo.css`) conectado 100% a `CatalogoService`.
+- [x] Implementar filtros reactivos con `signal` y `effect` con debounce de 350 ms para nombre de especie, etapa de crecimiento y rango de precio, reseteando a página 0 al filtrar.
+- [x] Implementar paginación real del servidor con botones Anterior/Siguiente, texto `Página X de Y` y `size = 6`.
+- [x] Renderizar cada ejemplar en tarjeta Bootstrap (`row-cols-1 row-cols-md-2 row-cols-lg-3 g-4`, `card h-100 shadow-sm rounded-3`) con especie, etapa en badge Terracota, precio en COP, disponibilidad y botón para iniciar pedido.
+- [x] Mostrar spinner de carga y estado vacío con el mensaje `No se encontraron ejemplares con esos criterios`.
+- [x] Verificar compilación con `npm run build`.
+
+**Verificación:** En F12 → Network, al buscar y cambiar de página se envían peticiones con `page` y `size` a `localhost:8080`; la respuesta incluye `contenido` y `totalPaginas`. Los registros con `deleted = true` no aparecen porque la query filtra `e.deleted = false`.

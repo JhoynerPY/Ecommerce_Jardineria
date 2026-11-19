@@ -1,1 +1,212 @@
-<p>catalogo works!</p>
+<section class="catalogo-hero mb-4">
+  <span class="badge bg-success-subtle text-success-emphasis rounded-pill mb-2">
+    Ecoregión Cafetera · Trazabilidad 100% viva
+  </span>
+  <h1 class="h2 fw-bold text-success mb-2">Catálogo de Ejemplares Botánicos</h1>
+  <p class="text-secondary mb-0">
+    Plantas vivas seleccionadas directamente desde viveros locales del Eje Cafetero. Elige
+    ejemplares aclimatados a tu entorno.
+  </p>
+</section>
+
+<section class="card border-0 shadow-sm rounded-3 mb-4">
+  <div class="card-body p-4">
+    <div class="row g-3 align-items-end">
+      <div class="col-12 col-lg-4">
+        <label class="form-label fw-semibold" for="busqueda">Buscar especie o variedad</label>
+        <div class="input-group">
+          <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+          <input
+            id="busqueda"
+            type="search"
+            class="form-control"
+            placeholder="Buscar por nombre común o científico..."
+            [value]="nombre()"
+            (input)="actualizarNombre($any($event.target).value)"
+          />
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <label class="form-label fw-semibold" for="etapa">Etapa de Crecimiento</label>
+        <select
+          id="etapa"
+          class="form-select"
+          [value]="etapa()"
+          (change)="actualizarEtapa($any($event.target).value)"
+        >
+          <option value="">Todas las etapas</option>
+          @for (opcion of etapas; track opcion.valor) {
+            <option [value]="opcion.valor">{{ opcion.etiqueta }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <label class="form-label fw-semibold">Rango de Precio (COP)</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Mín"
+            min="0"
+            step="5000"
+            [value]="precioMin() ?? ''"
+            (input)="actualizarPrecioMin($any($event.target).value)"
+          />
+          <span class="input-group-text">-</span>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Máx"
+            min="0"
+            step="5000"
+            [value]="precioMax() ?? ''"
+            (input)="actualizarPrecioMax($any($event.target).value)"
+          />
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-2 d-grid">
+        <button type="button" class="btn btn-outline-secondary" (click)="limpiarFiltros()">
+          <i class="bi bi-eraser me-1"></i>Limpiar
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3 pt-3 border-top">
+      <span class="text-secondary small">
+        {{ totalElementos() }} ejemplares encontrados
+      </span>
+      <div class="d-flex flex-wrap gap-2">
+        @if (nombre()) {
+          <span class="badge bg-success-subtle text-success-emphasis">Nombre: {{ nombre() }}</span>
+        }
+        @if (etapa()) {
+          <span class="badge badge-terracota">Etapa: {{ etapa() }}</span>
+        }
+        @if (precioMin() !== null) {
+          <span class="badge bg-success-subtle text-success-emphasis">
+            Desde: {{ precioMin() | number: '1.0-0' }} COP
+          </span>
+        }
+        @if (precioMax() !== null) {
+          <span class="badge bg-success-subtle text-success-emphasis">
+            Hasta: {{ precioMax() | number: '1.0-0' }} COP
+          </span>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+@if (cargando()) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Cargando ejemplares...</span>
+    </div>
+    <p class="text-secondary mt-3 mb-0">Consultando ejemplares disponibles...</p>
+  </div>
+} @else if (error()) {
+  <div class="alert alert-danger rounded-3 shadow-sm" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error() }}
+  </div>
+} @else if (ejemplares().length === 0) {
+  <div class="text-center py-5 bg-white rounded-3 shadow-sm">
+    <i class="bi bi-flower2 display-4 text-secondary"></i>
+    <h2 class="h5 fw-bold mt-3 mb-2">No se encontraron ejemplares con esos criterios</h2>
+    <p class="text-secondary mb-3">Intenta con otro nombre, etapa o rango de precio.</p>
+    <button type="button" class="btn btn-terracota" (click)="limpiarFiltros()">
+      Limpiar filtros
+    </button>
+  </div>
+} @else {
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @for (ejemplar of ejemplares(); track ejemplar.ejemplarId) {
+      <div class="col">
+        <article class="card h-100 shadow-sm rounded-3 border-0">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+              <span class="badge badge-terracota">{{ ejemplar.etapaCrecimiento }}</span>
+              @if (ejemplar.disponible) {
+                <span class="badge bg-success-subtle text-success-emphasis">Disponible</span>
+              } @else {
+                <span class="badge bg-secondary-subtle text-secondary-emphasis">
+                  No disponible
+                </span>
+              }
+            </div>
+
+            <h2 class="h5 card-title fw-bold mb-1">{{ ejemplar.especieNombreComun }}</h2>
+            <p class="fst-italic text-secondary small mb-3">
+              {{ ejemplar.especieNombreCientifico }}
+            </p>
+
+            @if (ejemplar.viveroNombre) {
+              <p class="text-secondary small mb-3">
+                <i class="bi bi-geo-alt me-1"></i>{{ ejemplar.viveroNombre }}
+              </p>
+            }
+
+            <div class="mt-auto">
+              <div class="d-flex align-items-end justify-content-between gap-2 mb-3">
+                <div>
+                  <span class="d-block text-uppercase text-secondary small fw-bold">
+                    Precio vivo
+                  </span>
+                  <span class="h5 fw-bold text-success mb-0">
+                    {{ (ejemplar.precio ?? 0) | number: '1.0-0' }}
+                    <small class="text-secondary fw-normal">{{ ejemplar.moneda ?? 'COP' }}</small>
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-success w-100 fw-semibold"
+                [disabled]="!ejemplar.disponible"
+                (click)="iniciarPedido(ejemplar)"
+              >
+                <i class="bi bi-bag-plus me-2"></i>Iniciar pedido
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    }
+  </div>
+
+  <nav
+    class="d-flex flex-column align-items-center gap-2 mt-4"
+    aria-label="Paginación del catálogo"
+  >
+    <div class="d-inline-flex align-items-center gap-2 bg-white px-3 py-2 rounded-3 shadow-sm">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        [disabled]="!hayPaginaAnterior() || cargando()"
+        (click)="anterior()"
+      >
+        <i class="bi bi-chevron-left me-1"></i>Anterior
+      </button>
+
+      <span class="px-2 fw-semibold">
+        Página {{ paginaVisible() }} de {{ totalPaginas() }}
+      </span>
+
+      <button
+        type="button"
+        class="btn btn-success"
+        [disabled]="!hayPaginaSiguiente() || cargando()"
+        (click)="siguiente()"
+      >
+        Siguiente<i class="bi bi-chevron-right ms-1"></i>
+      </button>
+    </div>
+
+    <span class="text-secondary small">
+      Mostrando {{ ejemplares().length }} de {{ totalElementos() }} ejemplares
+    </span>
+  </nav>
+}

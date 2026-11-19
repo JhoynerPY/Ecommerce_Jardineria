@@ -1,0 +1,18 @@
+.catalogo-hero {
+  padding: 0.5rem 0;
+}
+
+.card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.75rem 1.5rem rgba(35, 78, 54, 0.12) !important;
+}
+
+.input-group-text {
+  border-color: #ced4da;
+}
