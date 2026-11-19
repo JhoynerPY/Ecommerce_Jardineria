@@ -150,3 +150,19 @@
 > "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: crea el interceptor funcional `src/app/interceptors/auth.interceptor.ts` (`HttpInterceptorFn`) que, si `AuthService` tiene token, clona la petición agregando `Authorization: Bearer <token>` (ningún servicio ni componente debe escribir el header a mano); con `catchError`, si el backend responde 401 y no es la petición de login, llama a `AuthService.cerrarSesion()`, muestra con `AvisoService` 'Tu sesión ha vencido o no es válida. Inicia sesión nuevamente.' y redirige a `/login`. Registra `authInterceptor` en `provideHttpClient(withInterceptors([authInterceptor]))` en `src/app/app.config.ts`. Crea los guards funcionales `src/app/guards/auth.guard.ts` (solo con sesión, si no avisa y va a `/login`), `src/app/guards/no-auth.guard.ts` (impide `/login` y `/registro` con sesión, redirige a `/catalogo`) y `src/app/guards/rol.guard.ts` (fábrica `rolGuard(rolesPermitidos: string[])` que verifica el rol del JWT; si no coincide, avisa acceso denegado y redirige a `/catalogo`). Aplica `noAuthGuard` a `/login` y `/registro` en `src/app/app.routes.ts`. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 2.4 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+---
+
+## FASE 3: Catálogo de Ejemplares Conectado al Backend
+
+### Tarea 3.1 — Modelo y servicio de catálogo con búsqueda paginada
+
+**Rama sugerida:** `feature/catalogo-servicio`  
+**Criterios cubiertos:** Frontend Conectado al Backend
+
+- [x] Ajustar `CatalogoController` para mapear los resultados de `buscarPlantasPorNombreYPrecio` a `PlantaBusquedaDTO` y exponer el filtro `etapa`.
+- [x] Crear `src/app/modelos/catalogo.model.ts` con `PlantaBusquedaDTO`, `FiltrosCatalogo` y `PaginaResponse<T>` respetando los nombres exactos del backend (`contenido`, `paginaActual`, `totalElementos`, `totalPaginas`).
+- [x] Crear `src/app/servicios/catalogo.service.ts` con `HttpClient`, `HttpParams` y `environment.apiUrl`, método `buscarEjemplares(filtros, page, size)` contra `GET /api/catalogo/ejemplares`.
+- [x] Verificar compilación con `npm run build`.
+
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
