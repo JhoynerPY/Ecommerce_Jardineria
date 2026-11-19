@@ -131,3 +131,22 @@
 > "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: implementa `src/app/componentes/login/` (`login.ts`, `login.html`, `login.css`) y `src/app/componentes/registro/` (`registro.ts`, `registro.html`, `registro.css`) con `ReactiveFormsModule`, validaciones, `signal` de carga y traducción de errores HTTP. Conecta login con `AuthService.login()` + `guardarSesion()` y registro con `AuthService.registrar()` + `guardarSesion()`, mostrando avisos con `AvisoService` y redirigiendo a `/catalogo` en caso de éxito. El registro debe reflejar los campos de `RegisterRequest` (nombre, email, password mínimo 6, roles COMPRADOR/VENDEDOR_VIVERO). Maqueta ambos formularios como la tarjeta de dos paneles de `docs/images/login.png` con Bootstrap 5, paleta 60-30-10 y lenguaje ubicuo. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 2.3 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 2.4 — Interceptor JWT y guards funcionales en `jardineria-front/`
+**Rama sugerida:** `feature/interceptor-guards`
+**Criterios cubiertos:** Frontend Conectado al Backend + Seguridad (Extra +3 pts con `rolGuard`)
+
+- [x] Crear `src/app/interceptors/auth.interceptor.ts` (`HttpInterceptorFn`): si `AuthService.obtenerToken()` devuelve token, clona la petición con `Authorization: Bearer <token>` (ningún servicio ni componente escribe el header a mano).
+- [x] En `catchError`, ante 401 que no sea `POST /auth/login`: llamar a `AuthService.cerrarSesion()`, mostrar con `AvisoService` "Tu sesión ha vencido o no es válida. Inicia sesión nuevamente." y redirigir a `/login`.
+- [x] Registrar `authInterceptor` en `provideHttpClient(withInterceptors([authInterceptor]))` dentro de `src/app/app.config.ts`.
+- [x] Crear `src/app/guards/auth.guard.ts`: permite el paso solo con sesión activa; si no, avisa y redirige a `/login`.
+- [x] Crear `src/app/guards/no-auth.guard.ts`: impide entrar a `/login` y `/registro` con sesión activa y redirige a `/catalogo`.
+- [x] Crear `src/app/guards/rol.guard.ts` (Extra +3 pts): fábrica `rolGuard(rolesPermitidos: string[])` que valida el rol del JWT (normalizando `ROLE_` y mayúsculas); si no coincide, muestra aviso de acceso denegado y redirige a `/catalogo`.
+- [x] Aplicar `noAuthGuard` a las rutas `/login` y `/registro` en `src/app/app.routes.ts`.
+- [x] Corregir tonos azules residuales de Bootstrap (`.btn-primary`, `.btn-outline-primary`, enlaces y checkbox) sobrescribiendo las variables compiladas en `src/styles.css`, ya que cambiar `--bs-primary` en `:root` no recolorea esos componentes.
+- [x] Verificar compilación con `npm run build`.
+
+**Prompt para el Agente:**
+> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: crea el interceptor funcional `src/app/interceptors/auth.interceptor.ts` (`HttpInterceptorFn`) que, si `AuthService` tiene token, clona la petición agregando `Authorization: Bearer <token>` (ningún servicio ni componente debe escribir el header a mano); con `catchError`, si el backend responde 401 y no es la petición de login, llama a `AuthService.cerrarSesion()`, muestra con `AvisoService` 'Tu sesión ha vencido o no es válida. Inicia sesión nuevamente.' y redirige a `/login`. Registra `authInterceptor` en `provideHttpClient(withInterceptors([authInterceptor]))` en `src/app/app.config.ts`. Crea los guards funcionales `src/app/guards/auth.guard.ts` (solo con sesión, si no avisa y va a `/login`), `src/app/guards/no-auth.guard.ts` (impide `/login` y `/registro` con sesión, redirige a `/catalogo`) y `src/app/guards/rol.guard.ts` (fábrica `rolGuard(rolesPermitidos: string[])` que verifica el rol del JWT; si no coincide, avisa acceso denegado y redirige a `/catalogo`). Aplica `noAuthGuard` a `/login` y `/registro` en `src/app/app.routes.ts`. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 2.4 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
+
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
