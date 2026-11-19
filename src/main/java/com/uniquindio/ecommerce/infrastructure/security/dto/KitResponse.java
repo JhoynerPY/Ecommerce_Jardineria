@@ -3,6 +3,7 @@ package com.uniquindio.ecommerce.infrastructure.security.dto;
 public class KitResponse {
 
     private String idKit;
+    private String nombreKit;
     private ArticuloKitResponse planta;
     private ArticuloKitResponse maceta;
     private ArticuloKitResponse sustrato;
@@ -14,6 +15,7 @@ public class KitResponse {
     }
 
     public KitResponse(String idKit,
+                       String nombreKit,
                        ArticuloKitResponse planta,
                        ArticuloKitResponse maceta,
                        ArticuloKitResponse sustrato,
@@ -21,6 +23,7 @@ public class KitResponse {
                        double descuento,
                        double precioTotal) {
         this.idKit = idKit;
+        this.nombreKit = nombreKit;
         this.planta = planta;
         this.maceta = maceta;
         this.sustrato = sustrato;
@@ -34,6 +37,12 @@ public class KitResponse {
 
     public void setIdKit(String idKit) {
         this.idKit = idKit; }
+
+    public String getNombreKit() {
+        return nombreKit; }
+
+    public void setNombreKit(String nombreKit) {
+        this.nombreKit = nombreKit; }
 
     public ArticuloKitResponse getPlanta() {
         return planta; }

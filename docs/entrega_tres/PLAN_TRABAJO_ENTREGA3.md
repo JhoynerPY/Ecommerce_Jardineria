@@ -233,3 +233,18 @@
 - [x] Verificar `.\gradlew.bat test` en verde y endpoints reales: `GET /api/kits/articulos` 200, `POST /api/kits` 201, `GET /api/kits` 200 y 401 sin token.
 
 **Verificación:** `./gradlew test` en verde y endpoints visibles y funcionales en Swagger (`http://localhost:8080/swagger-ui.html`).
+
+### Tarea 5.2 — Crear vista `Configurador de Kits de Jardinería` en Angular
+**Rama sugerida:** `feature/operacion-negocio`
+**Criterios cubiertos:** 2.9 Funcionalidad propia de su negocio (10 pts)
+
+- [x] Crear `src/app/modelos/kit.model.ts` y `src/app/servicios/kit.service.ts` espejando los DTOs y endpoints de `KitController`.
+- [x] Crear el componente standalone `src/app/componentes/kits/` y registrar la ruta `/kits` protegida con `authGuard`.
+- [x] Listar los `ArticuloKit` reales del backend en tarjetas Bootstrap seleccionables, agrupadas por planta, maceta y sustrato.
+- [x] Usar `signal` y `computed` para calcular en tiempo real los artículos seleccionados, subtotal, descuento del 15% y total estimado.
+- [x] Validar selección completa y compatibilidad de diámetro entre maceta y planta; mostrar advertencia cuando la maceta sea demasiado pequeña.
+- [x] Permitir nombrar el kit y guardarlo con `POST /api/kits`; el nombre se persiste en el backend junto con los artículos y el precio.
+- [x] Deshabilitar el botón durante el envío, mostrar avisos con `AvisoService` para éxito y errores 400/401, y refrescar la lista de kits guardados desde la base de datos.
+- [x] Verificar `npm run build`, `.\gradlew test` y persistencia real: crear un kit con nombre, consultar `GET /api/kits` y confirmar que aparece tras recargar.
+
+**Verificación:** Armar un kit en el navegador, guardarlo, recargar la página y comprobar que el kit persiste desde el backend.

@@ -188,6 +188,7 @@ public class JpaMapper {
         if (domain == null) return null;
         KitJardineriaEntity entity = new KitJardineriaEntity();
         entity.setId(domain.getIdKit());
+        entity.setNombreKit(domain.getNombreKit());
         entity.setPlanta(toEntity(domain.getPlanta()));
         entity.setMaceta(toEntity(domain.getMaceta()));
         entity.setSustrato(toEntity(domain.getSustrato()));
@@ -198,14 +199,15 @@ public class JpaMapper {
         if (entity == null) return null;
         try {
             Constructor<KitJardineria> constructor = KitJardineria.class.getDeclaredConstructor(
-                String.class, ArticuloKit.class, ArticuloKit.class, ArticuloKit.class
+                String.class, ArticuloKit.class, ArticuloKit.class, ArticuloKit.class, String.class
             );
             constructor.setAccessible(true);
             return constructor.newInstance(
                 entity.getId(),
                 toDomain(entity.getPlanta()),
                 toDomain(entity.getMaceta()),
-                toDomain(entity.getSustrato())
+                toDomain(entity.getSustrato()),
+                entity.getNombreKit()
             );
         } catch (Exception e) {
             throw new RuntimeException("Error mapping KitJardineriaEntity to domain", e);

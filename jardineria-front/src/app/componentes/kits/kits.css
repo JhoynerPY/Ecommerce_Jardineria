@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.kit-card {
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.kit-card:hover {
+  border-color: #234e36;
+  box-shadow: 0 0.35rem 0.9rem rgba(35, 78, 54, 0.12);
+  transform: translateY(-1px);
+}
+
+.kit-card.border-success {
+  border-width: 2px;
+  box-shadow: 0 0 0 0.2rem rgba(35, 78, 54, 0.1);
+}
+
+.kit-card:focus-visible {
+  outline: 3px solid rgba(201, 106, 59, 0.45);
+  outline-offset: 2px;
+}

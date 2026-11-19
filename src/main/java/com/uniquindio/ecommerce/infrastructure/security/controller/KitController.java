@@ -68,7 +68,8 @@ public class KitController {
                 request.getIdPlanta(),
                 request.getIdMaceta(),
                 request.getIdSustrato(),
-                idCliente
+                idCliente,
+                request.getNombreKit()
         );
 
         return ResponseEntity.created(URI.create("/api/kits/" + kit.getIdKit()))
@@ -93,6 +94,7 @@ public class KitController {
 
         return new KitResponse(
                 kit.getIdKit(),
+                kit.getNombreKit(),
                 mapearArticulo(kit.getPlanta()),
                 mapearArticulo(kit.getMaceta()),
                 mapearArticulo(kit.getSustrato()),

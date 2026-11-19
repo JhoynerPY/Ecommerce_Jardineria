@@ -109,7 +109,8 @@ class KitControllerIntegrationTest {
                 {
                   "idPlanta": "planta-test",
                   "idMaceta": "maceta-test",
-                  "idSustrato": "sustrato-test"
+                  "idSustrato": "sustrato-test",
+                  "nombreKit": "Kit de prueba"
                 }
                 """;
 
@@ -119,6 +120,7 @@ class KitControllerIntegrationTest {
                         .content(request))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.idKit").isNotEmpty())
+                .andExpect(jsonPath("$.nombreKit").value("Kit de prueba"))
                 .andExpect(jsonPath("$.subtotal").value(39000.0))
                 .andExpect(jsonPath("$.descuento").value(5850.0))
                 .andExpect(jsonPath("$.precioTotal").value(33150.0));

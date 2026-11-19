@@ -25,7 +25,8 @@ public class ConfigurarKitService implements ConfigurarKitUseCase {
     }
 
     @Override
-    public KitJardineria armarKit(String idPlanta, String idMaceta, String idSustrato, String idCliente) {
+    public KitJardineria armarKit(String idPlanta, String idMaceta, String idSustrato,
+                                  String idCliente, String nombreKit) {
 
         ArticuloKit planta = catalogoArticulosPort.obtenerArticulo(idPlanta);
         ArticuloKit maceta = catalogoArticulosPort.obtenerArticulo(idMaceta);
@@ -35,7 +36,7 @@ public class ConfigurarKitService implements ConfigurarKitUseCase {
             throw new ReglaDominioException("Uno o más artículos no existen en el catálogo.");
         }
 
-        KitJardineria nuevoKit = KitJardineria.crear(planta, maceta, sustrato);
+        KitJardineria nuevoKit = KitJardineria.crear(planta, maceta, sustrato, nombreKit);
 
         kitJardineriaRepository.almacenarKit(nuevoKit);
         carritoComprasPort.agregarKit(idCliente, nuevoKit);

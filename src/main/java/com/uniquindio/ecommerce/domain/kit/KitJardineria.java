@@ -9,17 +9,25 @@ public class KitJardineria {
     private final ArticuloKit planta;
     private ArticuloKit maceta;
     private final ArticuloKit sustrato;
+    private final String nombreKit;
     private static final double DESCUENTO_PAQUETE = 0.15;
 
 
-    private KitJardineria(String idKit, ArticuloKit planta, ArticuloKit maceta, ArticuloKit sustrato) {
+    private KitJardineria(String idKit, ArticuloKit planta, ArticuloKit maceta,
+                          ArticuloKit sustrato, String nombreKit) {
         this.idKit = idKit;
         this.planta = planta;
         this.maceta = maceta;
         this.sustrato = sustrato;
+        this.nombreKit = nombreKit;
     }
 
     public static KitJardineria crear(ArticuloKit planta, ArticuloKit maceta, ArticuloKit sustrato) {
+        return crear(planta, maceta, sustrato, null);
+    }
+
+    public static KitJardineria crear(ArticuloKit planta, ArticuloKit maceta,
+                                      ArticuloKit sustrato, String nombreKit) {
         // Invariante 1: Un kit requiere estrictamente los 3 elementos bases
         if (planta == null || maceta == null || sustrato == null) {
             throw new ReglaDominioException("El kit debe contener una planta, una maceta y un sustrato.");
@@ -30,7 +38,7 @@ public class KitJardineria {
             throw new ReglaDominioException("La maceta seleccionada no es compatible con las dimensiones de la planta.");
         }
 
-        return new KitJardineria(UUID.randomUUID().toString(), planta, maceta, sustrato);
+        return new KitJardineria(UUID.randomUUID().toString(), planta, maceta, sustrato, nombreKit);
     }
 
     private static boolean esMacetaCompatible(ArticuloKit planta, ArticuloKit maceta) {
@@ -59,6 +67,7 @@ public class KitJardineria {
     public ArticuloKit getPlanta() { return planta; }
     public ArticuloKit getMaceta() { return maceta; }
     public ArticuloKit getSustrato() { return sustrato; }
+    public String getNombreKit() { return nombreKit; }
 
     // equals/hashCode por identidad
     @Override

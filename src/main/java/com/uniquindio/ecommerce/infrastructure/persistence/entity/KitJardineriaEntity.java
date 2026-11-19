@@ -25,6 +25,9 @@ public class KitJardineriaEntity {
     @Column(name = "id", length = 36)
     private String id;
 
+    @Column(name = "nombre_kit")
+    private String nombreKit;
+
     @ManyToOne
     @JoinColumn(name = "planta_id", nullable = false)
     private ArticuloKitEntity planta;
