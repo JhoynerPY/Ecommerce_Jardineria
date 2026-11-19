@@ -6,6 +6,7 @@ import com.uniquindio.ecommerce.infrastructure.persistence.entity.KitJardineriaE
 import com.uniquindio.ecommerce.infrastructure.persistence.mapper.JpaMapper;
 import com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.KitJardineriaJpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,5 +28,12 @@ public class KitJardineriaRepositoryAdapter implements KitJardineriaRepository {
     public void almacenarKit(KitJardineria kit) {
         KitJardineriaEntity entity = JpaMapper.toEntity(kit);
         jpaRepository.save(entity);
+    }
+
+    @Override
+    public List<KitJardineria> obtenerKits() {
+        return jpaRepository.findByDeletedFalseOrderByIdAsc().stream()
+                .map(JpaMapper::toDomain)
+                .toList();
     }
 }

@@ -212,3 +212,24 @@
 - [x] Verificar `npm run build`, `.\gradlew.bat test` y flujo real: VENDEDOR_VIVERO actualiza estado con 200, COMPRADOR recibe 403, ejemplar inexistente 404 y estado inválido 400.
 
 **Verificación:** `PUT /api/inventario/ejemplar/{id}/estado-salud` responde 200 con `idEjemplar`, `estadoSalud`, `disponibleParaVenta` y `mensaje`; `MARCHITO` y `CON_PLAGA` retiran el ejemplar de la venta.
+
+---
+
+## FASE 5: Funcionalidad propia del negocio — Configurador de Kits de Jardinería
+
+### Tarea 5.1 — Exponer `KitController` y endpoints de Artículos/Kits en el Backend (Hexagonal)
+**Rama sugerida:** `feature/operacion-negocio`
+**Criterios cubiertos:** 2.9 Funcionalidad propia de su negocio (10 pts)
+
+- [x] Revisar `KitJardineria`, `ArticuloKit`, `ConfigurarKitUseCase`, `ConfigurarKitService`, `ArticuloKitJpaRepository`, `KitJardineriaRepositoryAdapter` y `BeanConfiguration`.
+- [x] Crear `src/main/java/.../infrastructure/security/dto/ConfigurarKitRequest.java`, `KitResponse.java` y `ArticuloKitResponse.java` respetando la capa de infraestructura.
+- [x] Crear `KitController` exponiendo `GET /api/kits/articulos` (público) con los `ArticuloKit` reales no eliminados desde la BD.
+- [x] Exponer `POST /api/kits` protegido con JWT, delegando a `ConfigurarKitUseCase` para crear el `KitJardineria` aplicando las reglas de compatibilidad y el descuento del dominio.
+- [x] Exponer `GET /api/kits` protegido con JWT para consultar los kits configurados y persistidos.
+- [x] Extender los puertos de salida `CatalogoArticulosPort` y `KitJardineriaRepository` con métodos de listado, e implementarlos en sus adaptadores JPA.
+- [x] Registrar el bean `ConfigurarKitService` en `BeanConfiguration` y permitir `/api/kits/articulos` en `SecurityConfig`.
+- [x] Actualizar `data.sql` con artículos de ejemplo: maceta de terracota, sustrato orgánico, abono y regadera.
+- [x] Escribir `KitControllerIntegrationTest` cubriendo listado público, creación autenticada con descuento y bloqueo sin token.
+- [x] Verificar `.\gradlew.bat test` en verde y endpoints reales: `GET /api/kits/articulos` 200, `POST /api/kits` 201, `GET /api/kits` 200 y 401 sin token.
+
+**Verificación:** `./gradlew test` en verde y endpoints visibles y funcionales en Swagger (`http://localhost:8080/swagger-ui.html`).

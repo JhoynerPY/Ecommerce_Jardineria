@@ -14,6 +14,8 @@ public interface ArticuloKitJpaRepository extends JpaRepository<ArticuloKitEntit
 
     Optional<ArticuloKitEntity> findByIdAndDeletedFalse(String id);
 
+    List<ArticuloKitEntity> findByDeletedFalseOrderByIdAsc();
+
     @Query("SELECT a FROM ArticuloKitEntity a WHERE a.deleted = false " +
            "AND (:nombre IS NULL OR LOWER(a.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))) " +
            "AND (:minDiametro IS NULL OR a.diametro >= :minDiametro) " +

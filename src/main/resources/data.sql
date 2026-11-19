@@ -104,7 +104,11 @@ INSERT INTO articulos_kit (id, nombre, precio_valor, precio_moneda, diametro, de
 ('sustrato-002', 'Sustrato para cactus 5L', 12000, 'COP', 0.0, false),
 ('sustrato-003', 'Sustrato para orquídeas 5L', 15000, 'COP', 0.0, false),
 ('sustrato-004', 'Tierra para macetas 10L', 18000, 'COP', 0.0, false),
-('sustrato-005', 'Compost orgánico 5kg', 14000, 'COP', 0.0, false);
+('sustrato-005', 'Compost orgánico 5kg', 14000, 'COP', 0.0, false),
+('maceta-006', 'Maceta terracota 16cm', 14000, 'COP', 16.0, false),
+('sustrato-006', 'Sustrato orgánico 5L', 11000, 'COP', 0.0, false),
+('abono-001', 'Abono orgánico 1kg', 9000, 'COP', 0.0, false),
+('regadera-001', 'Regadera plástica 2L', 22000, 'COP', 0.0, false);
 
 -- ============================================
 -- KITS DE JARDINERÍA

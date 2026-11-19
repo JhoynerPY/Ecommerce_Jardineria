@@ -6,6 +6,7 @@ import com.uniquindio.ecommerce.infrastructure.persistence.entity.ArticuloKitEnt
 import com.uniquindio.ecommerce.infrastructure.persistence.mapper.JpaMapper;
 import com.uniquindio.ecommerce.infrastructure.persistence.repository.jpa.ArticuloKitJpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,5 +23,12 @@ public class CatalogoArticulosRepositoryAdapter implements CatalogoArticulosPort
         return jpaRepository.findByIdAndDeletedFalse(idArticulo)
                 .map(JpaMapper::toDomain)
                 .orElse(null);
+    }
+
+    @Override
+    public List<ArticuloKit> listarArticulos() {
+        return jpaRepository.findByDeletedFalseOrderByIdAsc().stream()
+                .map(JpaMapper::toDomain)
+                .toList();
     }
 }

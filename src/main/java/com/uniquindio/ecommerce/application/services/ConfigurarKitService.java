@@ -3,24 +3,30 @@ package com.uniquindio.ecommerce.application.services;
 import com.uniquindio.ecommerce.application.ports.input.ConfigurarKitUseCase;
 import com.uniquindio.ecommerce.application.ports.output.CarritoComprasPort;
 import com.uniquindio.ecommerce.application.ports.output.CatalogoArticulosPort;
+import com.uniquindio.ecommerce.domain.common.ReglaDominioException;
 import com.uniquindio.ecommerce.domain.kit.ArticuloKit;
 import com.uniquindio.ecommerce.domain.kit.KitJardineria;
-import com.uniquindio.ecommerce.domain.common.ReglaDominioException; // <-- Importamos tu excepción
+import com.uniquindio.ecommerce.domain.repository.KitJardineriaRepository;
+
+import java.util.List;
 
 public class ConfigurarKitService implements ConfigurarKitUseCase {
 
     private final CatalogoArticulosPort catalogoArticulosPort;
     private final CarritoComprasPort carritoComprasPort;
+    private final KitJardineriaRepository kitJardineriaRepository;
 
-    public ConfigurarKitService(CatalogoArticulosPort catalogoArticulosPort, CarritoComprasPort carritoComprasPort) {
+    public ConfigurarKitService(CatalogoArticulosPort catalogoArticulosPort,
+                                CarritoComprasPort carritoComprasPort,
+                                KitJardineriaRepository kitJardineriaRepository) {
         this.catalogoArticulosPort = catalogoArticulosPort;
         this.carritoComprasPort = carritoComprasPort;
+        this.kitJardineriaRepository = kitJardineriaRepository;
     }
 
     @Override
     public KitJardineria armarKit(String idPlanta, String idMaceta, String idSustrato, String idCliente) {
 
-        // 1. Obtener la información base de los artículos seleccionados
         ArticuloKit planta = catalogoArticulosPort.obtenerArticulo(idPlanta);
         ArticuloKit maceta = catalogoArticulosPort.obtenerArticulo(idMaceta);
         ArticuloKit sustrato = catalogoArticulosPort.obtenerArticulo(idSustrato);
@@ -29,12 +35,16 @@ public class ConfigurarKitService implements ConfigurarKitUseCase {
             throw new ReglaDominioException("Uno o más artículos no existen en el catálogo.");
         }
 
-        // 2. Crear el Kit usando el método de fábrica del Dominio
         KitJardineria nuevoKit = KitJardineria.crear(planta, maceta, sustrato);
 
-        // 3. Añadir el combo completo al carrito del usuario
+        kitJardineriaRepository.almacenarKit(nuevoKit);
         carritoComprasPort.agregarKit(idCliente, nuevoKit);
 
         return nuevoKit;
+    }
+
+    @Override
+    public List<KitJardineria> listarKits() {
+        return kitJardineriaRepository.obtenerKits();
     }
 }

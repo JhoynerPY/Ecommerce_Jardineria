@@ -3,8 +3,10 @@ package com.uniquindio.ecommerce.infrastructure.config;
 import com.uniquindio.ecommerce.application.ports.output.*;
 import com.uniquindio.ecommerce.application.services.ActualizarEstadoSaludService;
 import com.uniquindio.ecommerce.application.services.CancelarPedidoService;
+import com.uniquindio.ecommerce.application.services.ConfigurarKitService;
 import com.uniquindio.ecommerce.application.services.CrearPedidoService;
 import com.uniquindio.ecommerce.application.services.ProcesarCompraService;
+import com.uniquindio.ecommerce.domain.repository.KitJardineriaRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,5 +35,13 @@ public class BeanConfiguration {
     @Bean
     public ProcesarCompraService procesarCompraService(PasarelaPagoPort pagoPort, InventarioPort inventarioPort, PedidoRepositoryPort pedidoRepo) {
         return new ProcesarCompraService(pagoPort, inventarioPort, pedidoRepo);
+    }
+
+    //Caso de uso: Configurar kit de jardinería
+    @Bean
+    public ConfigurarKitService configurarKitService(CatalogoArticulosPort catalogoArticulosPort,
+                                                     CarritoComprasPort carritoComprasPort,
+                                                     KitJardineriaRepository kitJardineriaRepository) {
+        return new ConfigurarKitService(catalogoArticulosPort, carritoComprasPort, kitJardineriaRepository);
     }
 }
