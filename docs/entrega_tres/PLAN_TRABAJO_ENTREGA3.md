@@ -38,3 +38,17 @@
 > "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: crea `src/environments/environment.ts` y `src/environments/environment.development.ts` con `apiUrl: 'http://localhost:8080/api'`; configura `fileReplacements` en `angular.json` para que desarrollo use `environment.development.ts`; crea las carpetas `src/app/modelos/`, `src/app/servicios/`, `src/app/interceptors/`, `src/app/guards/`; registra `provideHttpClient(withInterceptors([]))` en `src/app/app.config.ts` (listo para el interceptor JWT). Verifica que `npm run build` compila sin errores. Al terminar, marca como completada la Tarea 0.2 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
 
 **Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.
+
+### Tarea 1.1 — Identidad visual Bootstrap 5 con paleta 60-30-10 en `jardineria-front/`
+**Rama sugerida:** `feature/bootstrap-tema`
+**Criterios cubiertos:** Extra Identidad Visual
+
+- [x] Instalar `bootstrap` y `bootstrap-icons` con npm.
+- [x] Registrar `node_modules/bootstrap/dist/css/bootstrap.min.css`, `node_modules/bootstrap-icons/font/bootstrap-icons.css` en `styles` y `node_modules/bootstrap/dist/js/bootstrap.bundle.min.js` en `scripts` de `angular.json`.
+- [x] Aplicar paleta en `src/styles.css`: base `#F6F4EC` (`--bs-body-bg`), primario `#234E36` (`--bs-primary`, `.btn-primary`), acento `#C96A3B` (clases `.btn-terracota`, `.bg-terracota`, `.text-terracota`, `.badge-terracota`), texto `#1F2922`.
+- [x] Verificar compilación con `npm run build`.
+
+**Prompt para el Agente:**
+> "Actúa como desarrollador senior de Angular 21. En `jardineria-front/`: instala `bootstrap` y `bootstrap-icons` con npm; registra los CSS y JS de Bootstrap en `angular.json` (sin copiar archivos a mano); en `src/styles.css` sobrescribe variables de Bootstrap 5 con la paleta base #F6F4EC, primario #234E36, acento #C96A3B, texto #1F2922 y crea clases utilitarias `.btn-terracota`, `.bg-terracota`, `.text-terracota`, `.badge-terracota`. Verifica que `npm run build` compila. Al terminar, marca como completada la Tarea 1.1 en `docs/entrega_tres/PLAN_TRABAJO_ENTREGA3.md`."
+
+**Verificación:** `npm run build` compila en verde dentro de `jardineria-front`.

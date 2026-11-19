@@ -10,3 +10,34 @@
   --bs-body-bg: #F6F4EC;
   --bs-body-color: #1F2922;
 }
+
+/* Clases utilitarias color acento terracota */
+.btn-terracota {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #C96A3B;
+  --bs-btn-border-color: #C96A3B;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #b35a32;
+  --bs-btn-hover-border-color: #a8542f;
+  --bs-btn-focus-shadow-rgb: 201, 106, 59;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #a8542f;
+  --bs-btn-active-border-color: #9d4e2c;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #C96A3B;
+  --bs-btn-disabled-border-color: #C96A3B;
+}
+
+.bg-terracota {
+  background-color: #C96A3B !important;
+}
+
+.text-terracota {
+  color: #C96A3B !important;
+}
+
+.badge-terracota {
+  --bs-badge-bg: #C96A3B;
+  color: #fff !important;
+}
