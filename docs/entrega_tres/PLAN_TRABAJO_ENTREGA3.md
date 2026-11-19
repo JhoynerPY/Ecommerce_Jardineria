@@ -248,3 +248,20 @@
 - [x] Verificar `npm run build`, `.\gradlew test` y persistencia real: crear un kit con nombre, consultar `GET /api/kits` y confirmar que aparece tras recargar.
 
 **Verificación:** Armar un kit en el navegador, guardarlo, recargar la página y comprobar que el kit persiste desde el backend.
+
+---
+
+## FASE 6: Persistencia con MariaDB
+
+### Tarea 6.1 — Agregar driver de MariaDB y perfil `application-mariadb.properties` en Backend
+**Rama sugerida:** `feature/operacion-negocio`
+**Criterios cubiertos:** Backend Conectado al Backend + Persistencia
+
+- [x] Verificar `build.gradle` y confirmar `runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'`; mantener intacto el driver H2 y la configuración Java 21.
+- [x] Crear `src/main/resources/application-mariadb.properties` con la URL `jdbc:mariadb://localhost:3307/jardineria_db`, usuario `root`, contraseña `root`, `ddl-auto=update`, `sql.init.mode=never` y consola H2 deshabilitada.
+- [x] Sobrescribir el dialecto heredado del perfil H2 con `org.hibernate.dialect.MariaDBDialect` para que el perfil MariaDB no use SQL de H2.
+- [x] Revisar `data.sql`: las sentencias son `INSERT` estándar con columnas snake_case y valores literales, sin funciones exclusivas de H2; además el perfil MariaDB carga con `sql.init.mode=never`.
+- [x] Mantener el perfil por defecto en `application.yml` con H2 en memoria y no modificar las pruebas existentes.
+- [x] Ejecutar `.\gradlew.bat clean test` y confirmar que los tests en H2 siguen pasando en verde.
+
+**Verificación:** `./gradlew test` en verde; el perfil por defecto sigue usando H2 y MariaDB queda disponible con `--spring.profiles.active=mariadb`.
